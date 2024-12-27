@@ -20,6 +20,7 @@ var _move_tween: Tween = null
 var _current_direction := Vector2(1, 0)
 
 var _is_active := false
+var _can_infect := true
 
 func _ready() -> void:
 	set_active(false)
@@ -33,12 +34,12 @@ func _process(delta: float) -> void:
 				_current_direction = _valid_inputs[direction_key]
 				_move(_current_direction)
 				
-		if Input.is_action_just_pressed("infect"):
+		if Input.is_action_just_pressed("infect") and _can_infect:
 			var object := raycast.get_collider() as ControllableEntity
-			print(object)
 			if object: 
 				set_active(false)
 				object.set_active(true)
+
 	else: 
 		_default_process(delta)
 
@@ -67,6 +68,9 @@ func _default_process(delta: float) -> void:
 
 func set_active(val: bool) -> void:
 	_is_active = val
+	_can_infect = false
+	var timer = get_tree().create_timer(1.0).timeout.connect(func(): _can_infect = true)
+
 	if _is_active:
 		sprite.get_child(0).hide()
 		sprite.get_child(1).show()
