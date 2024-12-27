@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://054ttw8cqh5y"]
 
-[ext_resource type="Texture2D" uid="uid://dra2nklwinlnc" path="res://assets/art/tile1.png" id="1_7xukr"]
+[ext_resource type="Texture2D" uid="uid://c8e3cf5qsbqmk" path="res://assets/art/tilesheet_v1.png" id="1_dqvrn"]
 [ext_resource type="Script" path="res://scripts/entities/grid.gd" id="2_opxi2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0fcq3"]
-texture = ExtResource("1_7xukr")
+texture = ExtResource("1_dqvrn")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -22,6 +22,12 @@ texture_region_size = Vector2i(64, 64)
 1:3/0 = 0
 2:3/0 = 0
 3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_k3010"]
 tile_size = Vector2i(64, 64)
