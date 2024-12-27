@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c406dsfflyo6h"]
+
+[ext_resource type="Texture2D" uid="uid://d16gjiwkgn7ec" path="res://assets/art/fire_1.png" id="1_8xch4"]
+
+[node name="Firewall" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8xch4")
