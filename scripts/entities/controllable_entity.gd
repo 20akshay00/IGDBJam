@@ -44,6 +44,9 @@ func _process(delta: float) -> void:
 			if object is ControllableEntity:
 				if (self is CarrierBug) or (object is CarrierBug and is_equal_approx(object._current_direction.dot(_current_direction), -1)):
 					set_active(false)
+					if object._move_tween and object._move_tween.is_running(): 
+						await object._move_tween.finished
+						
 					object.set_active(true)
 			elif object is Key:
 				# decrypt key
