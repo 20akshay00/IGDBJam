@@ -1,103 +1,35 @@
-name: "Export and Deploy to Itch.io"
+name: Publish to Itch.io
 
-# Controls when the workflow will run; triggers the workflow on push
-on: 
-    push:
-      branches:
-        - '**' # Trigger on push to any branch
+on:
+  push:
+    branches: ["master"]
 
-env:
-  GODOT_VERSION: 4.3
-  EXPORT_NAME: SpecialDelivery.exe
-  ITCH_USERNAME: 20akshay00
-  ITCH_GAME_ID: 20akshay00
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    # Job for exporting the project as a web (HTML5) build
-    export-web:
-      name: Web Export
-      # The type of runner that the job will run on
-      runs-on: ubuntu-20.04
-      # Docker image to export Godot Engine games
-      container:
-        image: barichello/godot-ci:4.2.2
-  
-      # Steps represent a sequence of tasks that will be executed as part of the job
-      steps:
-        # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - name: Checkout repository
-          uses: actions/checkout@v2
-          with:
-            lfs: true
-  
-        # Debugging step to list directory contents
-        - name: List directory contents
-          run: ls -la 
-  
-        # Debugging step to show Itchio Username
-        - name: Check Itchio Name
-          run: echo ${{ env.ITCH_USERNAME }}
-            
-        # Sets up the Godot export templates directory
-        - name: Setup Godot Export Templates
-          run: |
-            mkdir -v -p ~/.local/share/godot/export_templates/
-            mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-        
-        # Debugging step to check the project path 
-        - name: Check project path
-          run: |
-            echo "Current directory: $(pwd)"
-            echo "Project path: ${PROJECT_PATH}"
-            ls -la ${PROJECT_PATH}
-  
-        # Builds the project for HTML5 (web)
-        - name: Web Build
-          run: |
-            mkdir -v -p build/web
-            godot --headless --verbose --export-release "HTML5" build/web/index.html
-  
-        # Uploads the built web project as an artifact
-        - name: Upload Web Artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: web
-            path: build/web
-  
-        # Installs rsync, a utility for efficiently transferring and synchronizing files
-        - name: Install rsync
-          run: |
-            apt-get update && apt-get install -y rsync
-  
-    # Job for deploying the project to Itch.io
-    deploy:
-      name: Upload to Itch
-      runs-on: ubuntu-latest
-      # Ensure this job runs after the export-web job
-      needs: export-web
-      # Only run this job on main branch
-      if: github.ref == 'refs/heads/main'  
-      strategy:
-        fail-fast: true
-        matrix:
-          channel:
-            - web
-      steps:
-        # Downloads the artifact produced by the previous jobs
-        - name: Download Artifact
-          uses: actions/download-artifact@v3
-          with:
-            name: ${{ matrix.channel }}
-            path: build/${{ matrix.channel }}
-  
-        # Publishes the build to Itch.io using the butler tool
-        - name: Publish to Itch.io
-          uses: KikimoraGames/itch-publish@v0.0.3
-          with:
-            butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
-            gameData: ./build/${{ matrix.channel }}
-            itchUsername: ${{ env.ITCH_USERNAME }}
-            itchGameId: ${{ env.ITCH_GAME_ID }}
-            buildChannel: ${{ matrix.channel }}
-            buildNumber: ${{ github.run_number }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Godot Export
+        id: export
+        uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.2/Godot_v4.3-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.2/Godot_v4.3-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+          # Use the GitHub Actions workflow cache to cache the Godot export templates and Godot executable. 
+          # Helps speed up builds by not having to download them every time.
+          cache: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+
+      - name: Publish to Itch
+        uses: Ayowel/butler-to-itch@v1.0.0
+        with:
+          butler_key: ${{secrets.ITCHIO_TOKEN}}
+          itch_user: 20akshay00
+          itch_game: SpecialDelivery.exe
+          version: ${{ github.ref_name }}
+          files: "${{ steps.export.outputs.archive_directory }}/mosaics-web.zip"
