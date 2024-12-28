@@ -36,6 +36,7 @@ func _process(delta: float) -> void:
 			if Input.is_action_pressed(direction_key):
 				_current_direction = _valid_inputs[direction_key]
 				_move(_current_direction)
+				break
 		# infection mechanic
 		if Input.is_action_just_pressed("infect") and _can_infect:
 			var object := raycast.get_collider() as ControllableEntity
