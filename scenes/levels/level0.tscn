@@ -21,4 +21,4 @@ position = Vector2(100, 524)
 position = Vector2(181, 327)
 
 [node name="MoverProcess2" parent="Grid" instance=ExtResource("4_vheuv")]
-position = Vector2(461, 153)
+position = Vector2(446, 159)

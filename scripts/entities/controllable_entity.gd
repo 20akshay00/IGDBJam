@@ -30,18 +30,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if _is_moving: return
-	
 	if _is_active:
+		# movement using user input
 		for direction_key in _valid_inputs.keys():
 			if Input.is_action_pressed(direction_key):
 				_current_direction = _valid_inputs[direction_key]
 				_move(_current_direction)
-				
+		# infection mechanic
 		if Input.is_action_just_pressed("infect") and _can_infect:
 			var object := raycast.get_collider() as ControllableEntity
-			if object: 
-				set_active(false)
-				object.set_active(true)
+			if object:
+				if (self is CarrierBug) or (object is CarrierBug and is_equal_approx(object._current_direction.dot(_current_direction), -1)):
+					set_active(false)
+					object.set_active(true)
 
 	else: 
 		_default_process(delta)
@@ -50,18 +51,20 @@ func _move(dir: Vector2) -> void:
 	raycast.target_position = dir * _tile_size
 	raycast.force_raycast_update()
 	
+	# rotate sprite
 	if abs(_current_direction.dot(Vector2(cos(sprite.rotation), sin(sprite.rotation))) - 1) > 0.01:
 		if _move_tween: _move_tween.kill()
 		_move_tween = create_tween()
 		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1) 
 		_move_tween.tween_property(sprite, "rotation", angle, _rotation_animation_sec)
+	# push blocks and carrier bug
 	elif raycast.is_colliding():
 		var object := raycast.get_collider() as GridObject
 		if object: object.push(self, dir)
 		
 		var alt_object := raycast.get_collider() as CarrierBug
 		if alt_object and not alt_object._is_active: alt_object.push(self, dir)
-		
+	# move tween
 	if !raycast.is_colliding():
 		_move_tween = create_tween()
 		_move_tween.tween_property(self, "position",
