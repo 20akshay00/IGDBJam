@@ -3,7 +3,7 @@ name: Build and Deploy Godot Game
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-deploy:
@@ -13,26 +13,47 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Godot
-        uses: josephbmanley/setup-godot@v2
+      - name: Cache Godot installation
+        uses: actions/cache@v3
         with:
-          godot-version: 4.3.stable
-          mono: false
+          path: ~/.cache/godot
+          key: ${{ runner.os }}-godot-4.3
+          restore-keys: |
+            ${{ runner.os }}-godot-4.3
+
+      - name: Install Godot
+        run: |
+          if [ ! -f /usr/local/bin/godot ]; then
+            wget https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_linux_headless.64.zip
+            unzip Godot_v4.3-stable_linux_headless.64.zip -d godot
+            chmod +x godot/Godot_v4.3-stable_linux_headless.64
+            sudo mv godot/Godot_v4.3-stable_linux_headless.64 /usr/local/bin/godot
+          fi
+
+      - name: Cache butler installation
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/butler
+          key: ${{ runner.os }}-butler
+          restore-keys: |
+            ${{ runner.os }}-butler
+
+      - name: Install butler
+        run: |
+          if [ ! -f /usr/local/bin/butler ]; then
+            curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+            unzip butler.zip -d butler
+            chmod +x butler/butler
+            sudo mv butler/butler /usr/local/bin/
+          fi
 
       - name: Export HTML build
         run: |
           mkdir -p export
           godot --headless --export HTML5 export/index.html
 
-      - name: Install butler
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
-          unzip butler.zip -d butler
-          chmod +x butler/butler
-          sudo mv butler/butler /usr/local/bin/
-
       - name: Deploy to itch.io
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.ITCHIO_TOKEN }}
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         run: |
           butler push export 20akshay00/SpecialDelivery.exe:html
