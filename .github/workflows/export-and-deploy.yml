@@ -24,10 +24,10 @@ jobs:
       - name: Install Godot
         run: |
           if [ ! -f /usr/local/bin/godot ]; then
-            wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux_x86.64.zip
+            curl -LO https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux_x86.64.zip
             unzip Godot_v4.3-stable_linux_x11.64.zip -d godot
-            chmod +x godot/Godot_v4.3-stable_linux_x11.64
-            sudo mv godot/Godot_v4.3-stable_linux_x11.64 /usr/local/bin/godot
+            chmod +x godot/Godot_v4.3-stable_linux_x86.64
+            sudo mv godot/Godot_v4.3-stable_linux_x86.64 /usr/local/bin/godot
           fi
 
       - name: Cache Godot export templates
@@ -41,7 +41,7 @@ jobs:
       - name: Download and install Godot export templates
         run: |
           if [ ! -d ~/.local/share/godot/templates ]; then
-            wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
+            curl -LO https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
             unzip Godot_v4.3-stable_export_templates.tpz -d ~/.local/share/godot/templates
           fi
 
