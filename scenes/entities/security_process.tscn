@@ -1,15 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnechtecirqu3"]
+[gd_scene load_steps=6 format=3 uid="uid://dt2k60d54gqys"]
 
-[ext_resource type="Script" path="res://scripts/entities/mover_process.gd" id="1_2ff61"]
-[ext_resource type="Texture2D" uid="uid://dxddl5lmri8tm" path="res://assets/art/bot_normal_v1.png" id="2_mshkt"]
-[ext_resource type="Texture2D" uid="uid://b2c65iovqau0u" path="res://assets/art/bot_infected_v1.png" id="3_n7g6b"]
-[ext_resource type="Texture2D" uid="uid://bmm26i8i0wu2m" path="res://assets/art/move_symbol_v1.png" id="4_6ti77"]
+[ext_resource type="Script" path="res://scripts/entities/mover_process.gd" id="1_sj6gx"]
+[ext_resource type="Texture2D" uid="uid://dxddl5lmri8tm" path="res://assets/art/bot_normal_v1.png" id="2_dwlil"]
+[ext_resource type="Texture2D" uid="uid://b2c65iovqau0u" path="res://assets/art/bot_infected_v1.png" id="3_qt1uq"]
+[ext_resource type="Texture2D" uid="uid://c5aqo83klx51d" path="res://assets/art/security_symbol_v1.png" id="4_q58mg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owbde"]
 size = Vector2(54, 53)
 
-[node name="MoverProcess" type="CharacterBody2D"]
-script = ExtResource("1_2ff61")
+[node name="SecurityProcess" type="CharacterBody2D"]
+script = ExtResource("1_sj6gx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0.5)
@@ -25,12 +25,12 @@ autostart = true
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Clean" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("2_mshkt")
+texture = ExtResource("2_dwlil")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("3_n7g6b")
+texture = ExtResource("3_qt1uq")
 
 [node name="Symbol" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("4_6ti77")
+texture = ExtResource("4_q58mg")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -7,7 +7,7 @@ var count := 3
 var dir := -1
 
 func set_active_hook(val: bool) -> void:
-	_current_direction = Vector2(dir, 0)
+	_current_direction = Vector2(cos(sprite.rotation), sin(sprite.rotation))
 	if val: 
 		timer.stop()
 	else:
