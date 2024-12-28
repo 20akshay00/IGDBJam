@@ -60,7 +60,7 @@ jobs:
   
         # Uploads the built web project as an artifact
         - name: Upload Web Artifact
-          uses: actions/upload-artifact@v1
+          uses: actions/upload-artifact@v3
           with:
             name: web
             path: build/web
@@ -86,7 +86,7 @@ jobs:
       steps:
         # Downloads the artifact produced by the previous jobs
         - name: Download Artifact
-          uses: actions/download-artifact@v2.0.8
+          uses: actions/download-artifact@v3
           with:
             name: ${{ matrix.channel }}
             path: build/${{ matrix.channel }}
