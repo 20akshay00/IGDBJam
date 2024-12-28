@@ -38,9 +38,6 @@ jobs:
       - name: Build
         run: |
           ./godot --headless --export-release html
-          ./godot --headless --export-release linux
-          ./godot --headless --export-release macos
-          ./godot --headless --export-release windows
 
       - name: Zip HTML Export
         run: |
