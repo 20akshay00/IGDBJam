@@ -25,7 +25,7 @@ jobs:
         run: |
           if [ ! -f /usr/local/bin/godot ]; then
             curl -LO https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux_x86.64.zip
-            unzip Godot_v4.3-stable_linux_x11.64.zip -d godot
+            unzip Godot_v4.3-stable_linux_x86.64.zip -d godot
             chmod +x godot/Godot_v4.3-stable_linux_x86.64
             sudo mv godot/Godot_v4.3-stable_linux_x86.64 /usr/local/bin/godot
           fi
