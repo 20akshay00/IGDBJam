@@ -20,3 +20,5 @@ func push(source: Node2D, direction: Vector2) -> void:
 			_is_sliding = true
 			await _move_tween.finished
 			_is_sliding = false
+			
+			AudioManager.play_effect(AudioManager.block_move_sfx)
