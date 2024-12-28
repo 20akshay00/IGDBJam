@@ -24,10 +24,25 @@ jobs:
       - name: Install Godot
         run: |
           if [ ! -f /usr/local/bin/godot ]; then
-            wget https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_linux_headless.64.zip
-            unzip Godot_v4.3-stable_linux_headless.64.zip -d godot
-            chmod +x godot/Godot_v4.3-stable_linux_headless.64
-            sudo mv godot/Godot_v4.3-stable_linux_headless.64 /usr/local/bin/godot
+            wget https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_linux_x11.64.zip
+            unzip Godot_v4.3-stable_linux_x11.64.zip -d godot
+            chmod +x godot/Godot_v4.3-stable_linux_x11.64
+            sudo mv godot/Godot_v4.3-stable_linux_x11.64 /usr/local/bin/godot
+          fi
+
+      - name: Cache Godot export templates
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/godot/templates
+          key: ${{ runner.os }}-godot-templates-4.3
+          restore-keys: |
+            ${{ runner.os }}-godot-templates-4.3
+
+      - name: Download and install Godot export templates
+        run: |
+          if [ ! -d ~/.local/share/godot/templates ]; then
+            wget https://downloads.tuxfamily.org/godotengine/4.3/export_templates/Godot_v4.3-stable_export_templates.tpz
+            unzip Godot_v4.3-stable_export_templates.tpz -d ~/.local/share/godot/templates
           fi
 
       - name: Cache butler installation
