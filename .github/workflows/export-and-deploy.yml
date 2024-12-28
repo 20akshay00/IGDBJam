@@ -1,7 +1,11 @@
 name: Deploy to Itch.io
 
 # Manually trigger by going to this workflow in the repository actions tab
-on: workflow_dispatch
+on:
+  push:
+    branches: ["master"]
+
+  workflow_dispatch:
 
 env:
   BUTLER_API_KEY: ${{secrets.ITCHIO_TOKEN}} # Repository Settings -> Secrets and variables -> Actions -> New repository secret
@@ -75,6 +79,3 @@ jobs:
       - name: Push To Itch
         run: |
           ./butler push ./exports/$PROJECT_NAME-html.zip $ITCHIO_USERNAME/$PROJECT_NAME:html
-          ./butler push ./exports/$PROJECT_NAME-linux.zip $ITCHIO_USERNAME/$PROJECT_NAME:linux
-          ./butler push ./exports/$PROJECT_NAME-macos.zip $ITCHIO_USERNAME/$PROJECT_NAME:mac
-          ./butler push ./exports/$PROJECT_NAME-windows.exe $ITCHIO_USERNAME/$PROJECT_NAME:windows
