@@ -1,3 +1,4 @@
+# https://github.com/deplicator/github-godot4-itchio
 name: Deploy to Itch.io
 
 # Manually trigger by going to this workflow in the repository actions tab

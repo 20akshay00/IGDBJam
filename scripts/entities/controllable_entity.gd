@@ -38,14 +38,17 @@ func _process(delta: float) -> void:
 				_current_direction = _valid_inputs[direction_key]
 				_move(_current_direction)
 				break
-		# infection mechanic
 		if Input.is_action_just_pressed("infect") and _can_infect:
-			var object := raycast.get_collider() as ControllableEntity
-			if object:
+			var object = raycast.get_collider()
+			# infection mechanic
+			if object is ControllableEntity:
 				if (self is CarrierBug) or (object is CarrierBug and is_equal_approx(object._current_direction.dot(_current_direction), -1)):
 					set_active(false)
 					object.set_active(true)
-
+			elif object is Key:
+				# decrypt key
+				if (self is SecurityProcess) and (object._is_encrypted):
+					object.decrypt()
 	else: 
 		_default_process(delta)
 
@@ -63,11 +66,14 @@ func _move(dir: Vector2) -> void:
 		_move_tween.tween_property(sprite, "rotation", angle, _rotation_animation_sec)
 	# push blocks and carrier bug
 	elif raycast.is_colliding():
+		# push keys and blocks
 		var object := raycast.get_collider() as GridObject
 		if object: object.push(self, dir)
 		
+		# push carrier bug
 		var alt_object := raycast.get_collider() as CarrierBug
 		if alt_object and not alt_object._is_active: alt_object.push(self, dir)
+		
 	# move tween
 	if not raycast.is_colliding() and _tile_map.is_empty(target_position):
 		_tile_map.update_grid(position, target_position)
