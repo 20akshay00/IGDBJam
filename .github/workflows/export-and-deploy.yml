@@ -1,45 +1,35 @@
-name: itch.io upload
+name: Publish to Itch.io
 
-# define what triggers the action
-# in this case: on push if one of the files named in paths changes
 on:
   push:
     branches: ["master"]
 
-# the directory where your game is
-# I always put the game inside a 'game' folder
-env:
-  WORKING_DIRECTORY: game
-
 jobs:
   deploy:
-    # only run action, if pushed on prod branch
-    # change or remove according to your needs
-    if: github.ref == 'refs/heads/prod'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-      
-      # change or remove according to your needs
-      - name: Create export directory
-        run: mkdir html5
 
-      # exports the game in html mode
-      # more info here https://github.com/dulvui/godot-html-export
-      - name: Godot HTML5 export
-        uses: dulvui/godot-4-html-export@v1.0.1
+      - name: Godot Export
+        id: export
+        uses: firebelley/godot-export@v5.2.1
         with:
-          working-directory: $WORKING_DIRECTORY
-          godot-version: 4.3
+          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+          # Use the GitHub Actions workflow cache to cache the Godot export templates and Godot executable. 
+          # Helps speed up builds by not having to download them every time.
+          cache: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
 
-      # uploads to itch.io
-      # more info here https://github.com/dulvui/itchio-butler-upload
-      - name: Upload to itch.io
-        uses: dulvui/itchio-butler-upload@v0.0.1
+      - name: Publish to Itch
+        uses: Ayowel/butler-to-itch@v1.0.0
         with:
-          working-directory: html5
-          api-key: ${{ secrets.ITCHIO_API_KEY }}
-          user: 20akshay00
-          game: SpecialDelivery.exe
-          channel: html5
+          butler_key: ${{secrets.ITCHIO_TOKEN}}
+          itch_user: 20akshay00
+          itch_game: SpecialDelivery.exe
+          version: ${{ github.ref_name }}
+          files: "${{ steps.export.outputs.archive_directory }}/mosaics-web.zip"
