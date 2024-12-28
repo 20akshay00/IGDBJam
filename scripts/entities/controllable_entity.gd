@@ -3,6 +3,7 @@ class_name ControllableEntity
 
 @onready var raycast := $RayCast2D
 @onready var sprite: Node2D = $Sprites
+@onready var _tile_map: TileMapLayer = get_parent()
 
 @export var _move_animation_sec := 0.3
 @export var _rotation_animation_sec := 0.1
@@ -52,6 +53,8 @@ func _move(dir: Vector2) -> void:
 	raycast.target_position = dir * _tile_size
 	raycast.force_raycast_update()
 	
+	var target_position := position + dir * _tile_size
+
 	# rotate sprite
 	if abs(_current_direction.dot(Vector2(cos(sprite.rotation), sin(sprite.rotation))) - 1) > 0.01:
 		if _move_tween: _move_tween.kill()
@@ -66,7 +69,8 @@ func _move(dir: Vector2) -> void:
 		var alt_object := raycast.get_collider() as CarrierBug
 		if alt_object and not alt_object._is_active: alt_object.push(self, dir)
 	# move tween
-	if !raycast.is_colliding():
+	if not raycast.is_colliding() and _tile_map.is_empty(target_position):
+		_tile_map.update_grid(position, target_position)
 		_move_tween = create_tween()
 		_move_tween.tween_property(self, "position",
 			position + dir * _tile_size, _move_animation_sec).set_trans(Tween.TRANS_SINE)

@@ -1,5 +1,5 @@
 extends CharacterBody2D
 class_name GridObject
 
-func push(source: Node2D, direction: Vector2) -> void:
+func push(_source: Node2D, _direction: Vector2) -> void:
 	return

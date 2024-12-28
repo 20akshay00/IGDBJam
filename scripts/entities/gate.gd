@@ -2,6 +2,8 @@ extends Area2D
 class_name Gate
 
 @export var locks: Array[Lock]
+@onready var _tile_map: TileMapLayer = get_parent()
+
 var unlock_indices: Array[int] = []
 
 func _ready() -> void:
@@ -25,5 +27,9 @@ func _on_lock_deactivated(lock: Lock):
 func _update_status() -> void:
 	if len(locks) == len(unlock_indices):
 		$Sprite2D.hide()
-	else:
+		$CollisionShape2D.disabled = true
+		_tile_map.remove_occupation(position)
+	elif not $Sprite2D.visible and _tile_map.is_empty(position):
 		$Sprite2D.show()
+		$CollisionShape2D.disabled = false
+		_tile_map.add_occupation(position)
