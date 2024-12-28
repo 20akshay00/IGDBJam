@@ -4,8 +4,7 @@ name: itch.io upload
 # in this case: on push if one of the files named in paths changes
 on:
   push:
-    paths:
-      - ".github/workflows/upload-itchio.yml"
+    branches: ["master"]
 
 # the directory where your game is
 # I always put the game inside a 'game' folder
