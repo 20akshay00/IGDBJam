@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnechtecirqu3"]
 
 [ext_resource type="Script" path="res://scripts/entities/mover_process.gd" id="1_2ff61"]
-[ext_resource type="Texture2D" uid="uid://cxurksrrkwuci" path="res://assets/art/mover_infected.png" id="2_v4y52"]
-[ext_resource type="Texture2D" uid="uid://cjn3ls1u4v5ff" path="res://assets/art/mover_clean.png" id="3_bs83b"]
+[ext_resource type="Texture2D" uid="uid://dxddl5lmri8tm" path="res://assets/art/bot_normal_v1.png" id="2_mshkt"]
+[ext_resource type="Texture2D" uid="uid://b2c65iovqau0u" path="res://assets/art/bot_infected_v1.png" id="3_n7g6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owbde"]
 size = Vector2(54, 53)
@@ -24,9 +24,9 @@ autostart = true
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Clean" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("3_bs83b")
+texture = ExtResource("2_mshkt")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("2_v4y52")
+texture = ExtResource("3_n7g6b")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

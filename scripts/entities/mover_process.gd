@@ -7,6 +7,7 @@ var count := 3
 var dir := -1
 
 func set_active_hook(val: bool) -> void:
+	_current_direction = Vector2(dir, 0)
 	if val: 
 		timer.stop()
 	else:
@@ -18,6 +19,6 @@ func _on_timer_timeout() -> void:
 		if count > 3: 
 			count = 0
 			dir *= -1
-			sprite.scale.x = dir
+			sprite.rotation = dir * PI/2
 	
 		_move(Vector2(dir, 0))

@@ -6,6 +6,7 @@ class_name ControllableEntity
 
 @export var _move_animation_sec := 0.3
 @export var _rotation_animation_sec := 0.1
+@export var _sprite_animation_sec := 0.5
 
 var _tile_size := 64
 var _valid_inputs := {
@@ -15,7 +16,9 @@ var _valid_inputs := {
 	"down": Vector2.DOWN}
 
 var _is_moving := false
+
 var _move_tween: Tween = null
+var _sprite_tween: Tween = null
 
 var _current_direction := Vector2(1, 0)
 
@@ -55,6 +58,10 @@ func _move(dir: Vector2) -> void:
 	elif raycast.is_colliding():
 		var object := raycast.get_collider() as GridObject
 		if object: object.push(self, dir)
+		
+		var alt_object := raycast.get_collider() as CarrierBug
+		if alt_object and not alt_object._is_active: alt_object.push(self, dir)
+		
 	if !raycast.is_colliding():
 		_move_tween = create_tween()
 		_move_tween.tween_property(self, "position",
@@ -71,12 +78,16 @@ func set_active(val: bool) -> void:
 	_can_infect = false
 	var timer = get_tree().create_timer(1.0).timeout.connect(func(): _can_infect = true)
 
+	if _sprite_tween: _sprite_tween.kill()
+	_sprite_tween = create_tween()
+	_sprite_tween.set_parallel()
+	
 	if _is_active:
-		sprite.get_child(0).hide()
-		sprite.get_child(1).show()
+		_sprite_tween.tween_property(sprite.get_child(0), "modulate:a", 0., _sprite_animation_sec)
+		_sprite_tween.tween_property(sprite.get_child(1), "modulate:a", 1., _sprite_animation_sec)
 	else:
-		sprite.get_child(1).hide()
-		sprite.get_child(0).show()
+		_sprite_tween.tween_property(sprite.get_child(0), "modulate:a", 1., _sprite_animation_sec)
+		_sprite_tween.tween_property(sprite.get_child(1), "modulate:a", 0., _sprite_animation_sec)
 
 	set_active_hook(val)
 
