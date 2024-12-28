@@ -32,4 +32,4 @@ jobs:
           itch_user: 20akshay00
           itch_game: SpecialDelivery.exe
           version: ${{ github.ref_name }}
-          files: "${{ steps.export.outputs.archive_directory }}/mosaics-web.zip"
+          files: "${{ steps.export.outputs.archive_directory }}/SpecialDelivery.exe.zip"
