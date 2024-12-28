@@ -35,3 +35,5 @@ jobs:
           itch_game: SpecialDelivery.exe
           version: ${{ github.ref_name }}
           files: "${{ steps.export.outputs.archive_directory }}/SpecialDelivery.exe.zip"
+        env:
+          BUTLER_DOWNLOAD_URL: https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
