@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3y0u5fjy10s5"]
+[gd_scene load_steps=4 format=3 uid="uid://b3y0u5fjy10s5"]
 
 [ext_resource type="Script" path="res://scripts/entities/lock.gd" id="1_5o7gc"]
-[ext_resource type="Texture2D" uid="uid://co11ennw4dxb8" path="res://assets/art/lockbg.png" id="2_56hag"]
-[ext_resource type="Texture2D" uid="uid://bngdeti1nvwtr" path="res://assets/art/lockfg.png" id="3_pmta5"]
+[ext_resource type="Texture2D" uid="uid://dcu5k8djhjag" path="res://assets/art/lock_key_tilesheet_v1.png" id="2_msiyt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75yje"]
 size = Vector2(46, 44)
@@ -10,11 +9,16 @@ size = Vector2(46, 44)
 [node name="Lock" type="Area2D"]
 script = ExtResource("1_5o7gc")
 
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("2_56hag")
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_msiyt")
+region_enabled = true
+region_rect = Rect2(0, 128, 64, 64)
 
-[node name="Foreground" type="Sprite2D" parent="."]
-texture = ExtResource("3_pmta5")
+[node name="Overlay" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_msiyt")
+region_enabled = true
+region_rect = Rect2(448, 0, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_75yje")

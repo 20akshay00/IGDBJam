@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bngdeti1nvwtr"
-path="res://.godot/imported/lockfg.png-0dd224e5f97b15965c89babd7a7ca468.ctex"
+uid="uid://ca3gsr21ol51y"
+path="res://.godot/imported/tilesheet_v4.png-ae35d1b0ae3dde1450e06d98ba8b87af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/lockfg.png"
-dest_files=["res://.godot/imported/lockfg.png-0dd224e5f97b15965c89babd7a7ca468.ctex"]
+source_file="res://assets/art/tilesheet_v4.png"
+dest_files=["res://.godot/imported/tilesheet_v4.png-ae35d1b0ae3dde1450e06d98ba8b87af.ctex"]
 
 [params]
 

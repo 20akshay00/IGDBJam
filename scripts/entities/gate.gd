@@ -26,10 +26,12 @@ func _on_lock_deactivated(lock: Lock):
 
 func _update_status() -> void:
 	if len(locks) == len(unlock_indices):
-		$Sprite2D.hide()
+		$Lower.play("open")
+		$Upper.play("open")
 		$CollisionShape2D.disabled = true
 		_tile_map.remove_occupation(position)
-	elif not $Sprite2D.visible and _tile_map.is_empty(position):
-		$Sprite2D.show()
+	elif _tile_map.is_empty(position):
+		$Lower.play("close")
+		$Upper.play("close")
 		$CollisionShape2D.disabled = false
 		_tile_map.add_occupation(position)

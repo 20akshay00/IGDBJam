@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhlsk8ceh2roe"]
+[gd_scene load_steps=4 format=3 uid="uid://dhlsk8ceh2roe"]
 
 [ext_resource type="Script" path="res://scripts/entities/key.gd" id="1_qiag1"]
-[ext_resource type="Texture2D" uid="uid://up7ndn7nih5k" path="res://assets/art/keybg.png" id="2_uawax"]
-[ext_resource type="Texture2D" uid="uid://b1ipy1mh2spf2" path="res://assets/art/keyfg.png" id="3_2vjub"]
-[ext_resource type="Texture2D" uid="uid://e8nuqlb882cu" path="res://assets/art/key_encrypt.png" id="4_vq11f"]
+[ext_resource type="Texture2D" uid="uid://dcu5k8djhjag" path="res://assets/art/lock_key_tilesheet_v1.png" id="2_b8tfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80ttj"]
 size = Vector2(54, 58)
@@ -11,16 +9,17 @@ size = Vector2(54, 58)
 [node name="Key" type="CharacterBody2D"]
 script = ExtResource("1_qiag1")
 
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("2_uawax")
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_b8tfx")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
 
-[node name="Foreground" type="Sprite2D" parent="."]
-texture = ExtResource("3_2vjub")
+[node name="ChainedSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_b8tfx")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_80ttj")
-
-[node name="Chains" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-texture = ExtResource("4_vq11f")
