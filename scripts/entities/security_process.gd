@@ -1,8 +1,11 @@
 extends ControllableEntity
 class_name SecurityProcess
 
+@export var num_ticks_detect := 4
+var start_tick := 0
+
 var count := 4
-var detected := false : set = _on_detection_changed
+var target: ControllableEntity = null
 
 var NORMAL_COLOR := Color("#35c20a4c")
 var DETECTED_COLOR := Color("fd6d724c") 
@@ -22,10 +25,15 @@ func set_active_hook(val: bool) -> void:
 
 func _on_tick() -> void:
 	if not _is_active:
-		count += 1
-		if count == 3: 
-			count = 0
-			_current_direction.x *= -1
+		if not target:
+			count += 1
+			if count == 3: 
+				count = 0
+				_current_direction.x *= -1
+		else:
+			_current_direction = _tile_map.get_next_dir_to(position, target.position)
+			if start_tick != -1 and ((EventManager.ticks - start_tick) >= num_ticks_detect):
+				_on_timer_timeout()
 			
 		_custom_move(_current_direction)
 
@@ -65,26 +73,24 @@ func _custom_move(dir: Vector2) -> void:
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body is ControllableEntity:
 		if body._is_active:
-			detected = true
+			target = body
+			_on_detection()
+			start_tick = -1
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body is ControllableEntity:
 		if body._is_active:
-			detected = false
+			start_tick = EventManager.ticks
 
-func _on_detection_changed(val: bool) -> void:
-	detected = val
-	if detected:
-		$DetectionArea/Polygon2D.color = DETECTED_COLOR
-		if _detection_tween: _detection_tween.kill()
-		_detection_tween = get_tree().create_tween()
-		_detection_tween.set_loops()
-		_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 0.5, 0.5)
-		_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 1, 0.5)
-		
-	else:
-		$Timer.start()
+func _on_detection() -> void:
+	$DetectionArea/Polygon2D.color = DETECTED_COLOR
+	if _detection_tween: _detection_tween.kill()
+	_detection_tween = get_tree().create_tween()
+	_detection_tween.set_loops()
+	_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 0.5, 0.5)
+	_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 1, 0.5)
 
 func _on_timer_timeout() -> void:
 	$DetectionArea/Polygon2D.color = NORMAL_COLOR
 	_detection_tween.kill()
+	target = null

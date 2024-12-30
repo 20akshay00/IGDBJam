@@ -5,6 +5,8 @@ var grid: Dictionary = {}
 var num_entities: int
 var num_entities_completed_move: int
 
+var astargrid := AStarGrid2D.new()
+
 func _ready() -> void:
 	EventManager.reset_tick()
 	for cell in get_used_cells():
@@ -16,6 +18,18 @@ func _ready() -> void:
 		if child is ControllableEntity: 
 			num_entities += 1
 			child.move_completed.connect(_on_move_completed)
+
+	_setup_astar()
+	
+func _setup_astar() -> void:
+	astargrid.region = get_used_rect()
+	astargrid.cell_size = Vector2i(64, 64)
+	astargrid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	
+	astargrid.update()
+	for cell in get_used_cells():
+		astargrid.set_point_solid(cell, not grid[cell])
 
 func is_empty(position: Vector2) -> bool:
 	var cell = local_to_map(position)
@@ -46,3 +60,21 @@ func _on_move_completed() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		LevelManager.reload_level()
+
+func get_next_dir_to(from: Vector2, to: Vector2):
+	_setup_astar()
+	var pos1 := local_to_map(from)
+	var pos2 := local_to_map(to)
+	
+	var path := astargrid.get_id_path(pos1, pos2, false)
+	print(pos1, " ", pos2)
+	
+	if path: 
+		print(path[1], " ", pos1)
+		return Vector2(path[1] - pos1)
+	else: 
+		print("no path")
+		if (pos1.x == pos2.x) or (pos1.y == pos2.y):
+			return pos2 - pos1
+		else:
+			return Vector2(1, 0)
