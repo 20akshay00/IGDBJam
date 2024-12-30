@@ -37,3 +37,15 @@ func _on_body_exited(body: Node2D) -> void:
 	if _key_tween: _key_tween.kill()
 	_key_tween = get_tree().create_tween()
 	_key_tween.tween_property($Overlay, "modulate:a", 0., 0.3)
+
+func _on_body_inside() -> void:
+	if get_overlapping_bodies() and get_overlapping_bodies()[0] is Key and not get_overlapping_bodies()[0]._is_encrypted:
+		await get_tree().create_timer(0.5).timeout
+		AudioManager.play_effect(AudioManager.valid_placement_sfx)
+		
+		$Overlay.region_rect = _rect
+		if _key_tween: _key_tween.kill()
+		_key_tween = get_tree().create_tween()
+		_key_tween.tween_property($Overlay, "modulate:a", 1.0, 0.15)
+		await _key_tween.finished
+		EventManager.lock_activated.emit(self)

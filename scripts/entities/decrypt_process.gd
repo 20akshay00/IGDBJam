@@ -1,5 +1,5 @@
 extends ControllableEntity
-class_name SecurityProcess
+class_name DecryptProcess
 
 var count := 4
 

@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 	
 			elif object is Key:
 				# decrypt key
-				if (self is SecurityProcess) and (object._is_encrypted):
+				if (self is DecryptProcess) and (object._is_encrypted):
 					object.decrypt()
 		if Input.is_action_just_pressed("pass"):
 			EventManager.tick_started(self)
