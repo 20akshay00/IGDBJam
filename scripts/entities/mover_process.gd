@@ -18,7 +18,7 @@ func _on_tick() -> void:
 			_current_direction.x *= -1
 			
 		_custom_move(_current_direction)
-		sprite.rotation = _current_direction.x * PI/2 - PI/2
+		#sprite.rotation = _current_direction.x * PI/2 - PI/2
 
 func _custom_move(dir: Vector2) -> void:
 	raycast.target_position = dir * _tile_size
@@ -27,10 +27,10 @@ func _custom_move(dir: Vector2) -> void:
 	var target_position := position + dir * _tile_size
 
 	# rotate sprite
-	if abs(dir.dot(Vector2(cos(sprite.rotation), sin(sprite.rotation))) - 1) > 0.01:
+	if abs(dir.dot(Vector2(cos(sprite.rotation), sin(sprite.rotation))) - 1) > 0.01:	
 		if _move_tween: _move_tween.kill()
 		_move_tween = create_tween()
-		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1) 
+		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1)
 		_move_tween.tween_property(sprite, "rotation", angle, _rotation_animation_sec)
 	
 	# push blocks and carrier bug

@@ -6,6 +6,7 @@ var num_entities: int
 var num_entities_completed_move: int
 
 func _ready() -> void:
+	EventManager.reset_tick()
 	for cell in get_used_cells():
 		grid[cell] = get_cell_tile_data(cell).get_custom_data("Walkable")
 
@@ -41,3 +42,7 @@ func _on_move_completed() -> void:
 	if num_entities_completed_move == num_entities - 1:
 		EventManager.on_tick_complete()
 		num_entities_completed_move = 0
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("restart"):
+		LevelManager.reload_level()

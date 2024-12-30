@@ -30,3 +30,4 @@ func decrypt() -> void:
 	_chain_tween.set_parallel()
 	_chain_tween.tween_property($Sprite, "modulate:a", 1., _chain_animation_sec)
 	_chain_tween.tween_property($ChainedSprite, "modulate:a", 0., _chain_animation_sec)
+	lock._on_body_entered(self)
