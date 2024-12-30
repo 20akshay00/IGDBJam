@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://rcyiy0uia4ur"]
+[gd_scene load_steps=14 format=4 uid="uid://rcyiy0uia4ur"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_lbvut"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="1_oh7do"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c705y5st7xlub" path="res://scenes/entities/gate.tscn" id="7_hspke"]
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="9_5p4me"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="9_tqr85"]
+[ext_resource type="PackedScene" uid="uid://df76wrk6flha3" path="res://scenes/entities/security_process.tscn" id="10_85nvu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
 texture = ExtResource("9_5p4me")
@@ -116,8 +117,11 @@ position = Vector2(739, 479)
 [node name="MoverProcess" parent="Grid" instance=ExtResource("4_vheuv")]
 position = Vector2(159, 352)
 
-[node name="SecurityProcess" parent="Grid" instance=ExtResource("5_jeuad")]
-position = Vector2(604, 285)
+[node name="DecryptProcess" parent="Grid" instance=ExtResource("5_jeuad")]
+position = Vector2(421, 414)
+
+[node name="SecurityProcess2" parent="Grid" instance=ExtResource("10_85nvu")]
+position = Vector2(484, 223)
 
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 visible = false

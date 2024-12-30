@@ -103,10 +103,27 @@ position = Vector2(292, 544)
 [node name="MoverProcess" parent="Grid" instance=ExtResource("7_u2w0f")]
 position = Vector2(158, 416)
 
-[node name="Label" type="Label" parent="."]
-offset_left = 171.0
-offset_top = 200.0
-offset_right = 622.0
-offset_bottom = 237.0
+[node name="Instructions" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 32.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Instructions"]
+offset_left = 72.0
+offset_top = 39.0
+offset_right = 561.0
+offset_bottom = 111.0
+color = Color(0, 0.505882, 0.25098, 0.505882)
+
+[node name="Label" type="Label" parent="Instructions"]
+offset_left = 94.0
+offset_top = 54.0
+offset_right = 545.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.909804)
 theme_override_font_sizes/font_size = 36
 text = "Infect a worker process with Q"
