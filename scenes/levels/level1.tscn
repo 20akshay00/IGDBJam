@@ -113,6 +113,7 @@ offset_bottom = 32.0
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Instructions"]
+layout_mode = 0
 offset_left = 72.0
 offset_top = 39.0
 offset_right = 561.0
@@ -120,6 +121,7 @@ offset_bottom = 111.0
 color = Color(0, 0.505882, 0.25098, 0.505882)
 
 [node name="Label" type="Label" parent="Instructions"]
+layout_mode = 0
 offset_left = 94.0
 offset_top = 54.0
 offset_right = 545.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://rcyiy0uia4ur"]
+[gd_scene load_steps=30 format=4 uid="uid://rcyiy0uia4ur"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_lbvut"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="1_oh7do"]
@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="9_5p4me"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="9_tqr85"]
 [ext_resource type="PackedScene" uid="uid://df76wrk6flha3" path="res://scenes/entities/security_process.tscn" id="10_85nvu"]
-[ext_resource type="Script" path="res://scripts/levels/level_portal.gd" id="11_ietjv"]
+[ext_resource type="PackedScene" uid="uid://ckhoxemw6imv7" path="res://scenes/levels/level_portal.tscn" id="11_mdq81"]
+[ext_resource type="PackedScene" uid="uid://ccbebsya6a2to" path="res://scenes/entities/hash.tscn" id="12_2c35q"]
+[ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="14_r6ypj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
 texture = ExtResource("9_5p4me")
@@ -84,8 +86,313 @@ custom_data_layer_0/name = "Walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_5f5ro")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iymk0"]
-size = Vector2(59.5, 45)
+[sub_resource type="Shader" id="Shader_2i1hc"]
+code = "shader_type canvas_item;
+
+
+uniform bool stepify = true;
+uniform float value : hint_range(0.0, 1.0) = 1.0;
+uniform int count = 1;
+uniform vec2 margin;
+uniform float shear_angle : hint_range(-1.0, 1.0) = 0.0; // -90 to 90 degrees
+uniform sampler2D gradient_x : source_color;
+uniform sampler2D gradient_y : source_color;
+uniform bool use_value_gradient = false;
+uniform bool invert = false;
+
+
+vec4 get_gradient_color(sampler2D src, float position) {
+	position = clamp(position, 0.01, 0.99); // Color at 0.0 and 1.0 get interpolated by both end
+    return texture(src, vec2(position, 0.5));
+}
+
+float square_shape(vec2 uv, vec2 size) {
+	vec2 bl = step((1.0-size)/2.0, uv); // bottom-left
+	vec2 tr = step((1.0-size)/2.0, 1.0-uv); // top-right
+	return bl.x * bl.y * tr.x * tr.y;
+}
+
+vec2 segmented_bar(vec2 uv) {
+	float shape = 0.0;
+	float bar_count = float(count);
+	float bar_size = 1.0/bar_count;
+	float separation = margin.x;
+	float separation_width = separation * bar_size;
+	float bar_value = 0.0;
+	for (int i=0;i<count;i++) {
+		float index_value = float(i+1) / float(count);
+		
+		if (index_value > value) {
+			// Ceil
+			if (value < float(i) * bar_size || value <= 0.0) {
+				continue;
+			}
+		}
+		
+		vec2 uv4 = uv;
+		vec2 size4 = vec2(bar_size, 1.0-margin.y);
+		//size4.x = bar_size;
+		uv4.x = uv4.x - (bar_size/2.0) + 0.5;
+		uv4.x -= bar_size * float(i); // Offset
+		size4.x -= separation_width;
+		shape += square_shape(uv4, size4);
+		bar_value = index_value;
+	}
+	return vec2(shape, bar_value);
+}
+
+float snap(float original, float numerator, float denominator)
+{
+    return round(original * denominator / numerator) * numerator / denominator;
+}
+
+vec3 hsv_to_rgb(vec3 color) {
+	vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 p = abs(fract(color.xxx + K.xyz) * 6.0 - K.www);
+	return color.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), color.y);
+}
+
+float round_place(float num,float places) {
+	return (round(num*pow(10,places))/pow(10,places));
+}
+
+float map_range(float min1, float max1, float min2, float max2, float v) {
+	float p = (v - min1) / (max1 - min1);
+	return p * (max2 - min2) + min2;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	float angle = 1.571 + (shear_angle * PI/4.0);
+	float shear_value = (cos(angle)/sin(angle));
+	float shear = shear_value * uv.y;
+	uv.x = uv.x + shear;
+	uv.x -= shear_value/2.0;
+	
+	uv.x *= 1.0+abs(shear_value);
+	uv.x -= abs(shear_value)/2.0;
+	
+	float bar_count = float(count);
+	float bar_size = 1.0/bar_count;
+	float separation_width = margin.x * bar_size;
+	
+	vec2 shape = segmented_bar(uv);
+	vec4 gradient_color = vec4(0.0);
+	float gradient_x_pos = uv.x;
+	if (use_value_gradient) {
+		gradient_x_pos = value;
+	}
+	vec4 gradient_color_x = get_gradient_color(gradient_x, gradient_x_pos);
+	if (stepify) {
+		float step_size = float(count)/2.0;
+		gradient_color_x = get_gradient_color(gradient_x, snap(gradient_x_pos, 1.0, step_size));
+	}
+	else {
+		shape.x *= step(uv.x, value);
+	}
+	
+	float y = map_range(0.5-(1.0-margin.y)/2.0, 0.5+(1.0-margin.y)/2.0, 0.0, 1.0, uv.y);
+	if (invert) {
+		y = uv.y;
+		shape.x = 1.0 - shape.x;
+		shape.x *= step(0.0, y);
+		shape.x *= step(y, 1.0);
+	}
+	vec4 gradient_color_y = get_gradient_color(gradient_y, y);
+	gradient_color += gradient_color_x;
+	gradient_color = mix(gradient_color_x, gradient_color_y, gradient_color_y.a);
+	
+	
+	
+	COLOR = vec4(gradient_color.rgb, shape.x);
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_8f6s2"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0073257, 0.0864726, 0.000844045, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xw64a"]
+gradient = SubResource("Gradient_8f6s2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d45bt"]
+shader = SubResource("Shader_2i1hc")
+shader_parameter/stepify = true
+shader_parameter/value = 1.0
+shader_parameter/count = 1
+shader_parameter/margin = Vector2(0, 0)
+shader_parameter/shear_angle = -0.05
+shader_parameter/use_value_gradient = false
+shader_parameter/invert = false
+shader_parameter/gradient_y = SubResource("GradientTexture1D_xw64a")
+
+[sub_resource type="Shader" id="Shader_ujtf1"]
+code = "shader_type canvas_item;
+
+
+uniform bool stepify = true;
+uniform float value : hint_range(0.0, 1.0) = 1.0;
+uniform int count = 1;
+uniform vec2 margin;
+uniform float shear_angle : hint_range(-1.0, 1.0) = 0.0; // -90 to 90 degrees
+uniform sampler2D gradient_x : source_color;
+uniform sampler2D gradient_y : source_color;
+uniform bool use_value_gradient = false;
+uniform bool invert = false;
+
+
+vec4 get_gradient_color(sampler2D src, float position) {
+	position = clamp(position, 0.01, 0.99); // Color at 0.0 and 1.0 get interpolated by both end
+    return texture(src, vec2(position, 0.5));
+}
+
+float square_shape(vec2 uv, vec2 size) {
+	vec2 bl = step((1.0-size)/2.0, uv); // bottom-left
+	vec2 tr = step((1.0-size)/2.0, 1.0-uv); // top-right
+	return bl.x * bl.y * tr.x * tr.y;
+}
+
+vec2 segmented_bar(vec2 uv) {
+	float shape = 0.0;
+	float bar_count = float(count);
+	float bar_size = 1.0/bar_count;
+	float separation = margin.x;
+	float separation_width = separation * bar_size;
+	float bar_value = 0.0;
+	for (int i=0;i<count;i++) {
+		float index_value = float(i+1) / float(count);
+		
+		if (index_value > value) {
+			// Ceil
+			if (value < float(i) * bar_size || value <= 0.0) {
+				continue;
+			}
+		}
+		
+		vec2 uv4 = uv;
+		vec2 size4 = vec2(bar_size, 1.0-margin.y);
+		//size4.x = bar_size;
+		uv4.x = uv4.x - (bar_size/2.0) + 0.5;
+		uv4.x -= bar_size * float(i); // Offset
+		size4.x -= separation_width;
+		shape += square_shape(uv4, size4);
+		bar_value = index_value;
+	}
+	return vec2(shape, bar_value);
+}
+
+float snap(float original, float numerator, float denominator)
+{
+    return round(original * denominator / numerator) * numerator / denominator;
+}
+
+vec3 hsv_to_rgb(vec3 color) {
+	vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 p = abs(fract(color.xxx + K.xyz) * 6.0 - K.www);
+	return color.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), color.y);
+}
+
+float round_place(float num,float places) {
+	return (round(num*pow(10,places))/pow(10,places));
+}
+
+float map_range(float min1, float max1, float min2, float max2, float v) {
+	float p = (v - min1) / (max1 - min1);
+	return p * (max2 - min2) + min2;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	float angle = 1.571 + (shear_angle * PI/4.0);
+	float shear_value = (cos(angle)/sin(angle));
+	float shear = shear_value * uv.y;
+	uv.x = uv.x + shear;
+	uv.x -= shear_value/2.0;
+	
+	uv.x *= 1.0+abs(shear_value);
+	uv.x -= abs(shear_value)/2.0;
+	
+	float bar_count = float(count);
+	float bar_size = 1.0/bar_count;
+	float separation_width = margin.x * bar_size;
+	
+	vec2 shape = segmented_bar(uv);
+	vec4 gradient_color = vec4(0.0);
+	float gradient_x_pos = uv.x;
+	if (use_value_gradient) {
+		gradient_x_pos = value;
+	}
+	vec4 gradient_color_x = get_gradient_color(gradient_x, gradient_x_pos);
+	if (stepify) {
+		float step_size = float(count)/2.0;
+		gradient_color_x = get_gradient_color(gradient_x, snap(gradient_x_pos, 1.0, step_size));
+	}
+	else {
+		shape.x *= step(uv.x, value);
+	}
+	
+	float y = map_range(0.5-(1.0-margin.y)/2.0, 0.5+(1.0-margin.y)/2.0, 0.0, 1.0, uv.y);
+	if (invert) {
+		y = uv.y;
+		shape.x = 1.0 - shape.x;
+		shape.x *= step(0.0, y);
+		shape.x *= step(y, 1.0);
+	}
+	vec4 gradient_color_y = get_gradient_color(gradient_y, y);
+	gradient_color += gradient_color_x;
+	gradient_color = mix(gradient_color_x, gradient_color_y, gradient_color_y.a);
+	
+	
+	
+	COLOR = vec4(gradient_color.rgb, shape.x);
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_cotts"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.011257, 0.114612, 0.0025881, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jdo3j"]
+gradient = SubResource("Gradient_cotts")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gtxqq"]
+shader = SubResource("Shader_ujtf1")
+shader_parameter/stepify = true
+shader_parameter/value = 1.0
+shader_parameter/count = 10
+shader_parameter/margin = Vector2(0.2, 0.2)
+shader_parameter/shear_angle = -0.03
+shader_parameter/use_value_gradient = false
+shader_parameter/invert = false
+shader_parameter/gradient_y = SubResource("GradientTexture1D_jdo3j")
+
+[sub_resource type="Gradient" id="Gradient_nepw8"]
+offsets = PackedFloat32Array(0, 0.915751)
+colors = PackedColorArray(0.161999, 0.607536, 0.0277809, 1, 0.737392, 0.165911, 0.248658, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_47bex"]
+gradient = SubResource("Gradient_nepw8")
+
+[sub_resource type="Gradient" id="Gradient_xibvm"]
+offsets = PackedFloat32Array(0, 0.274725)
+colors = PackedColorArray(0, 0, 0, 1, 0.158058, 0.59512, 0.0268855, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_puwax"]
+gradient = SubResource("Gradient_xibvm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8y8o3"]
+shader = ExtResource("14_r6ypj")
+shader_parameter/stepify = true
+shader_parameter/value = 0.546
+shader_parameter/count = 10
+shader_parameter/margin = Vector2(0.2, 0.2)
+shader_parameter/shear_angle = -0.03
+shader_parameter/use_value_gradient = false
+shader_parameter/invert = false
+shader_parameter/gradient_x = SubResource("GradientTexture1D_47bex")
+shader_parameter/gradient_y = SubResource("GradientTexture1D_puwax")
 
 [node name="Level0" type="Node2D"]
 script = ExtResource("1_lbvut")
@@ -93,6 +400,9 @@ script = ExtResource("1_lbvut")
 [node name="Grid" parent="." instance=ExtResource("1_oh7do")]
 tile_map_data = PackedByteArray("AAABAAQAAAADAAIAAAABAAMAAAADAAIAAAABAAIAAAADAAIAAAABAAEAAAADAAIAAAABAAAAAAADAAIAAAAAAAAAAAADAAIAAAAAAAEAAAADAAIAAAAAAAIAAAADAAIAAAAAAAMAAAADAAIAAAAAAAQAAAADAAIAAAAAAAUAAAADAAIAAAAAAAcAAAADAAIAAAAAAAgAAAADAAIAAAAAAAkAAAADAAIAAAABAAkAAAADAAIAAAACAAgAAAAHAAAAAAACAAUAAAAEAAAAAAACAAQAAAAEAAAAAAACAAMAAAAEAAAAAAACAAIAAAAGAAEAAAACAAEAAAADAAIAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAADAAEAAAADAAIAAAADAAIAAAAEAAAAAAADAAMAAAAEAAAAAAADAAQAAAAFAAAAAAADAAUAAAAEAAAAAAADAAgAAAAEAAAAAAADAAkAAAADAAIAAAACAAkAAAADAAIAAAAEAAkAAAADAAIAAAAEAAgAAAADAAIAAAAEAAcAAAADAAIAAAAEAAYAAAADAAIAAAAEAAUAAAAFAAAAAAAEAAQAAAAEAAAAAAAEAAMAAAADAAIAAAAEAAIAAAADAAIAAAAEAAEAAAADAAIAAAAEAAAAAAADAAIAAAAFAAAAAAADAAIAAAAFAAEAAAADAAIAAAAFAAIAAAADAAIAAAAFAAMAAAADAAIAAAAFAAQAAAAEAAAAAAAFAAUAAAAEAAAAAAAFAAYAAAAEAAAAAAAFAAcAAAAEAAAAAAAFAAgAAAAEAAAAAAAFAAkAAAADAAIAAAAGAAkAAAADAAIAAAAGAAgAAAAEAAAAAAAGAAcAAAAHAAAAAAAGAAYAAAAEAAAAAAAGAAUAAAAEAAAAAAAGAAQAAAAFAAAAAAAGAAMAAAAEAAAAAAAGAAIAAAADAAIAAAAGAAEAAAADAAIAAAAGAAAAAAADAAIAAAAHAAAAAAADAAIAAAAHAAEAAAADAAIAAAAHAAIAAAADAAIAAAAHAAMAAAAEAAAAAAAHAAQAAAAGAAEAAAAHAAUAAAAEAAAAAAAHAAYAAAAEAAAAAAAHAAcAAAAEAAAAAAAHAAgAAAAEAAAAAAAHAAkAAAADAAIAAAAIAAkAAAADAAIAAAAIAAgAAAADAAIAAAAIAAcAAAADAAIAAAAIAAYAAAAGAAEAAAAIAAUAAAAEAAAAAAAIAAQAAAAEAAAAAAAIAAMAAAAHAAAAAAAIAAIAAAADAAIAAAAIAAEAAAADAAIAAAAIAAAAAAADAAIAAAAJAAAAAAADAAIAAAAJAAEAAAADAAIAAAAJAAIAAAADAAIAAAAJAAMAAAAEAAAAAAAJAAQAAAAEAAAAAAAJAAUAAAAEAAAAAAAJAAYAAAAEAAAAAAAJAAcAAAADAAIAAAAJAAgAAAADAAIAAAAJAAkAAAADAAIAAAAKAAkAAAADAAIAAAAKAAgAAAAEAAAAAAAKAAcAAAAEAAAAAAAKAAYAAAAEAAAAAAAKAAUAAAAEAAAAAAAKAAQAAAAEAAAAAAAKAAMAAAAEAAAAAAAKAAIAAAAEAAAAAAAKAAEAAAADAAIAAAAKAAAAAAADAAIAAAALAAAAAAADAAIAAAALAAEAAAADAAIAAAALAAIAAAAFAAAAAAALAAMAAAAEAAAAAAALAAQAAAAFAAAAAAALAAUAAAAGAAEAAAALAAYAAAAEAAAAAAALAAcAAAAEAAAAAAALAAgAAAAEAAAAAAALAAkAAAADAAIAAAAMAAkAAAADAAIAAAAMAAgAAAAFAAAAAAAMAAcAAAAEAAAAAAAMAAYAAAADAAIAAAAMAAUAAAADAAIAAAAMAAQAAAAEAAAAAAAMAAMAAAAGAAEAAAAMAAIAAAAEAAAAAAAMAAEAAAADAAIAAAAMAAAAAAADAAIAAAANAAAAAAAEAAAAAAANAAEAAAAEAAAAAAANAAIAAAAEAAAAAAANAAMAAAAFAAAAAAANAAQAAAAEAAAAAAANAAUAAAADAAIAAAANAAYAAAAEAAAAAAANAAcAAAAEAAAAAAANAAgAAAAEAAAAAAANAAkAAAADAAIAAAAOAAkAAAADAAIAAAAOAAgAAAAGAAEAAAAOAAcAAAAFAAAAAAAOAAYAAAADAAIAAAAOAAUAAAADAAIAAAAOAAQAAAADAAIAAAAOAAMAAAAFAAAAAAAOAAIAAAAEAAAAAAAOAAEAAAADAAIAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAPAAEAAAADAAIAAAAPAAIAAAADAAIAAAAPAAMAAAADAAIAAAAPAAQAAAADAAIAAAAPAAUAAAAEAAAAAAAPAAYAAAAHAAAAAAAPAAcAAAAEAAAAAAAPAAgAAAAEAAAAAAAPAAkAAAADAAIAAAAQAAkAAAADAAIAAAAQAAgAAAADAAIAAAAQAAcAAAADAAIAAAAQAAYAAAADAAIAAAAQAAUAAAADAAIAAAAQAAQAAAADAAIAAAAQAAMAAAADAAIAAAAQAAIAAAADAAIAAAAQAAEAAAADAAIAAAAQAAAAAAADAAIAAAABAAUAAAADAAIAAAABAAYAAAADAAIAAAABAAcAAAADAAIAAAABAAgAAAADAAIAAAAAAAYAAAADAAIAAAACAAYAAAAEAAAAAAACAAcAAAAEAAAAAAADAAYAAAAEAAAAAAADAAcAAAAFAAAAAAARAAEAAAADAAIAAAARAAIAAAADAAIAAAARAAMAAAADAAIAAAARAAQAAAADAAIAAAARAAUAAAADAAIAAAARAAYAAAADAAIAAAARAAcAAAADAAIAAAARAAgAAAADAAIAAAARAAkAAAADAAIAAAARAAAAAAADAAIAAAAAAAoAAAADAAIAAAABAAoAAAADAAIAAAACAAoAAAADAAIAAAADAAoAAAADAAIAAAAEAAoAAAADAAIAAAAFAAoAAAADAAIAAAAGAAoAAAADAAIAAAAHAAoAAAADAAIAAAAIAAoAAAADAAIAAAAJAAoAAAADAAIAAAAKAAoAAAADAAIAAAALAAoAAAADAAIAAAAMAAoAAAADAAIAAAANAAoAAAADAAIAAAAOAAoAAAADAAIAAAAPAAoAAAADAAIAAAAQAAoAAAADAAIAAAARAAoAAAADAAIAAAAMAP//AAADAAIAAAANAP//AAADAAIAAAAOAP//AAADAAIAAAA=")
 tile_set = SubResource("TileSet_d4eyp")
+
+[node name="Hash" parent="Grid" instance=ExtResource("12_2c35q")]
+position = Vector2(223, 545)
 
 [node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("7_hspke")]
 position = Vector2(866, 95)
@@ -104,11 +414,12 @@ position = Vector2(481, 482)
 [node name="Lock2" parent="Grid" instance=ExtResource("6_periy")]
 position = Vector2(480, 352)
 
-[node name="Key" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("5_000xg")]
+[node name="Key" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("5_000xg")]
 position = Vector2(607, 352)
 lock = NodePath("../Lock")
 color = 2
 _is_encrypted = true
+hash = NodePath("../Hash")
 
 [node name="Key2" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("5_000xg")]
 position = Vector2(353, 482)
@@ -127,14 +438,7 @@ position = Vector2(421, 414)
 [node name="SecurityProcess2" parent="Grid" instance=ExtResource("10_85nvu")]
 position = Vector2(484, 223)
 
-[node name="LevelPortal" type="Area2D" parent="Grid" node_paths=PackedStringArray("UI")]
-position = Vector2(868, 31)
-script = ExtResource("11_ietjv")
-UI = NodePath("../../UI")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grid/LevelPortal"]
-shape = SubResource("RectangleShape2D_iymk0")
+[node name="LevelPortal" parent="Grid" instance=ExtResource("11_mdq81")]
 
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 visible = false
@@ -161,5 +465,29 @@ offset_bottom = 75.0
 theme_override_font_sizes/font_size = 36
 text = "Memory transfer blocked during security breaches!"
 
-[connection signal="body_entered" from="Grid/LevelPortal" to="Grid/LevelPortal" method="_on_body_entered"]
-[connection signal="body_exited" from="Grid/LevelPortal" to="Grid/LevelPortal" method="_on_body_exited"]
+[node name="SegmentedBar" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 953.0
+offset_top = 21.0
+offset_right = 993.0
+offset_bottom = 61.0
+metadata/_edit_group_ = true
+
+[node name="Backdrop" type="Panel" parent="UI/SegmentedBar"]
+material = SubResource("ShaderMaterial_d45bt")
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 30.0
+
+[node name="BackgroundBar" type="Panel" parent="UI/SegmentedBar"]
+material = SubResource("ShaderMaterial_gtxqq")
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 30.0
+
+[node name="ForegroundBar" type="Panel" parent="UI/SegmentedBar"]
+material = SubResource("ShaderMaterial_8y8o3")
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 30.0

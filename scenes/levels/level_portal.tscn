@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckhoxemw6imv7"]
+
+[ext_resource type="Script" path="res://scripts/levels/level_portal.gd" id="1_2qi04"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iymk0"]
+size = Vector2(59.5, 45)
+
+[node name="LevelPortal" type="Area2D" node_paths=PackedStringArray("UI")]
+position = Vector2(868, 31)
+script = ExtResource("1_2qi04")
+UI = NodePath("")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iymk0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

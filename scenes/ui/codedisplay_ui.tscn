@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://3k871n56u0us"]
+
+[node name="CodeDisplayUI" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -60)
+
+[node name="Glyphs" type="Node2D" parent="."]
+
+[node name="Glyph1" type="Sprite2D" parent="Glyphs"]
+position = Vector2(-60, 0)
+scale = Vector2(0.34, 0.34)
+
+[node name="Glyph2" type="Sprite2D" parent="Glyphs"]
+position = Vector2(-30, 0)
+scale = Vector2(0.34, 0.34)
+
+[node name="Glyph3" type="Sprite2D" parent="Glyphs"]
+scale = Vector2(0.34, 0.34)
+
+[node name="Glyph4" type="Sprite2D" parent="Glyphs"]
+position = Vector2(30, 0)
+scale = Vector2(0.34, 0.34)
+
+[node name="Glyph5" type="Sprite2D" parent="Glyphs"]
+position = Vector2(60, 0)
+scale = Vector2(0.34, 0.34)

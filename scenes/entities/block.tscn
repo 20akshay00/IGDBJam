@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0n1yedpdpvjf"]
 
 [ext_resource type="Script" path="res://scripts/entities/block.gd" id="1_qiag1"]
-[ext_resource type="Texture2D" uid="uid://bsrf2osn5682u" path="res://icon.svg" id="2_6indp"]
+[ext_resource type="Texture2D" uid="uid://crp25e2ubspdf" path="res://assets/art/lock_key_tilesheet_v2.png" id="2_jvuim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80ttj"]
-size = Vector2(54, 58)
+size = Vector2(54, 55)
 
 [node name="Block" type="CharacterBody2D"]
 script = ExtResource("1_qiag1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("2_6indp")
+texture = ExtResource("2_jvuim")
+region_enabled = true
+region_rect = Rect2(448, 128, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_80ttj")

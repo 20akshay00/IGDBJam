@@ -72,7 +72,7 @@ func _custom_move(dir: Vector2) -> void:
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body is ControllableEntity:
-		if body._is_active:
+		if body._is_active or (body is DecryptProcess and body._is_decrypting):
 			target = body
 			_on_detection()
 			start_tick = -1

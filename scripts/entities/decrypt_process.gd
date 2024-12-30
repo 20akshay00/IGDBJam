@@ -2,6 +2,7 @@ extends ControllableEntity
 class_name DecryptProcess
 
 var count := 4
+var _is_decrypting := false
 
 func _ready() -> void:
 	EventManager.tick.connect(_on_tick)
@@ -11,7 +12,7 @@ func set_active_hook(val: bool) -> void:
 	_current_direction = Vector2(cos(sprite.rotation), sin(sprite.rotation))
 
 func _on_tick() -> void:
-	if not _is_active:
+	if not _is_active and not _is_decrypting:
 		count += 1
 		if count == 3: 
 			count = 0
