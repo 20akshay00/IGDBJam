@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name ControllableEntity
 
+signal move_completed
+
 @onready var raycast := $RayCast2D
 @onready var sprite: Node2D = $Sprites
 @onready var _tile_map: TileMapLayer = get_parent()
@@ -28,30 +30,39 @@ var _can_infect := true
 
 func _ready() -> void:
 	set_active(false)
+	EventManager.tick.connect(_on_tick)
+
+#func _draw() -> void:
+	#draw_line(Vector2.ZERO, raycast.target_position, Color.RED, 5)
 
 func _process(delta: float) -> void:
 	if _is_moving: return
-	if _is_active:
+	if _is_active and not EventManager._tick_in_progress:
 		# movement using user input
 		for direction_key in _valid_inputs.keys():
 			if Input.is_action_pressed(direction_key):
 				_current_direction = _valid_inputs[direction_key]
 				_move(_current_direction)
-				break
+				EventManager.tick_started(self)
+				return
+
 		if Input.is_action_just_pressed("infect") and _can_infect:
 			var object = raycast.get_collider()
 			# infection mechanic
 			if object is ControllableEntity:
-				if (self is CarrierBug) or (object is CarrierBug and is_equal_approx(object._current_direction.dot(_current_direction), -1)):
+				#  is_equal_approx(object._current_direction.dot(_current_direction), -1)
+				if (self is CarrierBug) or (object is CarrierBug):
 					set_active(false)
-					if object._move_tween and object._move_tween.is_running(): 
-						await object._move_tween.finished
-						
 					object.set_active(true)
+					return
+	
 			elif object is Key:
 				# decrypt key
 				if (self is SecurityProcess) and (object._is_encrypted):
 					object.decrypt()
+		if Input.is_action_just_pressed("pass"):
+			EventManager.tick_started(self)
+			return
 	else: 
 		_default_process(delta)
 
@@ -62,7 +73,7 @@ func _move(dir: Vector2) -> void:
 	var target_position := position + dir * _tile_size
 
 	# rotate sprite
-	if abs(_current_direction.dot(Vector2(cos(sprite.rotation), sin(sprite.rotation))) - 1) > 0.01:
+	if abs(dir.dot(Vector2(cos(sprite.rotation), sin(sprite.rotation))) - 1) > 0.01:
 		if _move_tween: _move_tween.kill()
 		_move_tween = create_tween()
 		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1) 
@@ -70,12 +81,11 @@ func _move(dir: Vector2) -> void:
 	# push blocks and carrier bug
 	elif raycast.is_colliding():
 		# push keys and blocks
-		var object := raycast.get_collider() as GridObject
-		if object: object.push(self, dir)
+		var object = raycast.get_collider()
+		if object is GridObject: object.push(self, dir)
 		
 		# push carrier bug
-		var alt_object := raycast.get_collider() as CarrierBug
-		if alt_object and not alt_object._is_active: alt_object.push(self, dir)
+		if object is CarrierBug and not object._is_active: object.push(self, dir)
 		
 	# move tween
 	if not raycast.is_colliding() and _tile_map.is_empty(target_position):
@@ -110,3 +120,7 @@ func set_active(val: bool) -> void:
 
 func set_active_hook(val: bool) -> void:
 	pass
+
+func _on_tick() -> void:
+	if not _is_active:
+		move_completed.emit()

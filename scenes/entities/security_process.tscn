@@ -18,19 +18,14 @@ shape = SubResource("RectangleShape2D_owbde")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(46, 0)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.75
-autostart = true
-
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Clean" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("2_dwlil")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("3_qt1uq")
 
 [node name="Symbol" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("4_q58mg")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

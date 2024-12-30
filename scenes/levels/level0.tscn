@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://rcyiy0uia4ur"]
+[gd_scene load_steps=12 format=4 uid="uid://rcyiy0uia4ur"]
 
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="1_oh7do"]
 [ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="4_vheuv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b3y0u5fjy10s5" path="res://scenes/entities/lock.tscn" id="6_periy"]
 [ext_resource type="PackedScene" uid="uid://c705y5st7xlub" path="res://scenes/entities/gate.tscn" id="7_hspke"]
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="9_5p4me"]
+[ext_resource type="Script" path="res://scenes/levels/draw.gd" id="9_tqr85"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
 texture = ExtResource("9_5p4me")
@@ -115,3 +116,8 @@ position = Vector2(159, 352)
 
 [node name="SecurityProcess" parent="Grid" instance=ExtResource("5_jeuad")]
 position = Vector2(604, 285)
+
+[node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
+visible = false
+script = ExtResource("9_tqr85")
+tilemap = NodePath("../Grid")

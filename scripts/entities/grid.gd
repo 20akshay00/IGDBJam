@@ -2,6 +2,9 @@ extends TileMapLayer
 
 var grid: Dictionary = {}
 
+var num_entities: int
+var num_entities_completed_move: int
+
 func _ready() -> void:
 	for cell in get_used_cells():
 		grid[cell] = get_cell_tile_data(cell).get_custom_data("Walkable")
@@ -9,9 +12,9 @@ func _ready() -> void:
 	for child in get_children():
 		child.position = (Vector2(local_to_map(child.position)) + Vector2(0.5, 0.5)) * Vector2(tile_set.tile_size) 
 		if child is not Lock: grid[local_to_map(child.position)] = false
-	
-func _process(delta: float) -> void:
-	pass
+		if child is ControllableEntity: 
+			num_entities += 1
+			child.move_completed.connect(_on_move_completed)
 
 func is_empty(position: Vector2) -> bool:
 	var cell = local_to_map(position)
@@ -31,3 +34,10 @@ func remove_occupation(at: Vector2) -> void:
 
 func add_occupation(at: Vector2) -> void:
 	grid[local_to_map(at)] = false
+
+func _on_move_completed() -> void:
+	num_entities_completed_move += 1
+
+	if num_entities_completed_move == num_entities - 1:
+		EventManager.on_tick_complete()
+		num_entities_completed_move = 0

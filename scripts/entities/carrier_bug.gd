@@ -6,6 +6,7 @@ var _is_sliding := false
 
 func _ready() -> void:
 	set_active(true)
+	EventManager.tick.connect(_on_tick)
 
 func push(source: Node2D, direction: Vector2) -> void:
 	if source is MoverProcess:
