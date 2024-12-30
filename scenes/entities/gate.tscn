@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://c705y5st7xlub"]
 
 [ext_resource type="Script" path="res://scripts/entities/gate.gd" id="1_xkgoe"]
-[ext_resource type="Texture2D" uid="uid://ca3gsr21ol51y" path="res://assets/art/tilesheet_v4.png" id="3_vjx0r"]
+[ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="3_vjx0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gylah"]
 size = Vector2(64, 50)

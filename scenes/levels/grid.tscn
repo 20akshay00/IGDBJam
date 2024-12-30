@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://054ttw8cqh5y"]
 
-[ext_resource type="Texture2D" uid="uid://c8e3cf5qsbqmk" path="res://assets/art/tilesheet_v1.png" id="1_dqvrn"]
+[ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="1_dqvrn"]
 [ext_resource type="Script" path="res://scripts/entities/grid.gd" id="2_opxi2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0fcq3"]

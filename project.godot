@@ -26,6 +26,10 @@ TransitionManager="*res://scenes/globals/transition_manager.tscn"
 
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom_font="res://assets/fonts/Geo-Regular.ttf"
+
 [input]
 
 right={
