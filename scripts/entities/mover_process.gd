@@ -15,10 +15,9 @@ func _on_tick() -> void:
 		count += 1
 		if count == 3: 
 			count = 0
-			_current_direction.x *= -1
+			_current_direction *= -1
 			
 		_custom_move(_current_direction)
-		#sprite.rotation = _current_direction.x * PI/2 - PI/2
 
 func _custom_move(dir: Vector2) -> void:
 	raycast.target_position = dir * _tile_size
@@ -39,11 +38,13 @@ func _custom_move(dir: Vector2) -> void:
 		var object = raycast.get_collider()
 		if object is GridObject:
 			if randf() < 0.5: object.push(self, dir)
-			else: _current_direction.x *= -1; count = 0;
+			else: _current_direction *= -1; count = 0;
 		# push carrier bug
 		elif object is CarrierBug and not object._is_active:
 			if randf() < 0.5: object.push(self, dir)
-			else: _current_direction.x *= -1; count = 0;
+			else: _current_direction *= -1; count = 0;
+		else:
+			_current_direction *= -1
 
 	# move tween
 	if not raycast.is_colliding() and _tile_map.is_empty(target_position):

@@ -7,6 +7,7 @@ signal lock_deactivated(lock: Lock)
 
 signal tick()
 var ticks: int = 0
+var is_detected := false
 
 func on_tick_complete():
 	ticks += 1

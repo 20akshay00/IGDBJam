@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://rcyiy0uia4ur"]
+[gd_scene load_steps=16 format=4 uid="uid://rcyiy0uia4ur"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_lbvut"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="1_oh7do"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="9_5p4me"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="9_tqr85"]
 [ext_resource type="PackedScene" uid="uid://df76wrk6flha3" path="res://scenes/entities/security_process.tscn" id="10_85nvu"]
+[ext_resource type="Script" path="res://scripts/levels/level_portal.gd" id="11_ietjv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
 texture = ExtResource("9_5p4me")
@@ -83,6 +84,9 @@ custom_data_layer_0/name = "Walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_5f5ro")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iymk0"]
+size = Vector2(59.5, 45)
+
 [node name="Level0" type="Node2D"]
 script = ExtResource("1_lbvut")
 
@@ -123,7 +127,39 @@ position = Vector2(421, 414)
 [node name="SecurityProcess2" parent="Grid" instance=ExtResource("10_85nvu")]
 position = Vector2(484, 223)
 
+[node name="LevelPortal" type="Area2D" parent="Grid" node_paths=PackedStringArray("UI")]
+position = Vector2(868, 31)
+script = ExtResource("11_ietjv")
+UI = NodePath("../../UI")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grid/LevelPortal"]
+shape = SubResource("RectangleShape2D_iymk0")
+
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 visible = false
 script = ExtResource("9_tqr85")
 tilemap = NodePath("../Grid")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WrongBotLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 0)
+offset_left = 35.0
+offset_top = 38.0
+offset_right = 836.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 36
+text = "System process cannot exit the current memory space!"
+
+[node name="SecurityLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 0)
+offset_left = 35.0
+offset_top = 38.0
+offset_right = 779.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 36
+text = "Memory transfer blocked during security breaches!"
+
+[connection signal="body_entered" from="Grid/LevelPortal" to="Grid/LevelPortal" method="_on_body_entered"]
+[connection signal="body_exited" from="Grid/LevelPortal" to="Grid/LevelPortal" method="_on_body_exited"]

@@ -29,7 +29,7 @@ func _on_tick() -> void:
 			count += 1
 			if count == 3: 
 				count = 0
-				_current_direction.x *= -1
+				_current_direction *= -1
 		else:
 			_current_direction = _tile_map.get_next_dir_to(position, target.position)
 			if start_tick != -1 and ((EventManager.ticks - start_tick) >= num_ticks_detect):
@@ -54,7 +54,7 @@ func _custom_move(dir: Vector2) -> void:
 
 	# push blocks and carrier bug
 	elif raycast.is_colliding():
-		_current_direction.x *= -1; 
+		_current_direction *= -1; 
 		count = 0;
 
 	# move tween
@@ -76,6 +76,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 			target = body
 			_on_detection()
 			start_tick = -1
+			EventManager.is_detected = true
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body is ControllableEntity:
@@ -89,8 +90,11 @@ func _on_detection() -> void:
 	_detection_tween.set_loops()
 	_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 0.5, 0.5)
 	_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 1, 0.5)
-
+	
 func _on_timer_timeout() -> void:
 	$DetectionArea/Polygon2D.color = NORMAL_COLOR
 	_detection_tween.kill()
 	target = null
+	_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
+	count = 0
+	EventManager.is_detected = false

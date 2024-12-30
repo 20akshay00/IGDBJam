@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 			# infection mechanic
 			if object is ControllableEntity:
 				#  is_equal_approx(object._current_direction.dot(_current_direction), -1)
-				if (self is CarrierBug) or (object is CarrierBug):
+				if (self is CarrierBug and object is not SecurityProcess) or (object is CarrierBug):
 					AudioManager.play_effect(AudioManager.virus_sfx)
 					set_active(false)
 					object.set_active(true)

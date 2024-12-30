@@ -14,7 +14,7 @@ func _ready() -> void:
 
 	for child in get_children():
 		child.position = (Vector2(local_to_map(child.position)) + Vector2(0.5, 0.5)) * Vector2(tile_set.tile_size) 
-		if child is not Lock: grid[local_to_map(child.position)] = false
+		if (child is not Lock) and (child is not Portal): grid[local_to_map(child.position)] = false
 		if child is ControllableEntity: 
 			num_entities += 1
 			child.move_completed.connect(_on_move_completed)
@@ -67,13 +67,10 @@ func get_next_dir_to(from: Vector2, to: Vector2):
 	var pos2 := local_to_map(to)
 	
 	var path := astargrid.get_id_path(pos1, pos2, false)
-	print(pos1, " ", pos2)
 	
 	if path: 
-		print(path[1], " ", pos1)
 		return Vector2(path[1] - pos1)
 	else: 
-		print("no path")
 		if (pos1.x == pos2.x) or (pos1.y == pos2.y):
 			return pos2 - pos1
 		else:
