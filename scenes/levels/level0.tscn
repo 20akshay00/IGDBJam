@@ -455,6 +455,7 @@ position = Vector2(287, 289)
 position = Vector2(286, 355)
 
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
+visible = false
 script = ExtResource("9_tqr85")
 tilemap = NodePath("../Grid")
 
