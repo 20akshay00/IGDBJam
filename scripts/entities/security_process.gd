@@ -31,7 +31,7 @@ func _on_tick() -> void:
 				count = 0
 				_current_direction *= -1
 		else:
-			if target in $DetectionArea.get_overlapping_bodies(): EventManager.detected_on_tick.emit()
+			if target in $DetectionArea.get_overlapping_bodies() and target._is_active: EventManager.detected_on_tick.emit()
 			_current_direction = _tile_map.get_next_dir_to(position, target.position)
 			if start_tick != -1 and ((EventManager.ticks - start_tick) >= num_ticks_detect):
 				_on_timer_timeout()

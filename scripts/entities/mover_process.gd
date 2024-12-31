@@ -1,19 +1,26 @@
 extends ControllableEntity
 class_name MoverProcess
 
-var count := 4
+@export var max_count := 4
+var count := 0
+@export var _init_dir := Vector2.ZERO
 
 func _ready() -> void:
 	EventManager.tick.connect(_on_tick)
-	_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
-
+	if _init_dir != Vector2.ZERO:
+		_current_direction = _init_dir
+	else:	
+		_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
+	
+	sprite.rotation = atan2(_current_direction.y, _current_direction.x)
+	
 func set_active_hook(val: bool) -> void:
 	_current_direction = Vector2(cos(sprite.rotation), sin(sprite.rotation))
 
 func _on_tick() -> void:
 	if not _is_active:
 		count += 1
-		if count == 3: 
+		if count == max_count - 1:
 			count = 0
 			_current_direction *= -1
 			

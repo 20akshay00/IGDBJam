@@ -434,9 +434,11 @@ position = Vector2(739, 479)
 
 [node name="MoverProcess" parent="Grid" instance=ExtResource("4_vheuv")]
 position = Vector2(540, 411)
+_init_dir = Vector2(1, 0)
 
 [node name="DecryptProcess" parent="Grid" instance=ExtResource("5_jeuad")]
-position = Vector2(163, 228)
+position = Vector2(159, 289)
+_init_dir = Vector2(0, 1)
 
 [node name="SecurityProcess2" parent="Grid" instance=ExtResource("10_85nvu")]
 position = Vector2(484, 223)

@@ -36,6 +36,7 @@ func _ready() -> void:
 	#draw_line(Vector2.ZERO, raycast.target_position, Color.RED, 5)
 
 func _process(delta: float) -> void:
+	#queue_redraw()
 	if _is_moving: return
 	if _is_active and not EventManager._tick_in_progress:
 		# movement using user input
