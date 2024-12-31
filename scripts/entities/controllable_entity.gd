@@ -8,7 +8,7 @@ signal move_completed
 @onready var _tile_map: TileMapLayer = get_parent()
 
 @export var _move_animation_sec := 0.3
-@export var _rotation_animation_sec := 0.1
+@export var _rotation_animation_sec := 0.15
 @export var _sprite_animation_sec := 0.5
 
 var _tile_size := 64

@@ -7,12 +7,15 @@ signal lock_deactivated(lock: Lock)
 
 signal detected_on_tick()
 signal tick()
+signal tick_complete()
+
 var ticks: int = 0
 var is_detected := false
 
 func on_tick_complete():
 	ticks += 1
 	_tick_in_progress = false
+	tick_complete.emit()
 
 func tick_started(object: Node2D) -> void:
 	_tick_in_progress = true
