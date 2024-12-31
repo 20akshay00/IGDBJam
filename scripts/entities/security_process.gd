@@ -1,7 +1,8 @@
 extends ControllableEntity
 class_name SecurityProcess
 
-@export var num_ticks_detect := 4
+@export var _num_inactive_target_ticks_max := 6
+@export var num_ticks_detect := 6
 var start_tick := 0
 
 var count := 4
@@ -11,6 +12,7 @@ var NORMAL_COLOR := Color("#35c20a4c")
 var DETECTED_COLOR := Color("fd6d724c") 
 
 var _detection_tween: Tween = null
+var _num_inactive_target_ticks := -1
 
 func _ready() -> void:
 	EventManager.tick.connect(_on_tick)
@@ -25,15 +27,28 @@ func set_active_hook(val: bool) -> void:
 
 func _on_tick() -> void:
 	if not _is_active:
-		if not target:
+		if target == null:
 			count += 1
 			if count == 3: 
 				count = 0
 				_current_direction *= -1
 		else:
-			if target in $DetectionArea.get_overlapping_bodies() and target._is_active: EventManager.detected_on_tick.emit()
-			_current_direction = _tile_map.get_next_dir_to(position, target.position)
-			if start_tick != -1 and ((EventManager.ticks - start_tick) >= num_ticks_detect):
+			if target._is_active:
+				# start tracking how many ticks since the target became inactive
+				if _num_inactive_target_ticks == -1:
+					_num_inactive_target_ticks = 0
+				
+				# track how many ticks the active target is under direct line of sight
+				if target in $DetectionArea.get_overlapping_bodies(): 
+					EventManager.detected_on_tick.emit()
+			else: 
+				# if target is not active, keep track of how many ticks passed since then
+				_num_inactive_target_ticks += 1
+				if _num_inactive_target_ticks >= _num_inactive_target_ticks_max:
+					_on_timer_timeout()
+			
+			if target: _current_direction = _tile_map.get_next_dir_to(position, target.position)
+			if (start_tick != -1 and ((EventManager.ticks - start_tick) >= num_ticks_detect)):
 				_on_timer_timeout()
 			
 		_custom_move(_current_direction)
@@ -96,6 +111,7 @@ func _on_timer_timeout() -> void:
 	$DetectionArea/Polygon2D.color = NORMAL_COLOR
 	_detection_tween.kill()
 	target = null
+	_num_inactive_target_ticks = -1
 	_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
 	count = 0
 	EventManager.is_detected = false
