@@ -52,7 +52,6 @@ func add_occupation(at: Vector2) -> void:
 
 func _on_move_completed() -> void:
 	num_entities_completed_move += 1
-
 	if num_entities_completed_move == num_entities - 1:
 		EventManager.on_tick_complete()
 		num_entities_completed_move = 0

@@ -90,15 +90,18 @@ func _move(dir: Vector2) -> void:
 		if object is CarrierBug and not object._is_active: object.push(self, dir)
 		
 	# move tween
-	if not raycast.is_colliding() and _tile_map.is_empty(target_position):
-		_tile_map.update_grid(position, target_position)
-		_move_tween = create_tween()
-		_move_tween.tween_property(self, "position",
-			position + dir * _tile_size, _move_animation_sec).set_trans(Tween.TRANS_SINE)
-		_is_moving = true
-		await _move_tween.finished
-		_is_moving = false
-		
+	if not raycast.is_colliding():
+		if _tile_map.is_empty(target_position):
+			_tile_map.update_grid(position, target_position)
+			_move_tween = create_tween()
+			_move_tween.tween_property(self, "position",
+				position + dir * _tile_size, _move_animation_sec).set_trans(Tween.TRANS_SINE)
+			_is_moving = true
+			await _move_tween.finished
+			_is_moving = false
+	#elif raycast.get_collider() is TileMapLayer:
+		#AudioManager.play_effect(AudioManager.invalid_placement_sfx)
+		#
 func _default_process(delta: float) -> void:
 	pass
 

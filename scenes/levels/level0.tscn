@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://rcyiy0uia4ur"]
+[gd_scene load_steps=33 format=4 uid="uid://rcyiy0uia4ur"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_lbvut"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="1_oh7do"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://df76wrk6flha3" path="res://scenes/entities/security_process.tscn" id="10_85nvu"]
 [ext_resource type="PackedScene" uid="uid://ckhoxemw6imv7" path="res://scenes/levels/level_portal.tscn" id="11_mdq81"]
 [ext_resource type="PackedScene" uid="uid://ccbebsya6a2to" path="res://scenes/entities/hash.tscn" id="12_2c35q"]
+[ext_resource type="PackedScene" uid="uid://dctj475xw2wxd" path="res://scenes/entities/bridge.tscn" id="13_0aui2"]
+[ext_resource type="Script" path="res://scripts/entities/bridge.gd" id="14_l1him"]
 [ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="14_nnjab"]
 [ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="14_r6ypj"]
 
@@ -407,7 +409,7 @@ position = Vector2(223, 545)
 
 [node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("7_hspke")]
 position = Vector2(866, 95)
-locks = [NodePath("../Lock"), NodePath("../Lock2")]
+locks = [NodePath("../Lock")]
 
 [node name="Lock" parent="Grid" instance=ExtResource("6_periy")]
 position = Vector2(481, 482)
@@ -423,7 +425,7 @@ _is_encrypted = true
 hash = NodePath("../Hash")
 
 [node name="Key2" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("5_000xg")]
-position = Vector2(353, 482)
+position = Vector2(417, 483)
 lock = NodePath("../Lock2")
 color = 3
 
@@ -431,10 +433,10 @@ color = 3
 position = Vector2(739, 479)
 
 [node name="MoverProcess" parent="Grid" instance=ExtResource("4_vheuv")]
-position = Vector2(159, 352)
+position = Vector2(540, 411)
 
 [node name="DecryptProcess" parent="Grid" instance=ExtResource("5_jeuad")]
-position = Vector2(421, 414)
+position = Vector2(163, 228)
 
 [node name="SecurityProcess2" parent="Grid" instance=ExtResource("10_85nvu")]
 position = Vector2(484, 223)
@@ -442,8 +444,17 @@ position = Vector2(484, 223)
 [node name="LevelPortal" parent="Grid" node_paths=PackedStringArray("UI") instance=ExtResource("11_mdq81")]
 UI = NodePath("../../UI")
 
+[node name="Bridge" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("13_0aui2")]
+script = ExtResource("14_l1him")
+locks = [NodePath("../Lock2")]
+
+[node name="Marker2D" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(287, 289)
+
+[node name="Marker2D2" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(286, 355)
+
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
-visible = false
 script = ExtResource("9_tqr85")
 tilemap = NodePath("../Grid")
 

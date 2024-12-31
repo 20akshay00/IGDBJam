@@ -6,7 +6,7 @@ var _is_decrypting := false
 
 func _ready() -> void:
 	EventManager.tick.connect(_on_tick)
-	_current_direction = Vector2(1, 0)
+	_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
 
 func set_active_hook(val: bool) -> void:
 	_current_direction = Vector2(cos(sprite.rotation), sin(sprite.rotation))
