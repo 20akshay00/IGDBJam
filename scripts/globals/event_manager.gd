@@ -5,6 +5,7 @@ var _tick_in_progress := false
 signal lock_activated(lock: Lock)
 signal lock_deactivated(lock: Lock)
 
+signal detected_on_tick()
 signal tick()
 var ticks: int = 0
 var is_detected := false

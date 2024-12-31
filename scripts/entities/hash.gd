@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is DecryptProcess: 
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.25).timeout
 		
 		for idx in _hash_code.size():			
 			code_ui.get_node("Glyphs").get_child(idx).texture = char_textures[_hash_code[idx]]
@@ -36,7 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 		_key_tween.tween_property($Overlay, "modulate:a", 1.0, 0.3)
 		AudioManager.play_effect(AudioManager.valid_placement_sfx)
 	else:
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.25).timeout
 		
 		$Overlay.region_rect = _rect
 		if _key_tween: _key_tween.kill()
