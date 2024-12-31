@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://rcyiy0uia4ur"]
+[gd_scene load_steps=33 format=4 uid="uid://rcyiy0uia4ur"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_lbvut"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="1_oh7do"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ndlp3wv23s3t" path="res://scenes/entities/carrier_bug.tscn" id="5_tlg71"]
 [ext_resource type="PackedScene" uid="uid://b3y0u5fjy10s5" path="res://scenes/entities/lock.tscn" id="6_periy"]
 [ext_resource type="PackedScene" uid="uid://c705y5st7xlub" path="res://scenes/entities/gate.tscn" id="7_hspke"]
+[ext_resource type="Script" path="res://scripts/entities/lock.gd" id="7_yxsvm"]
+[ext_resource type="Script" path="res://scripts/entities/key.gd" id="8_28lf8"]
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="9_5p4me"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="9_tqr85"]
 [ext_resource type="PackedScene" uid="uid://df76wrk6flha3" path="res://scenes/entities/security_process.tscn" id="10_85nvu"]
@@ -409,21 +411,25 @@ position = Vector2(223, 545)
 position = Vector2(866, 95)
 locks = [NodePath("../Lock"), NodePath("../Lock2")]
 
-[node name="Lock" parent="Grid" instance=ExtResource("6_periy")]
+[node name="Lock" type="Area2D" parent="Grid" instance=ExtResource("6_periy")]
 position = Vector2(481, 482)
+script = ExtResource("7_yxsvm")
 
-[node name="Lock2" parent="Grid" instance=ExtResource("6_periy")]
+[node name="Lock2" type="Area2D" parent="Grid" instance=ExtResource("6_periy")]
 position = Vector2(480, 352)
+script = ExtResource("7_yxsvm")
 
-[node name="Key" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("5_000xg")]
+[node name="Key" type="CharacterBody2D" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("5_000xg")]
 position = Vector2(607, 352)
+script = ExtResource("8_28lf8")
 lock = NodePath("../Lock")
 color = 2
 _is_encrypted = true
 hash = NodePath("../Hash")
 
-[node name="Key2" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("5_000xg")]
+[node name="Key2" type="CharacterBody2D" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("5_000xg")]
 position = Vector2(353, 482)
+script = ExtResource("8_28lf8")
 lock = NodePath("../Lock2")
 color = 3
 

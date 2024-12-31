@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3y0u5fjy10s5"]
 
 [ext_resource type="Script" path="res://scripts/entities/lock.gd" id="1_5o7gc"]
-[ext_resource type="Texture2D" uid="uid://dcu5k8djhjag" path="res://assets/art/lock_key_tilesheet_v1.png" id="2_msiyt"]
+[ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_msiyt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75yje"]
 size = Vector2(46, 44)
