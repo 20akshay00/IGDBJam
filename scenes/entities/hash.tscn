@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/entities/hash.gd" id="1_63g1h"]
 [ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_ft3hi"]
-[ext_resource type="Texture2D" uid="uid://dcu5k8djhjag" path="res://assets/art/lock_key_tilesheet_v1.png" id="2_wo5pf"]
+[ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_wo5pf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75yje"]
 size = Vector2(46, 44)
