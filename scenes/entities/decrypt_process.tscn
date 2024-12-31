@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt2k60d54gqys"]
+[gd_scene load_steps=5 format=3 uid="uid://dt2k60d54gqys"]
 
 [ext_resource type="Script" path="res://scripts/entities/decrypt_process.gd" id="1_4bgep"]
-[ext_resource type="Texture2D" uid="uid://dxddl5lmri8tm" path="res://assets/art/bot_normal_v1.png" id="2_do3p8"]
-[ext_resource type="Texture2D" uid="uid://b2c65iovqau0u" path="res://assets/art/bot_infected_v1.png" id="3_s2rea"]
-[ext_resource type="Texture2D" uid="uid://bmm26i8i0wu2m" path="res://assets/art/move_symbol_v1.png" id="4_x6jgu"]
+[ext_resource type="Texture2D" uid="uid://dm3luyh8qieok" path="res://assets/art/brain_bot_normal_v1.png" id="2_lt63e"]
+[ext_resource type="Texture2D" uid="uid://bcx6m2t1wqv8b" path="res://assets/art/braint_bot_infected_v1.png" id="3_8x2al"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owbde"]
 size = Vector2(54, 53)
@@ -21,11 +20,10 @@ target_position = Vector2(46, 0)
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Clean" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("2_do3p8")
+rotation = -1.5708
+texture = ExtResource("2_lt63e")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
 modulate = Color(1, 1, 1, 0)
-texture = ExtResource("3_s2rea")
-
-[node name="Symbol" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("4_x6jgu")
+rotation = -1.5708
+texture = ExtResource("3_8x2al")

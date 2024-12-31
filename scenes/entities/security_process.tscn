@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://df76wrk6flha3"]
 
 [ext_resource type="Script" path="res://scripts/entities/security_process.gd" id="1_tcupy"]
-[ext_resource type="Texture2D" uid="uid://dxddl5lmri8tm" path="res://assets/art/bot_normal_v1.png" id="2_dwlil"]
+[ext_resource type="Texture2D" uid="uid://2ik5jawtyvmb" path="res://assets/art/security_bot_v1.png" id="2_ol7wv"]
 [ext_resource type="Texture2D" uid="uid://b2c65iovqau0u" path="res://assets/art/bot_infected_v1.png" id="3_qt1uq"]
 [ext_resource type="Texture2D" uid="uid://c5aqo83klx51d" path="res://assets/art/security_symbol_v1.png" id="4_q58mg"]
 
@@ -29,13 +29,16 @@ polygon = PackedVector2Array(0, 0, 155, -46, 155, 46)
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Clean" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("2_dwlil")
+rotation = -1.5708
+texture = ExtResource("2_ol7wv")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("3_qt1uq")
 
 [node name="Symbol" type="Sprite2D" parent="Sprites"]
+visible = false
 texture = ExtResource("4_q58mg")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
