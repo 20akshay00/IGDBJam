@@ -2,10 +2,12 @@ extends AudioStreamPlayer2D
 
 var valid_placement_sfx := preload("res://assets/audio/sfx/lockcorrect.mp3")
 var invalid_placement_sfx := preload("res://assets/audio/sfx/lockwrong.mp3")
-var block_move_sfx := preload("res://assets/audio/sfx/cratemove.mp3")
+var light_block_move_sfx := preload("res://assets/audio/sfx/lightboxmove.mp3")
+var heavy_block_move_sfx := preload("res://assets/audio/sfx/heavyboxmove.mp3")
+var key_move_sfx := preload("res://assets/audio/sfx/keymove.mp3")
 
 var virus_sfx := preload("res://assets/audio/sfx/virusfillv5.mp3")
-#var bg_music := preload("res://assets/audio/music/maintheme.wav")
+var bg_music := preload("res://assets/audio/music/del.maintheme2mp3.mp3")
 
 func _play_music(music: AudioStream, volume = -7):
 	if stream == music:
@@ -15,8 +17,8 @@ func _play_music(music: AudioStream, volume = -7):
 	volume_db = volume
 	play()
 
-#func play_music_level():
-	#_play_music(bg_music, -30)
+func play_music_level():
+	_play_music(bg_music, -25)
 
 func play_effect(aud_stream: AudioStream, volume = 0.0, loops = false):
 	var fx_player = AudioStreamPlayer2D.new()

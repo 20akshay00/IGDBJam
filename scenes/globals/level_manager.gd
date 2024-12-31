@@ -14,9 +14,9 @@ var levels = {
 func load_level(name):
 	TransitionManager.change_scene(levels[name])
 	EventManager.reset_tick()
-	#AudioManager.play_music_level()
+	AudioManager.play_music_level()
 	
 func reload_level():
 	TransitionManager.reload_scene()
 	EventManager.reset_tick()
-	#AudioManager.play_music_level()
+	AudioManager.play_music_level()
