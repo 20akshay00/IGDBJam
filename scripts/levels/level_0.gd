@@ -12,7 +12,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		LevelManager.reload_level()
 	
 	for idx in len(keys):
-		if Input.is_key_pressed(keys[idx]):
+		if Input.is_action_pressed(keys[idx]):
 			LevelManager.load_level(idx)
 	
 func _on_level_complete() -> void:
