@@ -432,60 +432,60 @@ position = Vector2(671, 475)
 position = Vector2(352, 159)
 
 [node name="Lock" parent="Grid" instance=ExtResource("6_ai4wm")]
-position = Vector2(863, 349)
+position = Vector2(224, 161)
 
 [node name="Lock2" parent="Grid" instance=ExtResource("6_ai4wm")]
-position = Vector2(802, 360)
+position = Vector2(289, 159)
 
 [node name="Lock3" parent="Grid" instance=ExtResource("6_ai4wm")]
-position = Vector2(800, 291)
+position = Vector2(225, 223)
 
 [node name="Lock4" parent="Grid" instance=ExtResource("6_ai4wm")]
-position = Vector2(871, 225)
+position = Vector2(291, 224)
 
 [node name="Lock5" parent="Grid" instance=ExtResource("6_ai4wm")]
-position = Vector2(797, 227)
+position = Vector2(356, 225)
 
 [node name="Lock6" parent="Grid" instance=ExtResource("6_ai4wm")]
-position = Vector2(866, 419)
+position = Vector2(290, 287)
 
 [node name="Key" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_yrr1f")]
-position = Vector2(222, 167)
+position = Vector2(870, 352)
 lock = NodePath("../Lock")
 color = 4
 _is_encrypted = true
 hash = NodePath("../Hash")
 
 [node name="Key6" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_yrr1f")]
-position = Vector2(289, 292)
+position = Vector2(865, 415)
 lock = NodePath("../Lock6")
 color = 3
 _is_encrypted = true
 hash = NodePath("../Hash6")
 
 [node name="Key2" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_yrr1f")]
-position = Vector2(281, 166)
+position = Vector2(804, 351)
 lock = NodePath("../Lock2")
 color = 1
 _is_encrypted = true
 hash = NodePath("../Hash2")
 
 [node name="Key3" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_yrr1f")]
-position = Vector2(223, 220)
+position = Vector2(802, 290)
 lock = NodePath("../Lock3")
 color = 2
 _is_encrypted = true
 hash = NodePath("../Hash3")
 
 [node name="Key4" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_yrr1f")]
-position = Vector2(289, 233)
+position = Vector2(863, 221)
 lock = NodePath("../Lock4")
 color = 6
 _is_encrypted = true
 hash = NodePath("../Hash4")
 
 [node name="Key5" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_yrr1f")]
-position = Vector2(346, 226)
+position = Vector2(803, 228)
 lock = NodePath("../Lock5")
 _is_encrypted = true
 hash = NodePath("../Hash5")

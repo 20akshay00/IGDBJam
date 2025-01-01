@@ -7,7 +7,13 @@ var levels = [
 	preload("res://scenes/levels/acoshey2.tscn"),
 	preload("res://scenes/levels/acoshey3.tscn"),
 	preload("res://scenes/levels/acoshey4.tscn"),
-	preload("res://scenes/levels/acoshey5.tscn")
+	preload("res://scenes/levels/acoshey5.tscn"),
+	preload("res://scenes/levels/book1.tscn"),
+	preload("res://scenes/levels/book2.tscn"),
+	preload("res://scenes/levels/book3.tscn"),
+	preload("res://scenes/levels/book4.tscn"),
+	preload("res://scenes/levels/book5.tscn"),
+	preload("res://scenes/levels/book6.tscn"),
 ]
 
 var times: Array[int] = []

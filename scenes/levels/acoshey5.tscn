@@ -433,16 +433,16 @@ position = Vector2(671, 223)
 position = Vector2(800, 478)
 
 [node name="Key" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("7_bfqrn")]
-position = Vector2(420, 289)
-lock = NodePath("../Lock2")
+position = Vector2(416, 355)
+lock = NodePath("../Lock")
 color = 4
 
 [node name="Key2" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("7_bfqrn")]
-position = Vector2(354, 351)
-lock = NodePath("../Lock")
+position = Vector2(354, 417)
+lock = NodePath("../Lock2")
 
 [node name="Key3" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_bfqrn")]
-position = Vector2(419, 416)
+position = Vector2(421, 485)
 lock = NodePath("../Lock3")
 color = 3
 _is_encrypted = true
@@ -450,7 +450,7 @@ hash = NodePath("../Hash2")
 
 [node name="Key4" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_bfqrn")]
 position = Vector2(801, 226)
-lock = NodePath("../Lock3")
+lock = NodePath("../Lock4")
 color = 5
 _is_encrypted = true
 hash = NodePath("../Hash")

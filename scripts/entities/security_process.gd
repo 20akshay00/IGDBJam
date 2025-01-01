@@ -6,7 +6,9 @@ class_name SecurityProcess
 var start_tick := 0
 
 @export var max_count := 4
-var count := max_count
+@export var _init_dir := Vector2.ZERO
+
+var count := 0
 
 var target: ControllableEntity = null
 
@@ -24,6 +26,14 @@ func _ready() -> void:
 	shape.points = $DetectionArea/Polygon2D.polygon
 	$DetectionArea/CollisionShape2D.shape = shape
 	
+	if _init_dir != Vector2.ZERO:
+		_current_direction = _init_dir
+	else:	
+		_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
+	
+	sprite.rotation = atan2(_current_direction.y, _current_direction.x)
+	$DetectionArea.rotation = sprite.rotation 
+
 func set_active_hook(val: bool) -> void:
 	_current_direction = Vector2(cos(sprite.rotation), sin(sprite.rotation))
 
