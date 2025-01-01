@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dhpyvjeb41rjn"]
+[gd_scene load_steps=31 format=4 uid="uid://dhpyvjeb41rjn"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_qw1yg"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_a2m3a"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://ckhoxemw6imv7" path="res://scenes/levels/level_portal.tscn" id="5_td4jc"]
 [ext_resource type="PackedScene" uid="uid://b3y0u5fjy10s5" path="res://scenes/entities/lock.tscn" id="6_6jvyh"]
 [ext_resource type="PackedScene" uid="uid://dhlsk8ceh2roe" path="res://scenes/entities/key.tscn" id="7_gjdnn"]
-[ext_resource type="PackedScene" uid="uid://ccbebsya6a2to" path="res://scenes/entities/hash.tscn" id="8_8fm1d"]
 [ext_resource type="PackedScene" uid="uid://ndlp3wv23s3t" path="res://scenes/entities/carrier_bug.tscn" id="9_aghkj"]
 [ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="10_5wme3"]
 [ext_resource type="Script" path="res://scripts/entities/bridge.gd" id="13_h2ioj"]
@@ -424,14 +423,11 @@ position = Vector2(607.778, 287.778)
 position = Vector2(930, 416.667)
 lock = NodePath("../Lock")
 color = 4
-hash = NodePath("../Hash")
+hash = NodePath("")
 
 [node name="Key2" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("7_gjdnn")]
 position = Vector2(611.111, 544.444)
 lock = NodePath("../Lock2")
-
-[node name="Hash" parent="Grid" instance=ExtResource("8_8fm1d")]
-position = Vector2(994.444, 546.667)
 
 [node name="CarrierBug" parent="Grid" instance=ExtResource("9_aghkj")]
 position = Vector2(425.556, 152.222)
