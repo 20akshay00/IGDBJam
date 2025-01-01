@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dhqdqjueorpv2"]
+[gd_scene load_steps=32 format=4 uid="uid://dhqdqjueorpv2"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_3he3f"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_8wlmr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="9_xgic3"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="10_os1gk"]
 [ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="11_gddxv"]
+[ext_resource type="PackedScene" uid="uid://dt2k60d54gqys" path="res://scenes/entities/decrypt_process.tscn" id="11_wju3u"]
 [ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="12_dlyrv"]
 [ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="13_fetpt"]
 [ext_resource type="PackedScene" uid="uid://cws63lnwpdthq" path="res://scenes/ui/level_end_ui.tscn" id="14_bostb"]
@@ -438,7 +439,7 @@ lock = NodePath("../Lock2")
 color = 3
 
 [node name="Key3" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_e7mip")]
-position = Vector2(671, 225)
+position = Vector2(737, 221)
 lock = NodePath("../Lock3")
 color = 2
 _is_encrypted = true
@@ -455,6 +456,10 @@ position = Vector2(616, 226)
 position = Vector2(221, 161)
 max_count = 6
 _init_dir = Vector2(1, 0)
+
+[node name="DecryptProcess" parent="Grid" instance=ExtResource("11_wju3u")]
+position = Vector2(543, 345)
+_init_dir = Vector2(0, 1)
 
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 visible = false
