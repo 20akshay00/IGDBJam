@@ -1,5 +1,7 @@
 extends Node2D
 
+var keys = [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
+
 func _ready() -> void:
 	EventManager._on_level_start()
 	EventManager.level_complete.connect(_on_level_complete)
@@ -8,7 +10,11 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		LevelManager.reload_level()
-
+	
+	for idx in len(keys):
+		if Input.is_key_pressed(keys[idx]):
+			LevelManager.load_level(idx)
+	
 func _on_level_complete() -> void:
 	for child in $Grid.get_children():
 		if child is ControllableEntity:

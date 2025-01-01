@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bqsb4ii4giwhw"]
+[gd_scene load_steps=32 format=4 uid="uid://bqsb4ii4giwhw"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_wom2a"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_2frbe"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="9_gln08"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="10_kkvox"]
 [ext_resource type="PackedScene" uid="uid://df76wrk6flha3" path="res://scenes/entities/security_process.tscn" id="10_oyc2l"]
+[ext_resource type="Script" path="res://scripts/entities/bridge.gd" id="11_kmj8s"]
 [ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="11_l1ctt"]
 [ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="12_wfu2r"]
 [ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="13_agqox"]
@@ -443,6 +444,9 @@ _init_dir = Vector2(1, 0)
 [node name="SecurityProcess" parent="Grid" instance=ExtResource("10_oyc2l")]
 position = Vector2(482, 97)
 up_direction = Vector2(0, 1)
+
+[node name="Bridge" type="Node2D" parent="Grid"]
+script = ExtResource("11_kmj8s")
 
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 visible = false
