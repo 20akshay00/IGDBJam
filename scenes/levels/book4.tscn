@@ -422,11 +422,10 @@ position = Vector2(608.889, 228.889)
 [node name="Lock3" parent="Grid" instance=ExtResource("6_ab5b8")]
 position = Vector2(290, 545.556)
 
-[node name="Key" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_ceor7")]
+[node name="Key" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("7_ceor7")]
 position = Vector2(413.333, 347.778)
 lock = NodePath("../Lock")
 color = 4
-hash = NodePath("")
 
 [node name="Key2" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("7_ceor7")]
 position = Vector2(413.333, 477.778)

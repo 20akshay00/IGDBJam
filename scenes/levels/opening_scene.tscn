@@ -1,0 +1,160 @@
+[gd_scene load_steps=12 format=3 uid="uid://drco65dyajyja"]
+
+[ext_resource type="Script" path="res://scenes/levels/opening_scene.gd" id="1_rqmqo"]
+[ext_resource type="Texture2D" uid="uid://xkpc8o32hsfv" path="res://assets/art/ui/level_screen_background.png" id="1_vg4gn"]
+[ext_resource type="Texture2D" uid="uid://b76ub0vl8rv0f" path="res://assets/art/cursor.png" id="2_lh5ek"]
+[ext_resource type="Texture2D" uid="uid://dx1ludiqgd3p1" path="res://assets/art/file.png" id="3_vlmm7"]
+[ext_resource type="Script" path="res://scenes/levels/path_follow_2d.gd" id="5_8l03f"]
+[ext_resource type="Texture2D" uid="uid://csagjlyi38lol" path="res://assets/art/bug_infected.png" id="5_u2srq"]
+[ext_resource type="Script" path="res://scenes/levels/path_follow_mouse.gd" id="6_7tu0x"]
+[ext_resource type="Script" path="res://scenes/levels/path_follow_camera.gd" id="8_ggtg7"]
+
+[sub_resource type="Curve2D" id="Curve2D_me6jq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 314, 484, 14.2791, 125.572, -14.2791, -125.572, 468, 316, 0, 0, 0, 0, 315, 142)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_23wil"]
+_data = {
+"points": PackedVector2Array(90.8168, 20.7421, -90.8168, -20.7421, 752, 681, 98.1046, -10.6514, -98.1046, 10.6514, 505, 536, 0, 0, 0, 0, 297, 478)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_yqm24"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 579, 327, 0, 0, 0, 0, 316, 147)
+}
+point_count = 2
+
+[node name="OpeningScene" type="Node2D"]
+script = ExtResource("1_rqmqo")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(578, 326)
+scale = Vector2(1.41187, 1.36345)
+texture = ExtResource("1_vg4gn")
+
+[node name="File" type="Sprite2D" parent="."]
+position = Vector2(126, 140)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_vlmm7")
+
+[node name="File2" type="Sprite2D" parent="."]
+position = Vector2(300, 140)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_vlmm7")
+
+[node name="File3" type="Sprite2D" parent="."]
+position = Vector2(126, 300)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_vlmm7")
+
+[node name="File4" type="Sprite2D" parent="."]
+position = Vector2(300, 300)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_vlmm7")
+
+[node name="File5" type="Sprite2D" parent="."]
+position = Vector2(126, 470)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_vlmm7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 114.0
+offset_top = 164.0
+offset_right = 191.0
+offset_bottom = 194.0
+text = "Documents"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 127.0
+offset_top = 324.0
+offset_right = 206.0
+offset_bottom = 354.0
+text = "Steam"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 298.0
+offset_top = 325.0
+offset_right = 377.0
+offset_bottom = 355.0
+text = "Discord"
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 120.0
+offset_top = 495.0
+offset_right = 199.0
+offset_bottom = 525.0
+text = "ToDo.txt"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 283.0
+offset_top = 165.0
+offset_right = 364.0
+offset_bottom = 195.0
+text = "MyComputer"
+metadata/_edit_use_anchors_ = true
+
+[node name="Game" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(300, 487)
+
+[node name="Label" type="Label" parent="Game"]
+offset_left = -1.0
+offset_top = 11.0
+offset_right = 60.0
+offset_bottom = 28.0
+text = "Game.exe"
+
+[node name="File6" type="Sprite2D" parent="Game"]
+position = Vector2(5, -14)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_vlmm7")
+
+[node name="Path2D" type="Path2D" parent="."]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_me6jq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(314, 484)
+rotation = -0.828849
+script = ExtResource("5_8l03f")
+
+[node name="Bug" type="Sprite2D" parent="Path2D/PathFollow2D"]
+unique_name_in_owner = true
+position = Vector2(-12.035, -1.07599)
+rotation = -0.337456
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_u2srq")
+
+[node name="Path2D2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_23wil")
+
+[node name="PathFollowCursor" type="PathFollow2D" parent="Path2D2"]
+unique_name_in_owner = true
+position = Vector2(752, 681)
+rotation = -2.6292
+rotates = false
+script = ExtResource("6_7tu0x")
+
+[node name="Cursor" type="Sprite2D" parent="Path2D2/PathFollowCursor"]
+rotation = -3.68264
+scale = Vector2(0.703125, 0.8125)
+texture = ExtResource("2_lh5ek")
+
+[node name="Path2D3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_yqm24")
+
+[node name="PathFollowCamera" type="PathFollow2D" parent="Path2D3"]
+unique_name_in_owner = true
+position = Vector2(579, 327)
+rotation = -2.6292
+rotates = false
+script = ExtResource("8_ggtg7")
+
+[node name="Camera2D" type="Camera2D" parent="Path2D3/PathFollowCamera"]
+position = Vector2(4.19458, 3.37732)
+rotation = 2.6292

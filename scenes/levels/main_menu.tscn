@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://sebkj3ei6w28"]
+
+[ext_resource type="Texture2D" uid="uid://xkpc8o32hsfv" path="res://assets/art/ui/level_screen_background.png" id="1_5fyti"]
+[ext_resource type="Script" path="res://scenes/levels/main_menu.gd" id="1_7lyrq"]
+[ext_resource type="Texture2D" uid="uid://7j6kcuu06iib" path="res://assets/art/ui/level_ui.png" id="2_0rko1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hr5d"]
+atlas = ExtResource("2_0rko1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqp4f"]
+atlas = ExtResource("2_0rko1")
+region = Rect2(0, 64, 192, 64)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_7lyrq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5fyti")
+
+[node name="Title" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 488.0
+offset_top = 49.0
+offset_right = 676.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 48
+text = "VIRUS.exe"
+
+[node name="LevelOrb" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 161.0
+offset_right = 192.0
+offset_bottom = 225.0
+texture_normal = SubResource("AtlasTexture_4hr5d")
+
+[node name="LevelConnector" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 164.0
+offset_right = 340.0
+offset_bottom = 228.0
+texture = SubResource("AtlasTexture_fqp4f")

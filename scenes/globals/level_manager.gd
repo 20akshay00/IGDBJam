@@ -3,6 +3,7 @@ extends Node
 var current_level: int = 0
 
 var levels = [
+	preload("res://scenes/levels/main_menu.tscn"),
 	preload("res://scenes/levels/acoshey1.tscn"),
 	preload("res://scenes/levels/acoshey2.tscn"),
 	preload("res://scenes/levels/acoshey3.tscn"),

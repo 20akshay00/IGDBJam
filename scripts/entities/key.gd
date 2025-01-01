@@ -143,10 +143,12 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("up"):
 				code_input.push_back(0)
 				code_ui.get_node("Glyphs").get_child(len(code_input) - 1).texture = char_textures[1]
+				AudioManager.play_effect(AudioManager.hash_press_sfx)
 				#EventManager.tick_started(self)
 			elif Input.is_action_just_pressed("down"):
 				code_input.push_back(1)
 				code_ui.get_node("Glyphs").get_child(len(code_input) - 1).texture = char_textures[0]
+				AudioManager.play_effect(AudioManager.hash_press_sfx)
 				#EventManager.tick_started(self)
 			elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 				_is_decrypting = false
