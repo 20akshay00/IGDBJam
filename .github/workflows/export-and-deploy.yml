@@ -11,7 +11,7 @@ on:
 env:
   BUTLER_API_KEY: ${{secrets.ITCHIO_TOKEN}} # Repository Settings -> Secrets and variables -> Actions -> New repository secret
   ITCHIO_USERNAME: ${{secrets.ITCHIO_USERNAME}}
-  PROJECT_NAME: "SpecialDeliveryexe" # See README.md about project, channel, and export file naming conventions
+  PROJECT_NAME: "v1rusexe" # See README.md about project, channel, and export file naming conventions
 
 jobs:
   Build:
