@@ -23,3 +23,8 @@ texture = ExtResource("3_umjla")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("3_qasla")
+
+[node name="MoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

@@ -32,3 +32,8 @@ texture = ExtResource("3_4s653")
 [node name="Symbol" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource("4_6ti77")
+
+[node name="MoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

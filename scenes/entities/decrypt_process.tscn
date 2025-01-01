@@ -27,3 +27,8 @@ texture = ExtResource("2_lt63e")
 modulate = Color(1, 1, 1, 0)
 rotation = -1.5708
 texture = ExtResource("3_8x2al")
+
+[node name="MoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

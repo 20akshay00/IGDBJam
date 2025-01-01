@@ -6,6 +6,7 @@ signal move_completed
 @onready var raycast := $RayCast2D
 @onready var sprite: Node2D = $Sprites
 @onready var _tile_map: TileMapLayer = get_parent()
+@onready var _move_timer: Timer = $MoveTimer
 
 @export var _move_animation_sec := 0.3
 @export var _rotation_animation_sec := 0.15
@@ -28,9 +29,12 @@ var _current_direction := Vector2(1, 0)
 var _is_active := false
 var _can_infect := true
 
+var _can_move := true
+
 func _ready() -> void:
 	set_active(false)
 	EventManager.tick.connect(_on_tick)
+	
 #func _draw() -> void:
 	#draw_line(Vector2.ZERO, raycast.target_position, Color.RED, 5)
 
@@ -40,10 +44,11 @@ func _process(delta: float) -> void:
 	if _is_active and not EventManager._tick_in_progress:
 		# movement using user input
 		for direction_key in _valid_inputs.keys():
-			if Input.is_action_pressed(direction_key):
+			if Input.is_action_pressed(direction_key) and _can_move:
+				_can_move = false
+				_move_timer.start(0.2)
 				_current_direction = _valid_inputs[direction_key]
 				_move(_current_direction)
-				EventManager.tick_started(self)
 				return
 
 		if Input.is_action_just_pressed("infect") and _can_infect:
@@ -82,18 +87,23 @@ func _move(dir: Vector2) -> void:
 		_move_tween = create_tween()
 		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1) 
 		_move_tween.tween_property(sprite, "rotation", angle, _rotation_animation_sec)
+
 	# push blocks and carrier bug
-	elif raycast.is_colliding():
+	if raycast.is_colliding():
 		# push keys and blocks
 		var object = raycast.get_collider()
-		if object is GridObject: object.push(self, dir)
-		
+		if object is GridObject: 
+			var result: bool = object.push(self, dir)
+			if result: EventManager.tick_started(self)
+
 		# push carrier bug
-		if object is CarrierBug and not object._is_active: object.push(self, dir)
-		
+		if object is CarrierBug and not object._is_active: 
+			var result: bool = object.push(self, dir)
+			if result: EventManager.tick_started(self)
 	# move tween
-	if not raycast.is_colliding():
+	else:
 		if _tile_map.is_empty(target_position):
+			EventManager.tick_started(self)
 			_tile_map.update_grid(position, target_position)
 			_move_tween = create_tween()
 			_move_tween.tween_property(self, "position",

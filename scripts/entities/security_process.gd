@@ -5,7 +5,9 @@ class_name SecurityProcess
 @export var num_ticks_detect := 6
 var start_tick := 0
 
-var count := 4
+@export var max_count := 4
+var count := max_count
+
 var target: ControllableEntity = null
 
 var NORMAL_COLOR := Color("#35c20a4c")
@@ -29,7 +31,7 @@ func _on_tick() -> void:
 	if not _is_active:
 		if target == null:
 			count += 1
-			if count == 3: 
+			if count == max_count - 1: 
 				count = 0
 				_current_direction *= -1
 		else:
@@ -115,3 +117,7 @@ func _on_timer_timeout() -> void:
 	_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
 	count = 0
 	EventManager.is_detected = false
+
+
+func _on_move_timer_timeout() -> void:
+	_can_move = true

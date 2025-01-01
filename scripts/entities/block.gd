@@ -8,9 +8,9 @@ class_name Block
 
 var _is_sliding := false
 
-func push(source: Node2D, direction: Vector2) -> void:
+func push(source: Node2D, direction: Vector2) -> bool:
 	if source is MoverProcess:
-		if _is_sliding: return
+		if _is_sliding: return false
 		var destination: Vector2 = position + direction * Vector2(_tile_map.tile_set.tile_size)
 		if _tile_map.is_empty(destination):
 			_tile_map.update_grid(position, destination)
@@ -18,10 +18,15 @@ func push(source: Node2D, direction: Vector2) -> void:
 			_move_tween = create_tween()
 			_move_tween.tween_property(self, "position", destination, _sliding_animation_sec)	
 			_is_sliding = true
-			await _move_tween.finished
-			_is_sliding = false
-			
-			if self is Key:
-				AudioManager.play_effect(AudioManager.key_move_sfx)
-			else:
-				AudioManager.play_effect(AudioManager.light_block_move_sfx)
+			_move_tween.tween_callback(func(): 
+				_is_sliding = false
+				if self is Key:
+					AudioManager.play_effect(AudioManager.key_move_sfx)
+				else:
+					AudioManager.play_effect(AudioManager.light_block_move_sfx)
+				)
+			return true
+		else:
+			return false
+	else:
+		return true

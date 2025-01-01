@@ -41,5 +41,9 @@ texture = ExtResource("3_qt1uq")
 visible = false
 texture = ExtResource("4_q58mg")
 
+[node name="MoveTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

@@ -66,3 +66,6 @@ func _custom_move(dir: Vector2) -> void:
 		return
 
 	move_completed.emit()
+
+func _on_move_timer_timeout() -> void:
+	_can_move = true
