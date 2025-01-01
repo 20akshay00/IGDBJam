@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func launch():
 	show()
-	_launch(LevelManager.current_level, EventManager.ticks, EventManager.time)
+	_launch(LevelManager.current_level, EventManager.ticks, EventManager.time / 1000)
 	
 func _launch(lvl: int, clock: int, time: int) -> void:
 	_set_level_text(lvl)
@@ -24,7 +24,7 @@ func _launch(lvl: int, clock: int, time: int) -> void:
 	
 	if tween: tween.kill()
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate:a", 1., 2.)
+	tween.tween_property(self, "modulate:a", 1., 1.5)
 	tween.tween_property($LevelLabel, "modulate:a", 1., 1.5)
 	tween.tween_property($VBoxContainer/ClockCycleLabel, "modulate:a", 1., 1.5)
 	tween.tween_property($VBoxContainer/TimeLabel, "modulate:a", 1., 1.5)
@@ -39,14 +39,14 @@ func _set_clock_cycle(cycles: int):
 	$VBoxContainer/ClockCycleLabel.text = "Clock cycles utilized: " + str(cycles)
 	
 func _set_time(time: int):
-	$VBoxContainer/TimeLabel.text = "Real-time elapsed: " + str((time / 60) % 60) + " mins, " + str(time % 60)
+	$VBoxContainer/TimeLabel.text = "Real-time elapsed: " + str((time / 60)) + " mins, " + str(time % 60) + " secs"
 
 func _set_stars(stars: int) -> void:
 	if tween: tween.kill()
 	tween = get_tree().create_tween()
 	
 	for i in min(5, stars):
-		tween.tween_property($Stars.get_child(i), "modulate:a", 1., 0.1)
+		tween.tween_property($Stars.get_child(i), "modulate:a", 1., 0.4)
 		
 	await tween.finished
 	_activate_buttons()

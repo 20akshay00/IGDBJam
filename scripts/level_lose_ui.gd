@@ -32,9 +32,11 @@ func _launch(lvl: int, clock: int, time: int) -> void:
 
 func _on_retry_pressed() -> void:
 	LevelManager.reload_level()
+	if tween2: tween2.kill()
 
 func _on_home_pressed() -> void:
 	LevelManager.load_level(0)
+	if tween2: tween2.kill()
 
 func _activate_buttons() -> void:
 	if tween: tween.kill()

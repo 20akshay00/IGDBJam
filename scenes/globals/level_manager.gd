@@ -3,14 +3,11 @@ extends Node
 var current_level: int = 0
 
 var levels = [
-	preload("res://scenes/levels/level0.tscn")
-	#"level1": preload("res://levels/level_1.tscn"),
-	#"level2": preload("res://levels/level_2.tscn"),
-	#"level3": preload("res://levels/level_3.tscn"),
-	#"level4": preload("res://levels/level_4.tscn"),
-	#"level5": preload("res://levels/level_5.tscn"),
-	#"level6": preload("res://levels/level_6.tscn"),
-	#"end": preload("res://levels/game_end.tscn"),
+	preload("res://scenes/levels/acoshey1.tscn"),
+	preload("res://scenes/levels/acoshey2.tscn"),
+	preload("res://scenes/levels/acoshey3.tscn"),
+	preload("res://scenes/levels/acoshey4.tscn"),
+	preload("res://scenes/levels/acoshey5.tscn")
 ]
 
 var times: Array[int] = []
