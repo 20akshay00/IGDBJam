@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgyrvd164285p"]
+
+[ext_resource type="Script" path="res://scripts/level_lose_ui.gd" id="1_dxqpe"]
+[ext_resource type="Texture2D" uid="uid://23g2ouhmqbhx" path="res://assets/art/ui/level_screen_background_red.png" id="2_u5w32"]
+[ext_resource type="Texture2D" uid="uid://6o2eei7r8biv" path="res://assets/art/ui/retry_button.png" id="4_5syev"]
+[ext_resource type="Texture2D" uid="uid://c1bstoevf4r2h" path="res://assets/art/ui/retry_button_grey.png" id="4_6jc27"]
+[ext_resource type="Texture2D" uid="uid://c30bdorcnqfrq" path="res://assets/art/ui/home_button.png" id="5_sseyf"]
+[ext_resource type="Texture2D" uid="uid://ojnh21bdoiut" path="res://assets/art/ui/home_button_grey.png" id="6_jbvsq"]
+
+[node name="LevelLoseUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dxqpe")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_u5w32")
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.985
+anchor_bottom = 1.0
+offset_left = 497.0
+offset_top = 90.0
+offset_right = -481.72
+offset_bottom = -500.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 56
+text = "Level 1"
+
+[node name="TextLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.029
+anchor_right = 1.0
+anchor_bottom = 0.98
+offset_left = 197.0
+offset_top = 253.708
+offset_right = -197.0
+offset_bottom = -259.54
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "The system security has flagged the 
+payload as a malicious actor. Try again?"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.982
+offset_left = 476.0
+offset_top = 504.296
+offset_right = -476.0
+offset_bottom = 11.6639
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Retry" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("4_5syev")
+texture_pressed = ExtResource("4_6jc27")
+
+[node name="VSeparator" type="VSeparator" parent="Buttons"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Home" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("5_sseyf")
+texture_pressed = ExtResource("6_jbvsq")
+
+[connection signal="pressed" from="Buttons/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Buttons/Home" to="." method="_on_home_pressed"]

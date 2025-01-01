@@ -31,7 +31,6 @@ var _can_infect := true
 func _ready() -> void:
 	set_active(false)
 	EventManager.tick.connect(_on_tick)
-
 #func _draw() -> void:
 	#draw_line(Vector2.ZERO, raycast.target_position, Color.RED, 5)
 

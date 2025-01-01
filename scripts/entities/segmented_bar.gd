@@ -7,6 +7,8 @@ func _ready() -> void:
 func _update_value():
 	Stats.stealth_points -= 1
 	_set_value(10. - Stats.stealth_points)
+	if Stats.stealth_points == 0:
+		EventManager._on_level_lose()
 
 func _set_value(val: int):
 	$ForegroundBar.material.set_shader_parameter("value", val/10.)

@@ -9,8 +9,32 @@ signal detected_on_tick()
 signal tick()
 signal tick_complete()
 
+signal level_complete()
+signal level_lose()
+
+var time: int = 0
 var ticks: int = 0
 var is_detected := false
+
+func _on_level_start():
+	time = Time.get_ticks_msec()
+	ticks = 0
+
+func _on_level_complete():
+	time = Time.get_ticks_msec() - time
+	level_complete.emit()
+	
+	var prev_ticks = LevelManager.ticks[LevelManager.current_level]
+	var prev_time = LevelManager.times[LevelManager.current_level]
+
+	if prev_ticks < 0:
+		LevelManager.ticks[LevelManager.current_level] = min(ticks, prev_ticks)
+
+	if prev_time < 0:
+		LevelManager.times[LevelManager.current_level] = min(time, prev_time)
+		
+func _on_level_lose():
+	level_lose.emit()
 
 func on_tick_complete():
 	ticks += 1

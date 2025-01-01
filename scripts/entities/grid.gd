@@ -56,10 +56,6 @@ func _on_move_completed() -> void:
 		EventManager.on_tick_complete()
 		num_entities_completed_move = 0
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("restart"):
-		LevelManager.reload_level()
-
 func get_next_dir_to(from: Vector2, to: Vector2):
 	_setup_astar()
 	var pos1 := local_to_map(from)
