@@ -1,24 +1,24 @@
-[gd_scene load_steps=32 format=4 uid="uid://6ev81th3po4m"]
+[gd_scene load_steps=32 format=4 uid="uid://clhyvdm4di1ng"]
 
-[ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_ooeys"]
-[ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_tsop5"]
-[ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="3_cfdg0"]
-[ext_resource type="PackedScene" uid="uid://c705y5st7xlub" path="res://scenes/entities/gate.tscn" id="4_b1u7r"]
-[ext_resource type="PackedScene" uid="uid://ckhoxemw6imv7" path="res://scenes/levels/level_portal.tscn" id="5_o0t7v"]
-[ext_resource type="PackedScene" uid="uid://b3y0u5fjy10s5" path="res://scenes/entities/lock.tscn" id="6_45vor"]
-[ext_resource type="PackedScene" uid="uid://ccbebsya6a2to" path="res://scenes/entities/hash.tscn" id="6_tr5qf"]
-[ext_resource type="PackedScene" uid="uid://dhlsk8ceh2roe" path="res://scenes/entities/key.tscn" id="7_5iu1x"]
-[ext_resource type="PackedScene" uid="uid://ndlp3wv23s3t" path="res://scenes/entities/carrier_bug.tscn" id="8_1j6ll"]
-[ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="9_6qkvx"]
-[ext_resource type="Script" path="res://scenes/levels/draw.gd" id="11_607en"]
-[ext_resource type="PackedScene" uid="uid://dt2k60d54gqys" path="res://scenes/entities/decrypt_process.tscn" id="11_l0djl"]
-[ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="12_dns85"]
-[ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="13_1fxkq"]
-[ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="14_fcd8v"]
-[ext_resource type="PackedScene" uid="uid://cws63lnwpdthq" path="res://scenes/ui/level_end_ui.tscn" id="15_pmuli"]
+[ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_hxpjx"]
+[ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_nmfsi"]
+[ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="3_jjhbj"]
+[ext_resource type="PackedScene" uid="uid://c705y5st7xlub" path="res://scenes/entities/gate.tscn" id="4_g2i7s"]
+[ext_resource type="PackedScene" uid="uid://ckhoxemw6imv7" path="res://scenes/levels/level_portal.tscn" id="5_6ivqd"]
+[ext_resource type="PackedScene" uid="uid://ccbebsya6a2to" path="res://scenes/entities/hash.tscn" id="6_sjk5x"]
+[ext_resource type="PackedScene" uid="uid://b3y0u5fjy10s5" path="res://scenes/entities/lock.tscn" id="7_gmh32"]
+[ext_resource type="PackedScene" uid="uid://dhlsk8ceh2roe" path="res://scenes/entities/key.tscn" id="8_k0abt"]
+[ext_resource type="PackedScene" uid="uid://ndlp3wv23s3t" path="res://scenes/entities/carrier_bug.tscn" id="9_sk11d"]
+[ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="10_jdm5r"]
+[ext_resource type="PackedScene" uid="uid://dt2k60d54gqys" path="res://scenes/entities/decrypt_process.tscn" id="11_p3qa7"]
+[ext_resource type="Script" path="res://scenes/levels/draw.gd" id="13_esdei"]
+[ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="14_o0sb0"]
+[ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="15_yocsw"]
+[ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="16_8670y"]
+[ext_resource type="PackedScene" uid="uid://cws63lnwpdthq" path="res://scenes/ui/level_end_ui.tscn" id="17_3q4cy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
-texture = ExtResource("3_cfdg0")
+texture = ExtResource("3_jjhbj")
 texture_region_size = Vector2i(64, 64)
 1:1/0 = 0
 1:1/0/custom_data_0 = true
@@ -387,7 +387,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0.158058, 0.59512, 0.0268855, 1)
 gradient = SubResource("Gradient_xibvm")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8y8o3"]
-shader = ExtResource("13_1fxkq")
+shader = ExtResource("15_yocsw")
 shader_parameter/stepify = true
 shader_parameter/value = 0.0
 shader_parameter/count = 10
@@ -398,62 +398,90 @@ shader_parameter/invert = false
 shader_parameter/gradient_x = SubResource("GradientTexture1D_47bex")
 shader_parameter/gradient_y = SubResource("GradientTexture1D_puwax")
 
-[node name="OverAndUnder" type="Node2D"]
-script = ExtResource("1_ooeys")
+[node name="MentalWorkout" type="Node2D"]
+script = ExtResource("1_hxpjx")
 
-[node name="Grid" parent="." instance=ExtResource("2_tsop5")]
+[node name="Grid" parent="." instance=ExtResource("2_nmfsi")]
 scale = Vector2(0.9, 0.9)
-tile_map_data = PackedByteArray("AAABAAQAAAADAAIAAAABAAMAAAADAAIAAAABAAIAAAADAAIAAAABAAEAAAADAAIAAAABAAAAAAADAAIAAAAAAAAAAAADAAIAAAAAAAEAAAADAAIAAAAAAAIAAAADAAIAAAAAAAMAAAADAAIAAAAAAAQAAAADAAIAAAAAAAUAAAADAAIAAAAAAAcAAAADAAIAAAAAAAgAAAADAAIAAAAAAAkAAAADAAIAAAABAAkAAAADAAIAAAACAAgAAAADAAIAAAACAAUAAAADAAIAAAACAAQAAAADAAIAAAACAAMAAAADAAIAAAACAAIAAAADAAIAAAACAAEAAAADAAIAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAADAAEAAAADAAIAAAADAAIAAAAEAAAAAAADAAMAAAAEAAAAAAADAAQAAAADAAIAAAADAAgAAAAEAAAAAAADAAkAAAAEAAAAAAACAAkAAAADAAIAAAAOAAkAAAAEAAAAAAAOAAgAAAAEAAAAAAAOAAcAAAAEAAAAAAAOAAUAAAAEAAAAAAAOAAQAAAADAAIAAAAOAAMAAAAEAAAAAAAOAAIAAAAEAAAAAAAOAAEAAAADAAIAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAPAAEAAAADAAIAAAAPAAIAAAAEAAAAAAAPAAMAAAAEAAAAAAAPAAQAAAADAAIAAAAPAAUAAAAEAAAAAAAPAAcAAAAEAAAAAAAPAAgAAAAEAAAAAAAPAAkAAAAEAAAAAAAQAAkAAAADAAIAAAAQAAgAAAADAAIAAAAQAAcAAAADAAIAAAAQAAYAAAADAAIAAAAQAAUAAAADAAIAAAAQAAQAAAADAAIAAAAQAAMAAAADAAIAAAAQAAIAAAADAAIAAAAQAAEAAAADAAIAAAAQAAAAAAADAAIAAAABAAUAAAADAAIAAAABAAYAAAADAAIAAAABAAcAAAADAAIAAAABAAgAAAADAAIAAAAAAAYAAAADAAIAAAACAAYAAAADAAIAAAACAAcAAAADAAIAAAADAAYAAAAEAAAAAAADAAcAAAAEAAAAAAARAAEAAAADAAIAAAARAAIAAAADAAIAAAARAAMAAAADAAIAAAARAAQAAAADAAIAAAARAAUAAAADAAIAAAARAAYAAAADAAIAAAARAAcAAAADAAIAAAARAAgAAAADAAIAAAARAAkAAAADAAIAAAARAAAAAAADAAIAAAAAAAoAAAADAAIAAAABAAoAAAADAAIAAAACAAoAAAADAAIAAAARAAoAAAADAAIAAAABAAsAAAADAAIAAAACAAsAAAADAAIAAAADAAsAAAADAAIAAAAEAAsAAAADAAIAAAAFAAsAAAADAAIAAAAGAAsAAAADAAIAAAAHAAsAAAADAAIAAAAIAAsAAAADAAIAAAAJAAsAAAADAAIAAAAKAAsAAAADAAIAAAALAAsAAAADAAIAAAAMAAsAAAADAAIAAAANAAsAAAADAAIAAAAOAAsAAAADAAIAAAAPAAsAAAADAAIAAAAQAAsAAAADAAIAAAARAAsAAAADAAIAAAASAAsAAAADAAIAAAAAAAsAAAADAAIAAAATAAsAAAADAAIAAAASAAAAAAADAAIAAAASAAEAAAADAAIAAAASAAIAAAADAAIAAAASAAMAAAADAAIAAAASAAQAAAADAAIAAAASAAUAAAADAAIAAAASAAYAAAADAAIAAAASAAcAAAADAAIAAAASAAgAAAADAAIAAAASAAkAAAADAAIAAAASAAoAAAADAAIAAAATAAAAAAADAAIAAAATAAEAAAADAAIAAAATAAIAAAADAAIAAAATAAMAAAADAAIAAAATAAQAAAADAAIAAAATAAUAAAADAAIAAAATAAYAAAADAAIAAAATAAcAAAADAAIAAAATAAgAAAADAAIAAAATAAkAAAADAAIAAAATAAoAAAADAAIAAAAEAAAAAAADAAIAAAAEAAEAAAADAAIAAAAEAAIAAAAEAAAAAAAEAAMAAAAEAAAAAAAEAAQAAAADAAIAAAAEAAUAAAAEAAAAAAAEAAYAAAAEAAAAAAAEAAcAAAAEAAAAAAAEAAgAAAAEAAAAAAAEAAkAAAAEAAAAAAAFAAAAAAADAAIAAAAFAAEAAAADAAIAAAAFAAIAAAAEAAAAAAAFAAMAAAAEAAAAAAAFAAQAAAADAAIAAAAFAAYAAAADAAIAAAAFAAcAAAADAAIAAAAFAAgAAAADAAIAAAAFAAkAAAAEAAAAAAAGAAAAAAADAAIAAAAGAAMAAAAEAAAAAAAGAAYAAAAEAAAAAAAGAAcAAAAEAAAAAAAGAAgAAAADAAIAAAAGAAkAAAAEAAAAAAAHAAAAAAADAAIAAAAHAAEAAAADAAIAAAAHAAIAAAAEAAAAAAAHAAMAAAAEAAAAAAAHAAQAAAAEAAAAAAAHAAUAAAAEAAAAAAAHAAYAAAAEAAAAAAAHAAcAAAAEAAAAAAAHAAgAAAADAAIAAAAHAAkAAAAEAAAAAAAIAAAAAAADAAIAAAAIAAEAAAADAAIAAAAIAAIAAAAEAAAAAAAIAAMAAAAEAAAAAAAIAAQAAAADAAIAAAAIAAUAAAADAAIAAAAIAAYAAAADAAIAAAAIAAcAAAADAAIAAAAIAAgAAAADAAIAAAAIAAkAAAAEAAAAAAAJAAAAAAAEAAAAAAAJAAEAAAAEAAAAAAAJAAIAAAAEAAAAAAAJAAMAAAAEAAAAAAAJAAQAAAAEAAAAAAAJAAUAAAAEAAAAAAAJAAYAAAAEAAAAAAAJAAcAAAAEAAAAAAAJAAgAAAAEAAAAAAAJAAkAAAAEAAAAAAAKAAAAAAADAAIAAAAKAAEAAAADAAIAAAAKAAIAAAAEAAAAAAAKAAMAAAAEAAAAAAAKAAQAAAADAAIAAAAKAAUAAAADAAIAAAAKAAYAAAADAAIAAAAKAAcAAAADAAIAAAAKAAgAAAADAAIAAAAKAAkAAAAEAAAAAAALAAAAAAADAAIAAAALAAEAAAADAAIAAAALAAIAAAAEAAAAAAALAAMAAAAEAAAAAAALAAQAAAAEAAAAAAALAAUAAAAEAAAAAAALAAYAAAAEAAAAAAALAAcAAAAEAAAAAAALAAgAAAADAAIAAAALAAkAAAAEAAAAAAAMAAAAAAADAAIAAAAMAAEAAAADAAIAAAAMAAIAAAAEAAAAAAAMAAMAAAAEAAAAAAAMAAQAAAAEAAAAAAAMAAUAAAAEAAAAAAAMAAYAAAAEAAAAAAAMAAgAAAADAAIAAAAMAAkAAAAEAAAAAAANAAAAAAADAAIAAAANAAEAAAADAAIAAAANAAIAAAAEAAAAAAANAAMAAAAEAAAAAAANAAQAAAADAAIAAAANAAUAAAADAAIAAAANAAYAAAADAAIAAAANAAcAAAADAAIAAAANAAgAAAADAAIAAAANAAkAAAAEAAAAAAADAAoAAAAEAAAAAAAEAAoAAAAEAAAAAAAFAAoAAAAEAAAAAAAGAAoAAAAEAAAAAAAHAAoAAAAEAAAAAAAIAAoAAAAEAAAAAAAJAAoAAAAEAAAAAAAKAAoAAAAEAAAAAAALAAoAAAAEAAAAAAAMAAoAAAAEAAAAAAANAAoAAAAEAAAAAAAOAAoAAAAEAAAAAAAPAAoAAAAEAAAAAAAQAAoAAAADAAIAAAAOAAYAAAAEAAAAAAAGAAEAAAADAAIAAAAMAAcAAAAEAAAAAAAPAAYAAAAEAAAAAAAFAAUAAAADAAIAAAAGAAUAAAAEAAAAAAAGAAQAAAAEAAAAAAAGAAIAAAAEAAAAAAADAAUAAAAEAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAAQAAAADAAIAAAABAAMAAAADAAIAAAABAAIAAAADAAIAAAABAAEAAAADAAIAAAABAAAAAAADAAIAAAAAAAAAAAADAAIAAAAAAAEAAAADAAIAAAAAAAIAAAADAAIAAAAAAAMAAAADAAIAAAAAAAQAAAADAAIAAAAAAAUAAAADAAIAAAAAAAcAAAADAAIAAAAAAAgAAAADAAIAAAAAAAkAAAADAAIAAAABAAkAAAADAAIAAAACAAgAAAADAAIAAAACAAUAAAADAAIAAAACAAQAAAADAAIAAAACAAMAAAADAAIAAAACAAIAAAADAAIAAAACAAEAAAADAAIAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAADAAEAAAADAAIAAAADAAIAAAADAAIAAAADAAMAAAAEAAAAAAADAAQAAAAEAAAAAAADAAgAAAADAAIAAAADAAkAAAADAAIAAAACAAkAAAADAAIAAAAOAAkAAAADAAIAAAAOAAgAAAADAAIAAAAOAAcAAAAEAAAAAAAOAAUAAAAEAAAAAAAOAAQAAAAEAAAAAAAOAAMAAAAEAAAAAAAOAAIAAAADAAIAAAAOAAEAAAADAAIAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAPAAEAAAADAAIAAAAPAAIAAAADAAIAAAAPAAMAAAAEAAAAAAAPAAQAAAAEAAAAAAAPAAUAAAAEAAAAAAAPAAcAAAAEAAAAAAAPAAgAAAADAAIAAAAPAAkAAAADAAIAAAAQAAkAAAADAAIAAAAQAAgAAAADAAIAAAAQAAcAAAADAAIAAAAQAAYAAAADAAIAAAAQAAUAAAADAAIAAAAQAAQAAAADAAIAAAAQAAMAAAADAAIAAAAQAAIAAAADAAIAAAAQAAEAAAADAAIAAAAQAAAAAAADAAIAAAABAAUAAAADAAIAAAABAAYAAAADAAIAAAABAAcAAAADAAIAAAABAAgAAAADAAIAAAAAAAYAAAADAAIAAAACAAYAAAADAAIAAAACAAcAAAADAAIAAAADAAYAAAAEAAAAAAADAAcAAAAEAAAAAAARAAEAAAADAAIAAAARAAIAAAADAAIAAAARAAMAAAADAAIAAAARAAQAAAADAAIAAAARAAUAAAADAAIAAAARAAYAAAADAAIAAAARAAcAAAADAAIAAAARAAgAAAADAAIAAAARAAkAAAADAAIAAAARAAAAAAADAAIAAAAAAAoAAAADAAIAAAABAAoAAAADAAIAAAACAAoAAAADAAIAAAARAAoAAAADAAIAAAABAAsAAAADAAIAAAACAAsAAAADAAIAAAADAAsAAAADAAIAAAAEAAsAAAADAAIAAAAFAAsAAAADAAIAAAAGAAsAAAADAAIAAAAHAAsAAAADAAIAAAAIAAsAAAADAAIAAAAJAAsAAAADAAIAAAAKAAsAAAADAAIAAAALAAsAAAADAAIAAAAMAAsAAAADAAIAAAANAAsAAAADAAIAAAAOAAsAAAADAAIAAAAPAAsAAAADAAIAAAAQAAsAAAADAAIAAAARAAsAAAADAAIAAAASAAsAAAADAAIAAAAAAAsAAAADAAIAAAATAAsAAAADAAIAAAASAAAAAAADAAIAAAASAAEAAAADAAIAAAASAAIAAAADAAIAAAASAAMAAAADAAIAAAASAAQAAAADAAIAAAASAAUAAAADAAIAAAASAAYAAAADAAIAAAASAAcAAAADAAIAAAASAAgAAAADAAIAAAASAAkAAAADAAIAAAASAAoAAAADAAIAAAATAAAAAAADAAIAAAATAAEAAAADAAIAAAATAAIAAAADAAIAAAATAAMAAAADAAIAAAATAAQAAAADAAIAAAATAAUAAAADAAIAAAATAAYAAAADAAIAAAATAAcAAAADAAIAAAATAAgAAAADAAIAAAATAAkAAAADAAIAAAATAAoAAAADAAIAAAAEAAAAAAADAAIAAAAEAAEAAAADAAIAAAAEAAIAAAADAAIAAAAEAAMAAAAEAAAAAAAEAAQAAAAEAAAAAAAEAAUAAAAEAAAAAAAEAAYAAAAEAAAAAAAEAAcAAAAEAAAAAAAEAAgAAAADAAIAAAAEAAkAAAADAAIAAAAFAAAAAAADAAIAAAAFAAEAAAADAAIAAAAFAAIAAAADAAIAAAAFAAMAAAAEAAAAAAAFAAQAAAAEAAAAAAAFAAYAAAAEAAAAAAAFAAcAAAAEAAAAAAAFAAgAAAADAAIAAAAFAAkAAAADAAIAAAAGAAAAAAADAAIAAAAGAAMAAAAEAAAAAAAGAAYAAAAEAAAAAAAGAAcAAAAEAAAAAAAGAAgAAAADAAIAAAAGAAkAAAADAAIAAAAHAAAAAAADAAIAAAAHAAEAAAADAAIAAAAHAAIAAAADAAIAAAAHAAMAAAAEAAAAAAAHAAQAAAAEAAAAAAAHAAUAAAAEAAAAAAAHAAYAAAAEAAAAAAAHAAcAAAAEAAAAAAAHAAgAAAADAAIAAAAHAAkAAAADAAIAAAAIAAAAAAADAAIAAAAIAAEAAAADAAIAAAAIAAIAAAADAAIAAAAIAAMAAAAEAAAAAAAIAAQAAAAEAAAAAAAIAAUAAAAEAAAAAAAIAAYAAAAEAAAAAAAIAAcAAAAEAAAAAAAIAAgAAAADAAIAAAAIAAkAAAADAAIAAAAJAAAAAAAEAAAAAAAJAAEAAAAEAAAAAAAJAAIAAAAEAAAAAAAJAAMAAAAEAAAAAAAJAAQAAAAEAAAAAAAJAAUAAAAEAAAAAAAJAAYAAAAEAAAAAAAJAAcAAAAEAAAAAAAJAAgAAAADAAIAAAAJAAkAAAADAAIAAAAKAAAAAAADAAIAAAAKAAEAAAADAAIAAAAKAAIAAAADAAIAAAAKAAMAAAAEAAAAAAAKAAQAAAAEAAAAAAAKAAUAAAAEAAAAAAAKAAYAAAAEAAAAAAAKAAcAAAAEAAAAAAAKAAgAAAADAAIAAAAKAAkAAAADAAIAAAALAAAAAAADAAIAAAALAAEAAAADAAIAAAALAAIAAAADAAIAAAALAAMAAAAEAAAAAAALAAQAAAAEAAAAAAALAAUAAAAEAAAAAAALAAYAAAAEAAAAAAALAAcAAAAEAAAAAAALAAgAAAADAAIAAAALAAkAAAADAAIAAAAMAAAAAAADAAIAAAAMAAEAAAADAAIAAAAMAAIAAAADAAIAAAAMAAMAAAAEAAAAAAAMAAQAAAAEAAAAAAAMAAUAAAAEAAAAAAAMAAYAAAAEAAAAAAAMAAgAAAADAAIAAAAMAAkAAAADAAIAAAANAAAAAAADAAIAAAANAAEAAAADAAIAAAANAAIAAAADAAIAAAANAAMAAAAEAAAAAAANAAQAAAAEAAAAAAANAAUAAAAEAAAAAAANAAYAAAAEAAAAAAANAAcAAAAEAAAAAAANAAgAAAADAAIAAAANAAkAAAADAAIAAAADAAoAAAADAAIAAAAEAAoAAAADAAIAAAAFAAoAAAADAAIAAAAGAAoAAAADAAIAAAAHAAoAAAADAAIAAAAIAAoAAAADAAIAAAAJAAoAAAADAAIAAAAKAAoAAAADAAIAAAALAAoAAAADAAIAAAAMAAoAAAADAAIAAAANAAoAAAADAAIAAAAOAAoAAAADAAIAAAAPAAoAAAADAAIAAAAQAAoAAAADAAIAAAAOAAYAAAAEAAAAAAAGAAEAAAADAAIAAAAMAAcAAAAEAAAAAAAPAAYAAAAEAAAAAAAFAAUAAAAEAAAAAAAGAAUAAAAEAAAAAAAGAAQAAAAEAAAAAAAGAAIAAAADAAIAAAADAAUAAAAEAAAAAAA=")
 tile_set = SubResource("TileSet_d4eyp")
 
-[node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("4_b1u7r")]
-position = Vector2(608.889, 92.2223)
-locks = [NodePath("../Lock"), NodePath("../Lock2")]
+[node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("4_g2i7s")]
+position = Vector2(607.778, 153.333)
+locks = [NodePath("../Lock"), NodePath("../Lock2"), NodePath("../Lock3"), NodePath("../Lock4")]
 
-[node name="LevelPortal" parent="Grid" node_paths=PackedStringArray("UI") instance=ExtResource("5_o0t7v")]
-position = Vector2(608.889, 31.1111)
+[node name="LevelPortal" parent="Grid" node_paths=PackedStringArray("UI") instance=ExtResource("5_6ivqd")]
+position = Vector2(607.778, 92.2222)
 UI = NodePath("../../UI")
 
-[node name="Hash" parent="Grid" instance=ExtResource("6_tr5qf")]
-position = Vector2(800, 414.444)
+[node name="Hash" parent="Grid" instance=ExtResource("6_sjk5x")]
+position = Vector2(726.667, 480)
 
-[node name="Hash2" parent="Grid" instance=ExtResource("6_tr5qf")]
-position = Vector2(420, 425.556)
+[node name="Hash2" parent="Grid" instance=ExtResource("6_sjk5x")]
+position = Vector2(936.667, 478.889)
 
-[node name="Lock" parent="Grid" instance=ExtResource("6_45vor")]
-position = Vector2(481.111, 288.889)
+[node name="Hash3" parent="Grid" instance=ExtResource("6_sjk5x")]
+position = Vector2(283.333, 480)
 
-[node name="Lock2" parent="Grid" instance=ExtResource("6_45vor")]
-position = Vector2(737.778, 291.111)
+[node name="Hash4" parent="Grid" instance=ExtResource("6_sjk5x")]
+position = Vector2(481.111, 482.222)
 
-[node name="Key" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_5iu1x")]
-position = Vector2(288.889, 356.667)
+[node name="Lock" parent="Grid" instance=ExtResource("7_gmh32")]
+position = Vector2(357.778, 351.111)
+
+[node name="Lock4" parent="Grid" instance=ExtResource("7_gmh32")]
+position = Vector2(867.778, 352.222)
+
+[node name="Lock2" parent="Grid" instance=ExtResource("7_gmh32")]
+position = Vector2(537.778, 353.333)
+
+[node name="Lock3" parent="Grid" instance=ExtResource("7_gmh32")]
+position = Vector2(670, 350)
+
+[node name="Key" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("8_k0abt")]
+position = Vector2(354.444, 298.889)
 lock = NodePath("../Lock")
 color = 3
 _is_encrypted = true
 hash = NodePath("../Hash")
 
-[node name="Key2" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("7_5iu1x")]
-position = Vector2(925.556, 353.333)
+[node name="Key3" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("8_k0abt")]
+position = Vector2(663.333, 291.111)
+lock = NodePath("../Lock3")
+color = 5
+_is_encrypted = true
+hash = NodePath("../Hash3")
+
+[node name="Key2" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("8_k0abt")]
+position = Vector2(544.444, 295.556)
 lock = NodePath("../Lock2")
 color = 2
 _is_encrypted = true
 hash = NodePath("../Hash2")
 
-[node name="CarrierBug" parent="Grid" instance=ExtResource("8_1j6ll")]
-position = Vector2(604.444, 223.333)
+[node name="Key4" parent="Grid" node_paths=PackedStringArray("lock", "hash") instance=ExtResource("8_k0abt")]
+position = Vector2(872.222, 290)
+lock = NodePath("../Lock4")
+color = 6
+_is_encrypted = true
+hash = NodePath("../Hash4")
 
-[node name="MoverProcess" parent="Grid" instance=ExtResource("9_6qkvx")]
-position = Vector2(285.556, 163.333)
-_init_dir = Vector2(1, 0)
+[node name="CarrierBug" parent="Grid" instance=ExtResource("9_sk11d")]
+position = Vector2(613.333, 475.556)
 
-[node name="DecryptProcess" parent="Grid" instance=ExtResource("11_l0djl")]
-position = Vector2(928.889, 160)
-_init_dir = Vector2(-1, 0)
+[node name="MoverProcess" parent="Grid" instance=ExtResource("10_jdm5r")]
+position = Vector2(227.778, 282.222)
+max_count = 2
+_init_dir = Vector2(0, 1)
+
+[node name="DecryptProcess" parent="Grid" instance=ExtResource("11_p3qa7")]
+position = Vector2(991.111, 345.556)
+max_count = 2
+_init_dir = Vector2(0, 1)
 
 [node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 visible = false
-script = ExtResource("11_607en")
+script = ExtResource("13_esdei")
 tilemap = NodePath("../Grid")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -483,7 +511,7 @@ offset_left = 972.0
 offset_top = 38.0
 offset_right = 1120.0
 offset_bottom = 72.0
-script = ExtResource("12_dns85")
+script = ExtResource("14_o0sb0")
 metadata/_edit_group_ = true
 
 [node name="Backdrop" type="Panel" parent="UI/SegmentedBar"]
@@ -523,12 +551,12 @@ offset_bottom = 36.0
 theme_override_font_sizes/font_size = 24
 text = "Detection level"
 
-[node name="LevelLoseUI" parent="UI" instance=ExtResource("14_fcd8v")]
+[node name="LevelLoseUI" parent="UI" instance=ExtResource("16_8670y")]
 visible = false
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 647.0
 grow_vertical = 1
 
-[node name="LevelEndUI" parent="UI" instance=ExtResource("15_pmuli")]
+[node name="LevelEndUI" parent="UI" instance=ExtResource("17_3q4cy")]
 visible = false
