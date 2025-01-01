@@ -14,12 +14,14 @@ func push(source: Node2D, direction: Vector2) -> bool:
 		var destination: Vector2 = position + direction * Vector2(_tile_map.tile_set.tile_size)
 		if _tile_map.is_empty(destination):
 			_tile_map.update_grid(position, destination)
+			_is_moving = true
 			if _move_tween: _move_tween.kill()
 			_move_tween = create_tween()
 			_move_tween.tween_property(self, "position", destination, _sliding_animation_sec)	
 			_is_sliding = true
 			_move_tween.tween_callback(
 				func():
+					_is_moving = false
 					_is_sliding = false
 					AudioManager.play_effect(AudioManager.heavy_block_move_sfx)
 			)
