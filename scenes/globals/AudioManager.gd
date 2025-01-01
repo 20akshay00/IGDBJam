@@ -4,9 +4,14 @@ var valid_placement_sfx := preload("res://assets/audio/sfx/lockcorrect.mp3")
 var invalid_placement_sfx := preload("res://assets/audio/sfx/lockwrong.mp3")
 var light_block_move_sfx := preload("res://assets/audio/sfx/lightboxmove.mp3")
 var heavy_block_move_sfx := preload("res://assets/audio/sfx/heavyboxmove.mp3")
-var key_move_sfx := preload("res://assets/audio/sfx/keymove.mp3")
+var key_move_sfx := preload("res://assets/audio/sfx/keymove3.mp3")
 
-var virus_sfx := preload("res://assets/audio/sfx/virusfillv5.mp3")
+var hash_press_sfx := preload("res://assets/audio/sfx/hashbuttonpress.mp3")
+var stealth_sfx := preload("res://assets/audio/sfx/stealthdecrease.mp3")
+
+var virus_sfx := preload("res://assets/audio/sfx/virusfillv7.mp3")
+var virus_fail_sfx := preload("res://assets/audio/sfx/virusfillFAIL.mp3")
+
 var bg_music := preload("res://assets/audio/music/del.maintheme2mp3.mp3")
 
 func _play_music(music: AudioStream, volume = -7):

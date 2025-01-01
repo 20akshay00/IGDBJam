@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccbebsya6a2to"]
+[gd_scene load_steps=4 format=3 uid="uid://ccbebsya6a2to"]
 
 [ext_resource type="Script" path="res://scripts/entities/hash.gd" id="1_63g1h"]
-[ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_ft3hi"]
 [ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_wo5pf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75yje"]
@@ -11,7 +10,7 @@ size = Vector2(46, 44)
 script = ExtResource("1_63g1h")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_ft3hi")
+texture = ExtResource("2_wo5pf")
 region_enabled = true
 region_rect = Rect2(0, 192, 64, 64)
 

@@ -43,8 +43,9 @@ func _update_status() -> void:
 		for pos in bridge_positions:
 			_tile_map.set_cell(_tile_map.local_to_map(pos), 0, _empty_tile_atlas_coord, 0)
 			_tile_map.add_occupation(pos)
-
-		await get_tree().create_timer(0.5).timeout
+		
+		if get_tree():
+			await get_tree().create_timer(0.5).timeout
 			
 		for entity in _tile_map.get_children():
 			if (entity is not Bridge) and (_tile_map.local_to_map(entity.position) in bridge_cells):

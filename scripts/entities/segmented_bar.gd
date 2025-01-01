@@ -7,6 +7,8 @@ func _ready() -> void:
 func _update_value():
 	Stats.stealth_points -= 1
 	_set_value(10. - Stats.stealth_points)
+	AudioManager.play_effect(AudioManager.stealth_sfx)
+
 	if Stats.stealth_points == 0:
 		EventManager._on_level_lose()
 

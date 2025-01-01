@@ -34,7 +34,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if _key_tween: _key_tween.kill()
 		_key_tween = get_tree().create_tween()
 		_key_tween.tween_property($Overlay, "modulate:a", 1.0, 0.3)
-		AudioManager.play_effect(AudioManager.valid_placement_sfx)
+		AudioManager.play_effect(AudioManager.hash_press_sfx)
 	else:
 		await get_tree().create_timer(0.25).timeout
 		
@@ -46,6 +46,8 @@ func _on_body_entered(body: Node2D) -> void:
 		AudioManager.play_effect(AudioManager.invalid_placement_sfx)
 
 func _on_body_exited(body: Node2D) -> void:
+	if body is DecryptProcess:
+		AudioManager.play_effect(AudioManager.hash_press_sfx)
 
 	if _key_tween: _key_tween.kill()
 	_key_tween = get_tree().create_tween()

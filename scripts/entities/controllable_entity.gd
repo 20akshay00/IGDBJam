@@ -56,7 +56,9 @@ func _process(delta: float) -> void:
 					set_active(false)
 					object.set_active(true)
 					return
-	
+				else:
+					AudioManager.play_effect(AudioManager.virus_fail_sfx)
+
 			elif object is Key:
 				# decrypt key
 				if (self is DecryptProcess) and (object._is_encrypted) and (object._can_be_decrypted):
