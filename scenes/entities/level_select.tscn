@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1oef4fngrtru"]
 
-[ext_resource type="Script" path="res://scripts/entities/hash.gd" id="1_8dbk2"]
+[ext_resource type="Script" path="res://scenes/entities/level_select.gd" id="1_45orl"]
 [ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_5pina"]
 [ext_resource type="Texture2D" uid="uid://cbvqtbtkdo4s3" path="res://assets/art/lock_key_tilesheet_v5.png" id="2_aw22e"]
 
@@ -8,7 +8,7 @@
 size = Vector2(46, 44)
 
 [node name="LevelSelect" type="Area2D"]
-script = ExtResource("1_8dbk2")
+script = ExtResource("1_45orl")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_aw22e")
@@ -24,10 +24,15 @@ region_rect = Rect2(128, 256, 64, 64)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("2_5pina")
 region_enabled = true
-region_rect = Rect2(448, 64, 64, 64)
+region_rect = Rect2(448, 0, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_75yje")
+
+[node name="Shield" type="Sprite2D" parent="."]
+texture = ExtResource("2_aw22e")
+region_enabled = true
+region_rect = Rect2(0, 320, 64, 64)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

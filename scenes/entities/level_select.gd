@@ -5,14 +5,19 @@ var _key_tween: Tween = null
 var _rect: Rect2 
 
 @export var level_idx: int
+@export var difficulty: int = 0
 
 func _ready() -> void:
-	_rect = $Overlay.region_rect
+	_rect = $Shield.region_rect
+
+	if difficulty == 0:
+		$Shield.hide()
+	else:
+		$Shield.region_rect = Rect2(_rect.position + Vector2(_rect.size.x * (difficulty - 1), 0), _rect.size)
 
 func _on_body_entered(body: Node2D) -> void:
 		await get_tree().create_timer(0.25).timeout
 
-		$Overlay.region_rect = Rect2(_rect.position - Vector2(0, _rect.size.y), _rect.size)
 		if _key_tween: _key_tween.kill()
 		_key_tween = get_tree().create_tween()
 		_key_tween.tween_property($Overlay, "modulate:a", 1.0, 0.3)

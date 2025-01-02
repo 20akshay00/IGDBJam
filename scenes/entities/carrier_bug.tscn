@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ndlp3wv23s3t"]
 
 [ext_resource type="Script" path="res://scripts/entities/carrier_bug.gd" id="1_d6w71"]
-[ext_resource type="Texture2D" uid="uid://csagjlyi38lol" path="res://assets/art/bug_infected.png" id="3_qasla"]
-[ext_resource type="Texture2D" uid="uid://ob6fjgr4pxd1" path="res://assets/art/bug_clean.png" id="3_umjla"]
+[ext_resource type="Texture2D" uid="uid://7pfxinsdvsu0" path="res://assets/art/bug_clean_alt.png" id="2_s61fe"]
+[ext_resource type="Texture2D" uid="uid://do7ylnkjro0ak" path="res://assets/art/bug_infected_alt.png" id="3_aucsc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xl2yi"]
 radius = 22.0907
@@ -19,10 +19,10 @@ target_position = Vector2(51, 0)
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Clean" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("3_umjla")
+texture = ExtResource("2_s61fe")
 
 [node name="Infected" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("3_qasla")
+texture = ExtResource("3_aucsc")
 
 [node name="MoveTimer" type="Timer" parent="."]
 one_shot = true

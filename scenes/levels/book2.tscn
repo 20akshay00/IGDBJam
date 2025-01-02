@@ -463,6 +463,15 @@ tilemap = NodePath("../Grid")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="InstructionLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 369.0
+offset_top = 592.0
+offset_right = 771.0
+offset_bottom = 669.0
+theme_override_font_sizes/font_size = 36
+text = "Avoid detection at all costs."
+
 [node name="WrongBotLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 0)
 offset_left = 35.0

@@ -456,6 +456,17 @@ tilemap = NodePath("../Grid")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="InstructionLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 955.0
+offset_top = 293.0
+offset_right = 1123.0
+offset_bottom = 410.0
+theme_override_font_sizes/font_size = 36
+text = "Keys unlock
+ more than 
+     doors."
+
 [node name="WrongBotLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 0)
 offset_left = 35.0
