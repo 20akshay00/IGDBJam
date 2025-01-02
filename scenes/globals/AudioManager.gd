@@ -24,9 +24,9 @@ func _play_music(id: int) -> void:
 	
 	get_child(id).playing = true
 	_stream_tween = create_tween()
-	_stream_tween.set_parallel()
-	_stream_tween.tween_property(get_child(1 - id), "volume_db", -40., 3.)
-	_stream_tween.tween_property(get_child(id), "volume_db", -15., 3.)
+	#_stream_tween.set_parallel()
+	_stream_tween.tween_method(_set_volume.bind(get_child(1 - id)), db_to_linear(-15.), 0., 1.).set_ease(Tween.EASE_IN)
+	_stream_tween.tween_method(_set_volume.bind(get_child(id)), 0., db_to_linear(-15.), 1.)
 	_stream_tween.tween_callback(func(): get_child(1 - id).playing = false)
 	
 func play_music_level(lvl: int):
@@ -49,3 +49,5 @@ func play_effect(aud_stream: AudioStream, volume = 0.0, loops = false):
 	else:
 		return fx_player
 	
+func _set_volume(vol: float, player: AudioStreamPlayer) -> void:
+	player.volume_db = linear_to_db(vol)

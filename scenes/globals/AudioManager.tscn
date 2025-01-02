@@ -14,3 +14,5 @@ volume_db = -80.0
 [node name="Theme1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_wup75")
 volume_db = -80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
