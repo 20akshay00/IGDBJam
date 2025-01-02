@@ -407,7 +407,7 @@ tile_set = SubResource("TileSet_d4eyp")
 
 [node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("4_lwo23")]
 position = Vector2(352.222, 92.2222)
-locks = [NodePath("../Lock")]
+locks = [NodePath("../Lock"), NodePath("../Lock2")]
 
 [node name="LevelPortal" parent="Grid" node_paths=PackedStringArray("UI") instance=ExtResource("5_td4jc")]
 position = Vector2(348.889, 18.8889)
