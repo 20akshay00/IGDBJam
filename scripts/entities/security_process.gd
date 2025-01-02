@@ -13,7 +13,7 @@ var count := 0
 var target: ControllableEntity = null
 
 var NORMAL_COLOR := Color("#35c20a4c")
-var DETECTED_COLOR := Color("fd6d724c") 
+var DETECTED_COLOR := Color("fd6d724c")
 
 var _detection_tween: Tween = null
 var _num_inactive_target_ticks := -1
@@ -28,11 +28,11 @@ func _ready() -> void:
 	
 	if _init_dir != Vector2.ZERO:
 		_current_direction = _init_dir
-	else:	
+	else:
 		_current_direction = [Vector2(1, 0), Vector2(0, 1)].pick_random()
 	
 	sprite.rotation = atan2(_current_direction.y, _current_direction.x)
-	$DetectionArea.rotation = sprite.rotation 
+	$DetectionArea.rotation = sprite.rotation
 
 func set_active_hook(val: bool) -> void:
 	_current_direction = Vector2(cos(sprite.rotation), sin(sprite.rotation))
@@ -41,7 +41,7 @@ func _on_tick() -> void:
 	if not _is_active:
 		if target == null:
 			count += 1
-			if count == max_count - 1: 
+			if count == max_count - 1:
 				count = 0
 				_current_direction *= -1
 		else:
@@ -51,9 +51,9 @@ func _on_tick() -> void:
 					_num_inactive_target_ticks = 0
 				
 				# track how many ticks the active target is under direct line of sight
-				if target in $DetectionArea.get_overlapping_bodies(): 
+				if target in $DetectionArea.get_overlapping_bodies():
 					EventManager.detected_on_tick.emit()
-			else: 
+			else:
 				# if target is not active, keep track of how many ticks passed since then
 				_num_inactive_target_ticks += 1
 				if _num_inactive_target_ticks >= _num_inactive_target_ticks_max:
@@ -76,13 +76,13 @@ func _custom_move(dir: Vector2) -> void:
 		if _move_tween: _move_tween.kill()
 		_move_tween = create_tween()
 		_move_tween.set_parallel()
-		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1) 
+		var angle = lerp_angle(sprite.rotation, atan2(dir.y, dir.x), 1)
 		_move_tween.tween_property(sprite, "rotation", angle, _rotation_animation_sec)
 		_move_tween.tween_property($DetectionArea, "rotation", angle, _rotation_animation_sec)
 
 	# push blocks and carrier bug
 	elif raycast.is_colliding():
-		_current_direction *= -1; 
+		_current_direction *= -1;
 		count = 0;
 
 	# move tween
@@ -114,7 +114,7 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 func _on_detection() -> void:
 	$DetectionArea/Polygon2D.color = DETECTED_COLOR
 	if _detection_tween: _detection_tween.kill()
-	_detection_tween = get_tree().create_tween()
+	_detection_tween = create_tween()
 	_detection_tween.set_loops()
 	_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 0.5, 0.5)
 	_detection_tween.tween_property($DetectionArea/Polygon2D, "modulate:a", 1, 0.5)

@@ -23,11 +23,10 @@ func _launch(lvl: int, clock: int, time: int) -> void:
 	await tween.finished
 	
 	if tween2: tween2.kill()
-	tween2 = get_tree().create_tween()
+	tween2 = create_tween()
 	tween2.set_loops()
 	tween2.tween_property($TextLabel, "modulate:a", 0.3, 1.)
 	tween2.tween_property($TextLabel, "modulate:a", 1., 1.)
-	tween2.bind_node(self)
 	_activate_buttons()
 
 func _on_retry_pressed() -> void:

@@ -8,7 +8,7 @@ var tween: Tween = null
 func _on_body_entered(body: Node2D) -> void:
 	if body is not CarrierBug:
 		if tween: tween.kill()
-		tween = get_tree().create_tween()
+		tween = create_tween()
 		tween.set_loops()
 		tween.tween_property(UI.get_node("WrongBotLabel"), "modulate:a", 1., 0.5)
 		tween.tween_property(UI.get_node("WrongBotLabel"), "modulate:a", 0.3, 0.5)
@@ -16,7 +16,7 @@ func _on_body_entered(body: Node2D) -> void:
 	elif body is CarrierBug:
 		if EventManager.is_detected:
 			if tween: tween.kill()
-			tween = get_tree().create_tween()
+			tween = create_tween()
 			tween.set_loops()
 			tween.tween_property(UI.get_node("SecurityLabel"), "modulate:a", 1., 0.5)
 			tween.tween_property(UI.get_node("SecurityLabel"), "modulate:a", 0.3, 0.5)
