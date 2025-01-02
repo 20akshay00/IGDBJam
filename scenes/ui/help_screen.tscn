@@ -1,0 +1,199 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxonaipo4prv2"]
+
+[ext_resource type="Texture2D" uid="uid://xkpc8o32hsfv" path="res://assets/art/ui/level_screen_background.png" id="1_8wtlh"]
+[ext_resource type="Texture2D" uid="uid://do7ylnkjro0ak" path="res://assets/art/bug_infected_alt.png" id="2_35tpg"]
+[ext_resource type="Texture2D" uid="uid://fpd5u7atdesb" path="res://assets/art/move_bot_normal.png" id="3_76dfe"]
+[ext_resource type="Texture2D" uid="uid://dm3luyh8qieok" path="res://assets/art/brain_bot_normal_v1.png" id="4_kr7fj"]
+[ext_resource type="Texture2D" uid="uid://7pfxinsdvsu0" path="res://assets/art/bug_clean_alt.png" id="5_axrfd"]
+[ext_resource type="Texture2D" uid="uid://cbvqtbtkdo4s3" path="res://assets/art/lock_key_tilesheet_v5.png" id="6_4uh87"]
+[ext_resource type="Texture2D" uid="uid://bstq2oj81eax" path="res://assets/art/arrowDown.png" id="7_v45o3"]
+[ext_resource type="Texture2D" uid="uid://vk78mcpqtsuf" path="res://assets/art/arrowUp.png" id="8_cpad6"]
+
+[node name="HelpScreen" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+offset_right = 1149.0
+offset_bottom = 648.0
+texture = ExtResource("1_8wtlh")
+metadata/_edit_lock_ = true
+
+[node name="Column1" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Column1"]
+position = Vector2(214, 181)
+scale = Vector2(2, 2)
+texture = ExtResource("2_35tpg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Column1"]
+position = Vector2(147, 381)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_76dfe")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Column1"]
+position = Vector2(268, 386)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_kr7fj")
+
+[node name="Label" type="Label" parent="Column1"]
+offset_left = 69.0
+offset_top = 481.0
+offset_right = 353.0
+offset_bottom = 558.0
+theme_override_font_sizes/font_size = 36
+text = "[Q] - Infect system
+          processes"
+
+[node name="Label2" type="Label" parent="Column1"]
+offset_left = 129.0
+offset_top = 61.0
+offset_right = 302.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 36
+text = "Carrier Bug"
+
+[node name="Label3" type="Label" parent="Column1"]
+offset_left = 124.0
+offset_top = 275.0
+offset_right = 297.0
+offset_bottom = 323.0
+theme_override_font_sizes/font_size = 36
+text = "Can Infect:"
+
+[node name="Column2" type="Node2D" parent="."]
+position = Vector2(356, 4)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Column2"]
+position = Vector2(153, 382)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_axrfd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Column2"]
+position = Vector2(203, 180)
+scale = Vector2(2, 2)
+texture = ExtResource("3_76dfe")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Column2"]
+position = Vector2(268, 386)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_kr7fj")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Column2"]
+position = Vector2(151, 494)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_4uh87")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Column2"]
+position = Vector2(266, 496)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_4uh87")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Label2" type="Label" parent="Column2"]
+offset_left = 100.0
+offset_top = 57.0
+offset_right = 311.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 36
+text = "Mover Process"
+
+[node name="Label3" type="Label" parent="Column2"]
+offset_left = 138.0
+offset_top = 275.0
+offset_right = 284.0
+offset_bottom = 323.0
+theme_override_font_sizes/font_size = 36
+text = "Can push:"
+
+[node name="Column3" type="Node2D" parent="."]
+position = Vector2(707, 5)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Column3"]
+position = Vector2(195, 181)
+scale = Vector2(2, 2)
+texture = ExtResource("4_kr7fj")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Column3"]
+position = Vector2(283, 384)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_4uh87")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Column3"]
+position = Vector2(121, 384)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_4uh87")
+region_enabled = true
+region_rect = Rect2(0, 192, 64, 64)
+
+[node name="Label" type="Label" parent="Column3"]
+offset_left = 79.0
+offset_top = 506.0
+offset_right = 363.0
+offset_bottom = 583.0
+theme_override_font_sizes/font_size = 36
+text = "[Q] - Infect worker 
+          processes"
+
+[node name="Label2" type="Label" parent="Column3"]
+offset_left = 89.0
+offset_top = 53.0
+offset_right = 326.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 36
+text = "Cipher Process"
+
+[node name="Label3" type="Label" parent="Column3"]
+offset_left = 55.0
+offset_top = 275.0
+offset_right = 201.0
+offset_bottom = 323.0
+theme_override_font_sizes/font_size = 36
+text = "Can read:"
+
+[node name="Label4" type="Label" parent="Column3"]
+offset_left = 206.0
+offset_top = 274.0
+offset_right = 365.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 36
+text = "Can unlock:"
+
+[node name="ArrowDown" type="Sprite2D" parent="Column3"]
+position = Vector2(91, 462)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_v45o3")
+
+[node name="ArrowDown2" type="Sprite2D" parent="Column3"]
+position = Vector2(124, 462)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_v45o3")
+
+[node name="ArrowUp" type="Sprite2D" parent="Column3"]
+position = Vector2(157, 462)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_cpad6")
+
+[node name="ArrowUp2" type="Sprite2D" parent="Column3"]
+position = Vector2(59, 462)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_cpad6")
+
+[node name="ArrowUp3" type="Sprite2D" parent="Column3"]
+position = Vector2(191, 462)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_cpad6")

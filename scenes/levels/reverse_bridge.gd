@@ -53,6 +53,6 @@ func _update_status() -> void:
 							#entity.move_finished.emit()
 						entity.queue_free()
 						await get_tree().create_timer(1.).timeout
-						LevelManager.load_level(19)
+						LevelManager.load_level(17)
 						)
 		

@@ -112,41 +112,36 @@ level_idx = 3
 
 [node name="LevelSelect4" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(417.778, 161.111)
-level_idx = 11
+level_idx = 10
 difficulty = 2
 
 [node name="LevelSelect5" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(545.556, 155.556)
-level_idx = 12
-difficulty = 2
-
-[node name="LevelSelect6" parent="Grid" instance=ExtResource("5_jgvk7")]
-position = Vector2(671.111, 161.111)
-level_idx = 13
+level_idx = 11
 difficulty = 2
 
 [node name="LevelSelect14" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(798.889, 163.333)
-level_idx = 14
+level_idx = 12
 difficulty = 2
 
 [node name="LevelSelect15" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(928.889, 157.778)
-level_idx = 15
+level_idx = 13
 difficulty = 2
 
 [node name="LevelSelect16" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(1120, 286.667)
-level_idx = 16
+level_idx = 14
 difficulty = 3
 
 [node name="LevelSelect18" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(96.6666, 417.778)
-level_idx = 18
+level_idx = 16
 
 [node name="LevelSelect17" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(1120, 478.889)
-level_idx = 17
+level_idx = 15
 difficulty = 3
 
 [node name="LevelSelect7" parent="Grid" instance=ExtResource("5_jgvk7")]
@@ -154,19 +149,14 @@ position = Vector2(802.222, 606.667)
 level_idx = 7
 difficulty = 1
 
-[node name="LevelSelect8" parent="Grid" instance=ExtResource("5_jgvk7")]
-position = Vector2(680, 608.889)
-level_idx = 8
-difficulty = 1
-
 [node name="LevelSelect9" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(542.222, 608.889)
-level_idx = 9
+level_idx = 8
 difficulty = 1
 
 [node name="LevelSelect10" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(417.778, 607.778)
-level_idx = 10
+level_idx = 9
 difficulty = 1
 
 [node name="LevelSelect11" parent="Grid" instance=ExtResource("5_jgvk7")]
