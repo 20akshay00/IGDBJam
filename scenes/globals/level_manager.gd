@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 func load_level(lvl: int):
 	current_level = lvl
-	if (ticks[1] != -1) and (ticks[2] != -1) and (ticks[3] != -1):
+	if (ticks[1] != -1) and (ticks[2] != -1) and (ticks[3] != -1) and (ticks[4] != -1) and (ticks[5] != -1):
 		tutorial_complete = true
 	
 	TransitionManager.change_scene(levels[lvl])
