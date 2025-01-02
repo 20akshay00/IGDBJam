@@ -27,7 +27,7 @@ func _launch(lvl: int, clock: int, time: int) -> void:
 	tween2.set_loops()
 	tween2.tween_property($TextLabel, "modulate:a", 0.3, 1.)
 	tween2.tween_property($TextLabel, "modulate:a", 1., 1.)
-
+	tween2.bind_node(self)
 	_activate_buttons()
 
 func _on_retry_pressed() -> void:

@@ -26,7 +26,7 @@ func _ready() -> void:
 	tween.set_loops()
 	tween.tween_property($QLabel, "modulate:a", 0.3, 1.)
 	tween.tween_property($QLabel, "modulate:a", 1., 1.)
-
+	tween.bind_node(self)
 
 func _input(event: InputEvent) -> void:
 	for idx in len(keys):
