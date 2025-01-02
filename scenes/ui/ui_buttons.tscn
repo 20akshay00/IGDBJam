@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b07a3msph0ksc"]
+[gd_scene load_steps=9 format=3 uid="uid://b07a3msph0ksc"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui_buttons.gd" id="1_iy324"]
 [ext_resource type="Texture2D" uid="uid://c30bdorcnqfrq" path="res://assets/art/ui/home_button.png" id="1_mw4pn"]
@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c1bstoevf4r2h" path="res://assets/art/ui/retry_button_grey.png" id="4_kh3a5"]
 [ext_resource type="Texture2D" uid="uid://dnjqt2lk1v772" path="res://assets/art/ui/help_button.png" id="5_7lfrl"]
 [ext_resource type="Texture2D" uid="uid://dk5y01ytrx10e" path="res://assets/art/ui/help_button_grey.png" id="6_05gcm"]
+[ext_resource type="PackedScene" uid="uid://cxonaipo4prv2" path="res://scenes/ui/help_screen.tscn" id="8_5ly4h"]
 
 [node name="Buttons" type="Control"]
-modulate = Color(0.207843, 0.760784, 0.0392157, 1)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -17,7 +17,11 @@ offset_bottom = 40.0
 scale = Vector2(0.555, 0.555)
 script = ExtResource("1_iy324")
 
+[node name="HelpScreen" parent="." instance=ExtResource("8_5ly4h")]
+scale = Vector2(1.81, 1.81)
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
 layout_mode = 0
 offset_left = 16.2162
 offset_top = 1088.29
