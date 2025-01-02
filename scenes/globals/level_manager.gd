@@ -27,18 +27,21 @@ var levels = [
 	"res://scenes/levels/acoshey4.tscn",
 	# end
 	"res://scenes/levels/last_level.tscn",
-	"res://scenes/levels/closing_scene.tscn"
-]
+	"res://scenes/levels/closing_scene.tscn",
+	
+	# start
+	"res://scenes/levels/opening_scene.tscn"
+	]
 
 var times: Array[int] = []
 var ticks: Array[int] = []
 var stars: Array[int] = []
 
-var star5: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star4: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star3: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star2: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star1: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star5: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star4: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star3: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star2: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star1: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 func _ready() -> void:
 	var n = len(levels)

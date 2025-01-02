@@ -26,7 +26,9 @@ func _play_music(music: AudioStream, volume = -7):
 	play()
 
 func play_music_level(lvl: int):
-	if lvl < 6:
+	if lvl == 0:
+		_play_music(bg_music_adv, -20)
+	elif lvl < 6:
 		_play_music(bg_music, -20)
 	else:
 		_play_music(bg_music_adv, -20)
