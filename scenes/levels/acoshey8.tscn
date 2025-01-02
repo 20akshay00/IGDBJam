@@ -474,6 +474,15 @@ theme_override_font_sizes/font_size = 36
 text = "Encrypted keys must 
 be decrypted first."
 
+[node name="InstructionLabel4" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 813.0
+offset_top = 234.0
+offset_right = 1097.0
+offset_bottom = 311.0
+theme_override_font_sizes/font_size = 36
+text = "[E] - skip clock cycle"
+
 [node name="WrongBotLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 0)
 offset_left = 35.0
