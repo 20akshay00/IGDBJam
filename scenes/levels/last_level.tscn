@@ -1,0 +1,468 @@
+[gd_scene load_steps=17 format=4 uid="uid://jplh0uxouc0r"]
+
+[ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_1w7gx"]
+[ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="3_4u8v3"]
+[ext_resource type="Script" path="res://scenes/levels/last_level.gd" id="4_8gu70"]
+[ext_resource type="PackedScene" uid="uid://c705y5st7xlub" path="res://scenes/entities/gate.tscn" id="4_jyold"]
+[ext_resource type="PackedScene" uid="uid://bor2a20v83myg" path="res://scenes/entities/honey_pot.tscn" id="5_enuw6"]
+[ext_resource type="PackedScene" uid="uid://dfaf2fjuga7tj" path="res://scenes/entities/honey.tscn" id="6_3arho"]
+[ext_resource type="PackedScene" uid="uid://b3y0u5fjy10s5" path="res://scenes/entities/lock.tscn" id="7_noarq"]
+[ext_resource type="PackedScene" uid="uid://dhlsk8ceh2roe" path="res://scenes/entities/key.tscn" id="8_bllps"]
+[ext_resource type="PackedScene" uid="uid://ndlp3wv23s3t" path="res://scenes/entities/carrier_bug.tscn" id="9_d6lqx"]
+[ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="10_s7hf6"]
+[ext_resource type="Script" path="res://scenes/levels/reverse_bridge.gd" id="10_tufba"]
+[ext_resource type="Script" path="res://scenes/levels/draw.gd" id="12_g0xm0"]
+[ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="15_v8dsl"]
+[ext_resource type="PackedScene" uid="uid://cws63lnwpdthq" path="res://scenes/ui/level_end_ui.tscn" id="16_h67eg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
+texture = ExtResource("3_4u8v3")
+texture_region_size = Vector2i(64, 64)
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+0:2/0 = 0
+0:2/0/custom_data_0 = true
+1:2/0 = 0
+1:2/0/custom_data_0 = true
+2:1/0 = 0
+2:1/0/custom_data_0 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = true
+2:2/0 = 0
+2:2/0/custom_data_0 = true
+0:3/0 = 0
+0:3/0/custom_data_0 = true
+0:4/0 = 0
+0:4/0/custom_data_0 = true
+0:5/0 = 0
+0:5/0/custom_data_0 = true
+1:5/0 = 0
+1:5/0/custom_data_0 = true
+2:5/0 = 0
+2:5/0/custom_data_0 = true
+2:4/0 = 0
+2:4/0/custom_data_0 = true
+2:3/0 = 0
+2:3/0/custom_data_0 = true
+1:3/0 = 0
+1:3/0/custom_data_0 = true
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+4:0/0 = 0
+4:0/0/custom_data_0 = true
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+5:0/0 = 0
+5:0/0/custom_data_0 = true
+5:1/0 = 0
+5:1/0/custom_data_0 = true
+5:2/0 = 0
+5:2/0/custom_data_0 = true
+6:2/0 = 0
+6:2/0/custom_data_0 = true
+7:2/0 = 0
+7:2/0/custom_data_0 = true
+6:1/0 = 0
+6:1/0/custom_data_0 = true
+6:0/0 = 0
+6:0/0/custom_data_0 = true
+7:0/0 = 0
+7:0/0/custom_data_0 = true
+7:1/0 = 0
+7:1/0/custom_data_0 = true
+
+[sub_resource type="TileSet" id="TileSet_d4eyp"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "Walkable"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_5f5ro")
+
+[node name="LastLevel" type="Node2D"]
+script = ExtResource("4_8gu70")
+
+[node name="Grid" parent="." instance=ExtResource("2_1w7gx")]
+tile_map_data = PackedByteArray("AAABAAQAAAAEAAEAAAABAAMAAAAEAAEAAAABAAIAAAADAAIAAAABAAEAAAADAAIAAAABAAAAAAADAAIAAAAAAAAAAAADAAIAAAAAAAEAAAADAAIAAAAAAAIAAAAEAAEAAAAAAAMAAAAEAAEAAAAAAAQAAAADAAIAAAAAAAUAAAADAAIAAAAAAAcAAAAGAAAAAAAAAAgAAAADAAIAAAAAAAkAAAAEAAEAAAABAAkAAAAGAAAAAAACAAgAAAADAAIAAAACAAUAAAAEAAEAAAACAAQAAAAEAAEAAAACAAMAAAAEAAAAAAACAAIAAAAEAAAAAAACAAEAAAAEAAAAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAADAAEAAAAEAAAAAAADAAIAAAAEAAAAAAADAAMAAAAEAAAAAAADAAQAAAAEAAAAAAADAAUAAAAEAAEAAAADAAgAAAAEAAAAAAADAAkAAAADAAIAAAACAAkAAAADAAIAAAAEAAkAAAAEAAEAAAAEAAgAAAAEAAEAAAAEAAcAAAAEAAAAAAAEAAYAAAAEAAAAAAAEAAUAAAAEAAAAAAAEAAQAAAAEAAAAAAAEAAMAAAADAAIAAAAEAAIAAAADAAIAAAAEAAEAAAAEAAAAAAAEAAAAAAADAAIAAAAFAAAAAAAEAAEAAAAFAAEAAAAEAAAAAAAFAAIAAAAEAAAAAAAFAAMAAAADAAIAAAAFAAQAAAADAAIAAAAFAAUAAAAEAAAAAAAFAAYAAAAEAAAAAAAFAAcAAAAGAAAAAAAFAAkAAAADAAIAAAAGAAkAAAADAAIAAAAGAAgAAAAEAAAAAAAGAAcAAAAEAAAAAAAGAAYAAAAEAAAAAAAGAAUAAAAEAAEAAAAGAAQAAAAEAAAAAAAGAAMAAAAEAAAAAAAGAAIAAAAGAAAAAAAGAAEAAAAEAAEAAAAGAAAAAAADAAIAAAAHAAAAAAADAAIAAAAHAAEAAAAEAAEAAAAHAAIAAAAEAAAAAAAHAAMAAAAEAAAAAAAHAAQAAAAEAAAAAAAHAAUAAAAEAAAAAAAHAAYAAAAEAAEAAAAHAAcAAAAEAAAAAAAHAAgAAAAEAAAAAAAHAAkAAAAEAAAAAAAIAAkAAAADAAIAAAAIAAgAAAAEAAAAAAAIAAcAAAAEAAAAAAAIAAYAAAAEAAEAAAAIAAUAAAAEAAAAAAAIAAQAAAAEAAAAAAAIAAMAAAAEAAAAAAAIAAIAAAAEAAAAAAAIAAEAAAAEAAEAAAAIAAAAAAADAAIAAAAJAAAAAAADAAIAAAAJAAEAAAAEAAEAAAAJAAIAAAAEAAAAAAAJAAMAAAAEAAEAAAAJAAQAAAAHAAEAAAAJAAUAAAAEAAEAAAAJAAYAAAADAAIAAAAJAAcAAAADAAIAAAAJAAgAAAADAAIAAAAJAAkAAAADAAIAAAAKAAkAAAADAAIAAAAKAAgAAAADAAIAAAAKAAcAAAAEAAEAAAAKAAYAAAADAAIAAAAKAAUAAAAEAAAAAAAKAAMAAAAEAAAAAAAKAAIAAAAHAAIAAAAKAAEAAAAEAAAAAAAKAAAAAAADAAIAAAALAAAAAAADAAIAAAALAAEAAAADAAIAAAALAAIAAAAEAAAAAAALAAMAAAAEAAAAAAALAAQAAAAEAAAAAAALAAkAAAADAAIAAAAMAAkAAAADAAIAAAAMAAgAAAAEAAAAAAAMAAcAAAAEAAAAAAAMAAYAAAAEAAAAAAAMAAUAAAADAAIAAAAMAAQAAAAEAAAAAAAMAAMAAAAEAAAAAAAMAAIAAAADAAIAAAAMAAEAAAADAAIAAAAMAAAAAAADAAIAAAANAAAAAAADAAIAAAANAAEAAAAGAAEAAAANAAIAAAAEAAAAAAANAAMAAAAGAAEAAAANAAQAAAAEAAEAAAANAAUAAAADAAIAAAANAAYAAAAEAAAAAAANAAcAAAAEAAAAAAANAAgAAAAEAAAAAAANAAkAAAADAAIAAAAOAAkAAAAEAAAAAAAOAAgAAAAEAAAAAAAOAAcAAAAEAAAAAAAOAAYAAAAEAAAAAAAOAAUAAAAEAAEAAAAOAAQAAAAEAAAAAAAOAAMAAAAEAAEAAAAOAAIAAAAEAAAAAAAOAAEAAAAEAAAAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAPAAEAAAAEAAAAAAAPAAIAAAAHAAIAAAAPAAMAAAAEAAAAAAAPAAQAAAAEAAAAAAAPAAUAAAAEAAAAAAAPAAYAAAAEAAAAAAAPAAcAAAAEAAAAAAAPAAgAAAAGAAEAAAAPAAkAAAAEAAAAAAAQAAkAAAADAAIAAAAQAAgAAAAHAAIAAAAQAAcAAAADAAIAAAAQAAYAAAADAAIAAAAQAAUAAAADAAIAAAAQAAQAAAAEAAAAAAAQAAMAAAAEAAEAAAAQAAIAAAADAAIAAAAQAAEAAAADAAIAAAAQAAAAAAADAAIAAAABAAUAAAADAAIAAAABAAYAAAADAAIAAAABAAcAAAADAAIAAAABAAgAAAADAAIAAAAAAAYAAAADAAIAAAACAAYAAAAEAAAAAAACAAcAAAADAAIAAAADAAYAAAAEAAAAAAADAAcAAAADAAIAAAARAAEAAAADAAIAAAARAAIAAAADAAIAAAARAAMAAAADAAIAAAARAAQAAAAEAAAAAAARAAUAAAADAAIAAAARAAYAAAAEAAEAAAARAAcAAAADAAIAAAARAAgAAAADAAIAAAARAAkAAAAHAAIAAAARAAAAAAADAAIAAAAAAAoAAAADAAIAAAABAAoAAAAEAAEAAAACAAoAAAADAAIAAAADAAoAAAADAAIAAAAEAAoAAAADAAIAAAAFAAoAAAADAAIAAAAGAAoAAAADAAIAAAAHAAoAAAADAAIAAAAIAAoAAAADAAIAAAAJAAoAAAADAAIAAAAKAAoAAAADAAIAAAALAAoAAAADAAIAAAAMAAoAAAADAAIAAAANAAoAAAADAAIAAAAOAAoAAAADAAIAAAAPAAoAAAADAAIAAAAQAAoAAAADAAIAAAARAAoAAAADAAIAAAAFAAgAAAAEAAEAAAALAAUAAAADAAIAAAALAAYAAAADAAIAAAALAAcAAAAEAAEAAAALAAgAAAAEAAEAAAAKAAQAAAAEAAEAAAASAAMAAAADAAIAAAASAAQAAAADAAIAAAASAAUAAAADAAIAAAA=")
+tile_set = SubResource("TileSet_d4eyp")
+
+[node name="Lock" parent="Grid" instance=ExtResource("7_noarq")]
+position = Vector2(992, 607)
+
+[node name="Key" parent="Grid" node_paths=PackedStringArray("lock") instance=ExtResource("8_bllps")]
+position = Vector2(990, 416)
+lock = NodePath("../Lock")
+
+[node name="HoneyPot" parent="Grid" instance=ExtResource("5_enuw6")]
+position = Vector2(803, 290)
+
+[node name="HoneyPot5" parent="Grid" instance=ExtResource("5_enuw6")]
+position = Vector2(927, 157)
+
+[node name="HoneyPot6" parent="Grid" instance=ExtResource("5_enuw6")]
+position = Vector2(478, 300)
+
+[node name="HoneyPot2" parent="Grid" instance=ExtResource("6_3arho")]
+position = Vector2(290, 414)
+
+[node name="HoneyPot3" parent="Grid" instance=ExtResource("6_3arho")]
+position = Vector2(160, 155)
+
+[node name="HoneyPot4" parent="Grid" instance=ExtResource("6_3arho")]
+position = Vector2(925, 477)
+
+[node name="HoneyPot13" parent="Grid" instance=ExtResource("6_3arho")]
+position = Vector2(32, 671)
+
+[node name="MoverProcess" parent="Grid" instance=ExtResource("10_s7hf6")]
+position = Vector2(1049, 288)
+max_count = 2
+_init_dir = Vector2(-1, 0)
+
+[node name="CarrierBug" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(484, 607)
+_init_dir = Vector2(0, -1)
+
+[node name="CarrierBug2" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(547, 351)
+_init_dir = Vector2(-1, 0)
+
+[node name="CarrierBug3" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(288, 347)
+_init_dir = Vector2(0, 1)
+
+[node name="CarrierBug4" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(229, 223)
+
+[node name="CarrierBug5" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(224, 419)
+
+[node name="CarrierBug14" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(97, 612)
+
+[node name="CarrierBug6" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(475, 224)
+_init_dir = Vector2(0, 1)
+
+[node name="CarrierBug7" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(741, 166)
+up_direction = Vector2(0, 1)
+
+[node name="CarrierBug11" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(737, 287)
+
+[node name="CarrierBug12" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(419, 291)
+
+[node name="CarrierBug13" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(805, 228)
+_init_dir = Vector2(0, 1)
+
+[node name="CarrierBug8" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(864, 156)
+
+[node name="CarrierBug9" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(925, 416)
+_init_dir = Vector2(0, 1)
+
+[node name="CarrierBug10" parent="Grid" instance=ExtResource("9_d6lqx")]
+position = Vector2(862, 483)
+
+[node name="Bridge" type="Node2D" parent="Grid"]
+script = ExtResource("10_tufba")
+
+[node name="Marker2D" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(159, 97)
+
+[node name="Marker2D2" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(230, 99)
+
+[node name="Marker2D3" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(224, 160)
+
+[node name="Marker2D4" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(160, 162)
+
+[node name="Marker2D5" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(158, 214)
+
+[node name="Marker2D6" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(225, 221)
+
+[node name="Marker2D7" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(228, 284)
+
+[node name="Marker2D8" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(290, 286)
+
+[node name="Marker2D9" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(292, 347)
+
+[node name="Marker2D10" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(346, 357)
+
+[node name="Marker2D11" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(294, 476)
+
+[node name="Marker2D15" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(221, 548)
+
+[node name="Marker2D76" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(99, 609)
+
+[node name="Marker2D77" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(31, 672)
+
+[node name="Marker2D16" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(164, 421)
+
+[node name="Marker2D17" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(229, 424)
+
+[node name="Marker2D18" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(418, 544)
+
+[node name="Marker2D19" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(473, 543)
+
+[node name="Marker2D20" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(537, 544)
+
+[node name="Marker2D24" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(672, 361)
+
+[node name="Marker2D25" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(609, 293)
+
+[node name="Marker2D26" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(550, 287)
+
+[node name="Marker2D27" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(480, 357)
+
+[node name="Marker2D28" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(551, 232)
+
+[node name="Marker2D29" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(411, 231)
+
+[node name="Marker2D33" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(413, 169)
+
+[node name="Marker2D34" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(356, 164)
+
+[node name="Marker2D35" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(352, 100)
+
+[node name="Marker2D36" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(301, 101)
+
+[node name="Marker2D37" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(475, 158)
+
+[node name="Marker2D38" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(537, 159)
+
+[node name="Marker2D39" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(610, 160)
+
+[node name="Marker2D40" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(674, 161)
+
+[node name="Marker2D81" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(672, 218)
+
+[node name="Marker2D41" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(670, 98)
+
+[node name="Marker2D42" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(735, 168)
+
+[node name="Marker2D43" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(736, 222)
+
+[node name="Marker2D47" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(862, 228)
+
+[node name="Marker2D49" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(865, 107)
+
+[node name="Marker2D50" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(925, 102)
+
+[node name="Marker2D51" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(996, 105)
+
+[node name="Marker2D52" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(995, 163)
+
+[node name="Marker2D53" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(987, 235)
+
+[node name="Marker2D54" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(918, 291)
+
+[node name="Marker2D55" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(923, 159)
+
+[node name="Marker2D56" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(992, 285)
+
+[node name="Marker2D57" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(1046, 288)
+
+[node name="Marker2D58" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(994, 350)
+
+[node name="Marker2D62" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(868, 419)
+
+[node name="Marker2D79" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(477, 299)
+
+[node name="Marker2D78" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(922, 475)
+
+[node name="Marker2D63" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(809, 425)
+
+[node name="Marker2D64" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(807, 477)
+
+[node name="Marker2D65" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(798, 547)
+
+[node name="Marker2D66" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(858, 549)
+
+[node name="Marker2D67" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(911, 550)
+
+[node name="Marker2D68" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(922, 607)
+
+[node name="Marker2D69" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(990, 560)
+
+[node name="Marker2D70" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(1045, 550)
+
+[node name="Marker2D71" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(1114, 609)
+
+[node name="Marker2D72" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(991, 486)
+
+[node name="Marker2D73" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(854, 491)
+
+[node name="Marker2D61" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(936, 417)
+
+[node name="Marker2D59" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(1133, 287)
+
+[node name="Marker2D60" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(988, 419)
+
+[node name="Marker2D48" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(867, 171)
+
+[node name="Marker2D46" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(800, 231)
+
+[node name="Marker2D45" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(803, 296)
+
+[node name="Marker2D44" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(740, 287)
+
+[node name="Marker2D32" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(410, 292)
+
+[node name="Marker2D31" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(545, 348)
+
+[node name="Marker2D30" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(468, 224)
+
+[node name="Marker2D21" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(535, 491)
+
+[node name="Marker2D22" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(482, 483)
+
+[node name="Marker2D23" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(473, 615)
+
+[node name="Marker2D12" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(423, 478)
+rotation = 1.49614
+
+[node name="Marker2D13" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(360, 470)
+rotation = 1.49614
+
+[node name="Marker2D14" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(418, 416)
+rotation = 1.49614
+
+[node name="Marker2D74" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(356, 419)
+rotation = 1.49614
+
+[node name="Marker2D80" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(290, 425)
+rotation = 1.49614
+
+[node name="Marker2D75" type="Marker2D" parent="Grid/Bridge"]
+position = Vector2(31, 481)
+rotation = 1.49614
+
+[node name="Gate" parent="Grid" instance=ExtResource("4_jyold")]
+position = Vector2(1055, 159)
+
+[node name="Draw" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
+visible = false
+script = ExtResource("12_g0xm0")
+tilemap = NodePath("../Grid")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WrongBotLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 0)
+offset_left = 35.0
+offset_top = 38.0
+offset_right = 836.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 36
+text = "System process cannot exit the current memory space!"
+
+[node name="SecurityLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 0)
+offset_left = 35.0
+offset_top = 38.0
+offset_right = 779.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 36
+text = "Memory transfer blocked during security breaches!"
+
+[node name="LevelLoseUI" parent="UI" instance=ExtResource("15_v8dsl")]
+visible = false
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 647.0
+grow_vertical = 1
+
+[node name="LevelEndUI" parent="UI" instance=ExtResource("16_h67eg")]
+visible = false

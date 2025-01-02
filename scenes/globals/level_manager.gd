@@ -2,6 +2,7 @@ extends Node
 
 var current_level: int = 0
 var tutorial_complete := false
+var all_complete := false
 
 var levels = [
 	"res://scenes/levels/main_menu.tscn",
@@ -25,18 +26,22 @@ var levels = [
 	"res://scenes/levels/book7.tscn",
 	# hard
 	"res://scenes/levels/acoshey2.tscn",
-	"res://scenes/levels/acoshey4.tscn"	
+	"res://scenes/levels/acoshey4.tscn",
+	
+	# end
+	"res://scenes/levels/last_level.tscn",
+	"res://scenes/levels/closing_scene.tscn"
 ]
 
 var times: Array[int] = []
 var ticks: Array[int] = []
 var stars: Array[int] = []
 
-var star5: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star4: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star3: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star2: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-var star1: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star5: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star4: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star3: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star2: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+var star1: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 func _ready() -> void:
 	var n = len(levels)
@@ -60,9 +65,17 @@ func load_level(lvl: int):
 	if (ticks[1] != -1) and (ticks[2] != -1) and (ticks[3] != -1) and (ticks[4] != -1) and (ticks[5] != -1):
 		tutorial_complete = true
 	
+	var flag = true
+	for idx in range(17):
+		if ticks[idx + 1] == -1:
+			flag = false
+			break
+	
+	if flag: all_complete = true
+		
 	TransitionManager.change_scene(levels[lvl])
 	EventManager.reset_tick()
-	AudioManager.play_music_level()
+	AudioManager.play_music_level(lvl)
 	
 func load_next_level():
 	load_level(current_level + 1)
@@ -70,7 +83,7 @@ func load_next_level():
 func reload_level():
 	TransitionManager.reload_scene()
 	EventManager.reset_tick()
-	AudioManager.play_music_level()
+	AudioManager.play_music_level(current_level)
 
 func calculate_stars(lvl_tick: int) -> int:
 	var lvl = current_level

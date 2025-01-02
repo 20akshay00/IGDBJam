@@ -142,7 +142,7 @@ difficulty = 3
 
 [node name="LevelSelect18" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(96.6666, 417.778)
-level_idx = 16
+level_idx = 18
 
 [node name="LevelSelect17" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(1120, 478.889)
@@ -175,7 +175,7 @@ level_idx = 6
 difficulty = 1
 
 [node name="CarrierBugLite" parent="Grid" instance=ExtResource("5_ymc17")]
-position = Vector2(543.333, 353.333)
+position = Vector2(547.778, 352.222)
 
 [node name="Title" type="Label" parent="."]
 offset_left = 482.0
@@ -194,10 +194,10 @@ theme_override_font_sizes/font_size = 36
 text = "Deliver the virus to every file on disk!"
 
 [node name="TutorialLabel" type="ColorRect" parent="."]
-offset_left = 544.0
-offset_top = 252.0
-offset_right = 676.0
-offset_bottom = 279.0
+offset_left = 546.0
+offset_top = 241.0
+offset_right = 678.0
+offset_bottom = 268.0
 color = Color(0.207843, 0.760784, 0.0392157, 0.513726)
 metadata/_edit_group_ = true
 
@@ -210,12 +210,13 @@ theme_override_font_sizes/font_size = 24
 text = "Tutorial files"
 
 [node name="RootLabel" type="ColorRect" parent="."]
-offset_left = 39.0
-offset_top = 302.0
-offset_right = 135.0
-offset_bottom = 329.0
+offset_left = 38.0
+offset_top = 292.0
+offset_right = 134.0
+offset_bottom = 319.0
 color = Color(0.207843, 0.760784, 0.0392157, 0.513726)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Title3" type="Label" parent="RootLabel"]
 layout_mode = 0

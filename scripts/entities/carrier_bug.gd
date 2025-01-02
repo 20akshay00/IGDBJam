@@ -3,11 +3,19 @@ class_name CarrierBug
 
 var _is_sliding := false
 @export var _sliding_animation_sec := 0.4
+@export var _init_dir := Vector2.ZERO
 
 func _ready() -> void:
 	set_active(true)
 	EventManager.tick.connect(_on_tick)
-
+	
+	if _init_dir != Vector2.ZERO:
+		_current_direction = _init_dir
+	else:	
+		_current_direction = Vector2(1, 0)
+	
+	sprite.rotation = atan2(_current_direction.y, _current_direction.x)
+	
 func push(source: Node2D, direction: Vector2) -> bool:
 	if source is MoverProcess:
 		if _is_sliding: return false

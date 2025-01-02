@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 			_current_direction = _valid_inputs[direction_key]
 			_move(_current_direction)
 			return
-
+	
 func _move(dir: Vector2) -> void:
 	raycast.target_position = dir * _tile_size
 	raycast.force_raycast_update()

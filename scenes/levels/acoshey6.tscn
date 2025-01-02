@@ -453,6 +453,15 @@ offset_bottom = 560.0
 theme_override_font_sizes/font_size = 36
 text = "[W/A/S/D] - Move"
 
+[node name="InstructionLabel3" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 855.0
+offset_top = 491.0
+offset_right = 1154.0
+offset_bottom = 568.0
+theme_override_font_sizes/font_size = 36
+text = "[R] - Reset level"
+
 [node name="WrongBotLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 0)
 offset_left = 35.0
@@ -527,12 +536,3 @@ grow_vertical = 1
 
 [node name="LevelEndUI" parent="UI" instance=ExtResource("17_7bfty")]
 visible = false
-
-[node name="InstructionLabel" type="Label" parent="."]
-modulate = Color(0.207843, 0.760784, 0.0392157, 1)
-offset_left = 855.0
-offset_top = 491.0
-offset_right = 1154.0
-offset_bottom = 568.0
-theme_override_font_sizes/font_size = 36
-text = "[R] - Reset level"

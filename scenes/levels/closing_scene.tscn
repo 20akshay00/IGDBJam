@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjqlyvxw1h7k3"]
+
+[ext_resource type="Script" path="res://scenes/levels/opening_scene.gd" id="1_wigh0"]
+[ext_resource type="Texture2D" uid="uid://xkpc8o32hsfv" path="res://assets/art/ui/level_screen_background.png" id="2_55hve"]
+[ext_resource type="Texture2D" uid="uid://dx1ludiqgd3p1" path="res://assets/art/file.png" id="3_ggsiu"]
+[ext_resource type="Script" path="res://scenes/levels/path_follow_cursor_closing_scene.gd" id="4_mpsxi"]
+[ext_resource type="Texture2D" uid="uid://b76ub0vl8rv0f" path="res://assets/art/cursor.png" id="7_q8n8l"]
+
+[sub_resource type="Curve2D" id="Curve2D_23wil"]
+_data = {
+"points": PackedVector2Array(90.8168, 20.7421, -90.8168, -20.7421, 692, 809, -9.52441, 55.0299, 9.52441, -55.0299, 395, 634, -38.6056, 45.7328, 38.6056, -45.7328, 463, 511, 0, 0, 0, 0, 565, 451)
+}
+point_count = 4
+
+[node name="ClosingScene" type="Node2D"]
+script = ExtResource("1_wigh0")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(578, 326)
+scale = Vector2(1.41187, 1.36345)
+texture = ExtResource("2_55hve")
+
+[node name="File" type="Sprite2D" parent="."]
+position = Vector2(126, 140)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_ggsiu")
+
+[node name="File2" type="Sprite2D" parent="."]
+position = Vector2(300, 140)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_ggsiu")
+
+[node name="File3" type="Sprite2D" parent="."]
+position = Vector2(126, 300)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_ggsiu")
+
+[node name="File4" type="Sprite2D" parent="."]
+position = Vector2(300, 300)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_ggsiu")
+
+[node name="HoneyPot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(127, 473)
+metadata/_edit_group_ = true
+
+[node name="Honey" type="Sprite2D" parent="HoneyPot"]
+position = Vector2(1, 0)
+scale = Vector2(2.28906, 2.24219)
+texture = ExtResource("3_ggsiu")
+
+[node name="Label" type="Label" parent="HoneyPot"]
+offset_left = -11.0
+offset_top = 25.0
+offset_right = 61.0
+offset_bottom = 42.0
+text = "Honey4Life"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 114.0
+offset_top = 164.0
+offset_right = 191.0
+offset_bottom = 194.0
+text = "Documents"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 116.0
+offset_top = 324.0
+offset_right = 195.0
+offset_bottom = 354.0
+text = "Downloads
+"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 305.0
+offset_top = 325.0
+offset_right = 384.0
+offset_bottom = 355.0
+text = "Trash"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 283.0
+offset_top = 165.0
+offset_right = 364.0
+offset_bottom = 195.0
+text = "MyComputer"
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 327)
+
+[node name="Path2D2" type="Path2D" parent="."]
+position = Vector2(-262, -134)
+curve = SubResource("Curve2D_23wil")
+
+[node name="PathFollowCursor" type="PathFollow2D" parent="Path2D2"]
+unique_name_in_owner = true
+position = Vector2(692, 809)
+rotation = -2.6292
+rotates = false
+script = ExtResource("4_mpsxi")
+
+[node name="Cursor" type="Sprite2D" parent="Path2D2/PathFollowCursor"]
+position = Vector2(-25.6025, -10.8401)
+rotation = -3.68264
+scale = Vector2(0.703125, 0.8125)
+texture = ExtResource("7_q8n8l")

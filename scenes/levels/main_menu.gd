@@ -14,6 +14,11 @@ func _ready() -> void:
 	else:
 		_tile_map.set_cell(Vector2(10, 7), 0, _filled_tile_atlas_coord, 0)
 	
+	if not LevelManager.all_complete:
+		_tile_map.set_cell(Vector2(2, 6), 0, _empty_tile_atlas_coord, 0)
+	else:
+		_tile_map.set_cell(Vector2(2, 5), 0, _filled_tile_atlas_coord, 0)
+	
 	for child in $Grid.get_children():
 		if child is LevelSelect:
 			if LevelManager.ticks[child.level_idx] > -1:

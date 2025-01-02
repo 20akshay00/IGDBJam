@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bor2a20v83myg"]
+
+[ext_resource type="Texture2D" uid="uid://cbvqtbtkdo4s3" path="res://assets/art/lock_key_tilesheet_v5.png" id="1_b0e75"]
+
+[node name="HoneyPot" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_b0e75")
+region_enabled = true
+region_rect = Rect2(512, 128, 64, 64)

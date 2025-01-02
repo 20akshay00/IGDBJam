@@ -442,8 +442,8 @@ max_count = 2
 _init_dir = Vector2(0, -1)
 
 [node name="SecurityProcess2" parent="Grid" instance=ExtResource("11_erxu5")]
-position = Vector2(541.111, 161.111)
-max_count = 2
+position = Vector2(543.333, 221.111)
+max_count = 3
 _init_dir = Vector2(0, 1)
 
 [node name="SecurityProcess3" parent="Grid" instance=ExtResource("11_erxu5")]

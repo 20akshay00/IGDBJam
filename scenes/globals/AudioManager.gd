@@ -13,6 +13,8 @@ var virus_sfx := preload("res://assets/audio/sfx/virusfillv7.mp3")
 var virus_fail_sfx := preload("res://assets/audio/sfx/virusfillFAIL.mp3")
 
 var bg_music := preload("res://assets/audio/music/del.maintheme2mp3.mp3")
+var bg_music_adv := preload("res://assets/audio/music/del.secondthemev2.mp3")
+
 var mouse_click_sfx := preload("res://assets/audio/sfx/mouseclickv2.mp3")
 
 func _play_music(music: AudioStream, volume = -7):
@@ -23,9 +25,12 @@ func _play_music(music: AudioStream, volume = -7):
 	volume_db = volume
 	play()
 
-func play_music_level():
-	_play_music(bg_music, -20)
-
+func play_music_level(lvl: int):
+	if lvl < 6:
+		_play_music(bg_music, -20)
+	else:
+		_play_music(bg_music_adv, -20)
+		
 func play_effect(aud_stream: AudioStream, volume = 0.0, loops = false):
 	var fx_player = AudioStreamPlayer2D.new()
 	fx_player.stream = aud_stream
