@@ -448,6 +448,34 @@ tilemap = NodePath("../Grid")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="InstructionLabel" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 786.0
+offset_top = 219.0
+offset_right = 1085.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 36
+text = "(Q) - Infect system 
+              process"
+
+[node name="InstructionLabel2" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 787.0
+offset_top = 343.0
+offset_right = 1071.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 36
+text = "[E] - skip clock cycle"
+
+[node name="InstructionLabel3" type="Label" parent="UI"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+offset_left = 789.0
+offset_top = 444.0
+offset_right = 1073.0
+offset_bottom = 521.0
+theme_override_font_sizes/font_size = 36
+text = "[R] - reset level"
+
 [node name="WrongBotLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 0)
 offset_left = 35.0
@@ -522,31 +550,3 @@ grow_vertical = 1
 
 [node name="LevelEndUI" parent="UI" instance=ExtResource("19_50mr0")]
 visible = false
-
-[node name="InstructionLabel" type="Label" parent="UI"]
-modulate = Color(0.207843, 0.760784, 0.0392157, 1)
-offset_left = 786.0
-offset_top = 219.0
-offset_right = 1085.0
-offset_bottom = 296.0
-theme_override_font_sizes/font_size = 36
-text = "(Q) - Infect system 
-              process"
-
-[node name="InstructionLabel2" type="Label" parent="UI"]
-modulate = Color(0.207843, 0.760784, 0.0392157, 1)
-offset_left = 787.0
-offset_top = 343.0
-offset_right = 1071.0
-offset_bottom = 420.0
-theme_override_font_sizes/font_size = 36
-text = "[E] - skip clock cycle"
-
-[node name="InstructionLabel3" type="Label" parent="UI"]
-modulate = Color(0.207843, 0.760784, 0.0392157, 1)
-offset_left = 789.0
-offset_top = 444.0
-offset_right = 1073.0
-offset_bottom = 521.0
-theme_override_font_sizes/font_size = 36
-text = "[R] - reset level"

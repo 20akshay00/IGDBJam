@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1oef4fngrtru"]
+
+[ext_resource type="Script" path="res://scripts/entities/hash.gd" id="1_8dbk2"]
+[ext_resource type="Texture2D" uid="uid://bwoj1g1di1a78" path="res://assets/art/lock_key_tilesheet_v3.png" id="2_5pina"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75yje"]
+size = Vector2(46, 44)
+
+[node name="LevelSelect" type="Area2D"]
+script = ExtResource("1_8dbk2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_5pina")
+region_enabled = true
+region_rect = Rect2(384, 192, 64, 64)
+
+[node name="Overlay" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_5pina")
+region_enabled = true
+region_rect = Rect2(448, 64, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_75yje")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

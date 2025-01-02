@@ -1,6 +1,7 @@
 extends Node
 
 var current_level: int = 0
+var tutorial_complete := false
 
 var levels = [
 	preload("res://scenes/levels/main_menu.tscn"),
@@ -15,12 +16,13 @@ var levels = [
 	preload("res://scenes/levels/book4.tscn"),
 	preload("res://scenes/levels/book5.tscn"),
 	preload("res://scenes/levels/book6.tscn"),
+	preload("res://scenes/levels/book7.tscn")
 ]
 
 var times: Array[int] = []
 var ticks: Array[int] = []
 
-var tick_targets: Array[int] = [-1, 23, 52, 53, 582, 83, 32, -1]
+var tick_targets: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1]
 
 func _ready() -> void:
 	var n = len(levels)
@@ -32,7 +34,9 @@ func _ready() -> void:
 	
 func load_level(lvl: int):
 	current_level = lvl
-
+	if (ticks[1] != -1) and (ticks[2] != -1) and (ticks[3] != -1):
+		tutorial_complete = true
+	
 	TransitionManager.change_scene(levels[lvl])
 	EventManager.reset_tick()
 	AudioManager.play_music_level()

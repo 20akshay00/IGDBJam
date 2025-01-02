@@ -27,12 +27,16 @@ func _on_level_complete():
 	var prev_ticks = LevelManager.ticks[LevelManager.current_level]
 	var prev_time = LevelManager.times[LevelManager.current_level]
 
-	if prev_ticks < 0:
+	if prev_ticks != -1:
 		LevelManager.ticks[LevelManager.current_level] = min(ticks, prev_ticks)
-
-	if prev_time < 0:
-		LevelManager.times[LevelManager.current_level] = min(time, prev_time)
+	else:
+		LevelManager.ticks[LevelManager.current_level] = ticks
 		
+	if prev_time != -1:
+		LevelManager.times[LevelManager.current_level] = min(time, prev_time)
+	else:
+		LevelManager.times[LevelManager.current_level] = time
+
 func _on_level_lose():
 	level_lose.emit()
 

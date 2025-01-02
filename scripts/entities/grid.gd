@@ -14,7 +14,7 @@ func _ready() -> void:
 
 	for child in get_children():
 		child.position = (Vector2(local_to_map(child.position)) + Vector2(0.5, 0.5)) * Vector2(tile_set.tile_size) 
-		if (child is not Lock) and (child is not Portal) and (child is not Hash): grid[local_to_map(child.position)] = false
+		if (child is not Lock) and (child is not Portal) and (child is not Hash) and (child is not LevelSelect): grid[local_to_map(child.position)] = false
 		if child is ControllableEntity: 
 			num_entities += 1
 			child.move_completed.connect(_on_move_completed)

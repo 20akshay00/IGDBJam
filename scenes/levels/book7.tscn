@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="16_8670y"]
 [ext_resource type="PackedScene" uid="uid://cws63lnwpdthq" path="res://scenes/ui/level_end_ui.tscn" id="17_3q4cy"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f5ro"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yng0i"]
 texture = ExtResource("3_jjhbj")
 texture_region_size = Vector2i(64, 64)
 1:1/0 = 0
@@ -88,7 +88,7 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "Walkable"
 custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_5f5ro")
+sources/0 = SubResource("TileSetAtlasSource_yng0i")
 
 [sub_resource type="Shader" id="Shader_2i1hc"]
 code = "shader_type canvas_item;
