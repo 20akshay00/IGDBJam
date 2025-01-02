@@ -454,7 +454,7 @@ hash = NodePath("../Hash2")
 position = Vector2(604.444, 223.333)
 
 [node name="MoverProcess" parent="Grid" instance=ExtResource("9_6qkvx")]
-position = Vector2(285.556, 163.333)
+position = Vector2(424.444, 540)
 _init_dir = Vector2(1, 0)
 
 [node name="DecryptProcess" parent="Grid" instance=ExtResource("11_l0djl")]
