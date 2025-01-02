@@ -18,6 +18,7 @@ scale = Vector2(0.555, 0.555)
 script = ExtResource("1_iy324")
 
 [node name="HelpScreen" parent="." instance=ExtResource("8_5ly4h")]
+visible = false
 scale = Vector2(1.81, 1.81)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

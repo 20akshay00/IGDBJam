@@ -410,7 +410,7 @@ tile_set = SubResource("TileSet_d4eyp")
 
 [node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("4_ln8h2")]
 position = Vector2(608.889, 92.2223)
-locks = [NodePath("../Lock3"), NodePath("../Lock4")]
+locks = [NodePath("../Lock"), NodePath("../Lock2")]
 
 [node name="LevelPortal" parent="Grid" node_paths=PackedStringArray("UI") instance=ExtResource("5_yr8el")]
 position = Vector2(608.889, 31.1111)
@@ -473,7 +473,7 @@ _init_dir = Vector2(-1, 0)
 
 [node name="Bridge" type="Node2D" parent="Grid" node_paths=PackedStringArray("locks")]
 script = ExtResource("12_swg55")
-locks = [NodePath("../Lock")]
+locks = [NodePath("../Lock4")]
 
 [node name="Marker2D" type="Marker2D" parent="Grid/Bridge"]
 position = Vector2(540, 295.556)
@@ -489,7 +489,7 @@ position = Vector2(542.222, 486.667)
 
 [node name="Bridge2" type="Node2D" parent="Grid" node_paths=PackedStringArray("locks")]
 script = ExtResource("12_swg55")
-locks = [NodePath("../Lock2")]
+locks = [NodePath("../Lock3")]
 
 [node name="Marker2D" type="Marker2D" parent="Grid/Bridge2"]
 position = Vector2(606.667, 286.667)
