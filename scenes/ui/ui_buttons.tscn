@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://b07a3msph0ksc"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui_buttons.gd" id="1_iy324"]
+[ext_resource type="Texture2D" uid="uid://c30bdorcnqfrq" path="res://assets/art/ui/home_button.png" id="1_mw4pn"]
+[ext_resource type="Texture2D" uid="uid://ojnh21bdoiut" path="res://assets/art/ui/home_button_grey.png" id="2_gahms"]
+[ext_resource type="Texture2D" uid="uid://6o2eei7r8biv" path="res://assets/art/ui/retry_button.png" id="3_lhmru"]
+[ext_resource type="Texture2D" uid="uid://c1bstoevf4r2h" path="res://assets/art/ui/retry_button_grey.png" id="4_kh3a5"]
+[ext_resource type="Texture2D" uid="uid://dnjqt2lk1v772" path="res://assets/art/ui/help_button.png" id="5_7lfrl"]
+[ext_resource type="Texture2D" uid="uid://dk5y01ytrx10e" path="res://assets/art/ui/help_button_grey.png" id="6_05gcm"]
+
+[node name="Buttons" type="Control"]
+modulate = Color(0.207843, 0.760784, 0.0392157, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.555, 0.555)
+script = ExtResource("1_iy324")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 16.2162
+offset_top = 1088.29
+offset_right = 216.216
+offset_bottom = 1152.29
+metadata/_edit_group_ = true
+
+[node name="Home" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_mw4pn")
+texture_hover = ExtResource("2_gahms")
+
+[node name="Retry" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_lhmru")
+texture_hover = ExtResource("4_kh3a5")
+
+[node name="Help" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_7lfrl")
+texture_hover = ExtResource("6_05gcm")
+
+[connection signal="pressed" from="HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="HBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="HBoxContainer/Help" to="." method="_on_help_pressed"]

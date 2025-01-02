@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://73bm2toejk8h"]
+[gd_scene load_steps=31 format=4 uid="uid://73bm2toejk8h"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_wo76n"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_y4ykg"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dhlsk8ceh2roe" path="res://scenes/entities/key.tscn" id="8_f4siq"]
 [ext_resource type="PackedScene" uid="uid://ndlp3wv23s3t" path="res://scenes/entities/carrier_bug.tscn" id="10_du4e8"]
 [ext_resource type="PackedScene" uid="uid://bnechtecirqu3" path="res://scenes/entities/mover_process.tscn" id="11_68wph"]
+[ext_resource type="PackedScene" uid="uid://b07a3msph0ksc" path="res://scenes/ui/ui_buttons.tscn" id="11_tpx0o"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="13_13y0n"]
 [ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="14_t3hkk"]
 [ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="15_a1bc2"]
@@ -434,31 +435,33 @@ tilemap = NodePath("../Grid")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Buttons" parent="UI" instance=ExtResource("11_tpx0o")]
+
 [node name="InstructionLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 1)
-offset_left = 830.0
-offset_top = 348.0
-offset_right = 1129.0
-offset_bottom = 425.0
+offset_left = 814.0
+offset_top = 321.0
+offset_right = 1113.0
+offset_bottom = 398.0
 theme_override_font_sizes/font_size = 36
 text = "(Q) - Infect system 
               process"
 
 [node name="InstructionLabel2" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 1)
-offset_left = 379.0
-offset_top = 483.0
-offset_right = 621.0
-offset_bottom = 560.0
+offset_left = 843.0
+offset_top = 210.0
+offset_right = 1085.0
+offset_bottom = 287.0
 theme_override_font_sizes/font_size = 36
 text = "[W/A/S/D] - Move"
 
 [node name="InstructionLabel3" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 1)
 offset_left = 855.0
-offset_top = 491.0
+offset_top = 462.0
 offset_right = 1154.0
-offset_bottom = 568.0
+offset_bottom = 539.0
 theme_override_font_sizes/font_size = 36
 text = "[R] - Reset level"
 

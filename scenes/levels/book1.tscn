@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bqsb4ii4giwhw"]
+[gd_scene load_steps=33 format=4 uid="uid://bqsb4ii4giwhw"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_0.gd" id="1_lf621"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="2_m5nuq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/entities/bridge.gd" id="11_xvhq0"]
 [ext_resource type="Script" path="res://scenes/levels/draw.gd" id="12_ow81t"]
 [ext_resource type="Script" path="res://scripts/entities/segmented_bar.gd" id="13_t45jf"]
+[ext_resource type="PackedScene" uid="uid://b07a3msph0ksc" path="res://scenes/ui/ui_buttons.tscn" id="13_x3b1m"]
 [ext_resource type="Shader" path="res://assets/shaders/progressbar.gdshader" id="14_5qy7g"]
 [ext_resource type="PackedScene" uid="uid://dgyrvd164285p" path="res://scenes/ui/level_lose_ui.tscn" id="15_7k8cp"]
 [ext_resource type="PackedScene" uid="uid://cws63lnwpdthq" path="res://scenes/ui/level_end_ui.tscn" id="16_5xl5j"]
@@ -476,6 +477,8 @@ script = ExtResource("12_ow81t")
 tilemap = NodePath("../Grid")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Buttons" parent="UI" instance=ExtResource("13_x3b1m")]
 
 [node name="WrongBotLabel" type="Label" parent="UI"]
 modulate = Color(0.207843, 0.760784, 0.0392157, 0)
