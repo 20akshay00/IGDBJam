@@ -18,7 +18,7 @@ region_rect = Rect2(64, 256, 64, 64)
 [node name="File" type="Sprite2D" parent="."]
 texture = ExtResource("2_aw22e")
 region_enabled = true
-region_rect = Rect2(128, 256, 64, 64)
+region_rect = Rect2(320, 256, 64, 64)
 
 [node name="Overlay" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)

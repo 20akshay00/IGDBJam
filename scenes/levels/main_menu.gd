@@ -18,8 +18,10 @@ func _ready() -> void:
 		if child is LevelSelect:
 			if LevelManager.ticks[child.level_idx] > -1:
 				_rect = child.get_node("Sprite").region_rect
-				#child.get_node("Sprite").region_rect = Rect2(_rect.position - Vector2(_rect.size.x, 0), _rect.size)
-	
+				child.get_node("Sprite").region_rect = Rect2(_rect.position + Vector2(_rect.size.x, 0), _rect.size)
+				_rect = child.get_node("Overlay").region_rect
+				child.get_node("Overlay").region_rect = Rect2(_rect.position + Vector2(0, _rect.size.y), _rect.size)
+
 	var tween = create_tween()
 	tween.set_loops()
 	tween.tween_property($QLabel, "modulate:a", 0.3, 1.)
