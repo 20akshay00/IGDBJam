@@ -72,10 +72,9 @@ text = "Can Infect:"
 
 [node name="Column2" type="Node2D" parent="."]
 position = Vector2(356, 4)
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Column2"]
-position = Vector2(153, 382)
+position = Vector2(207, 385)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_axrfd")
 
@@ -83,11 +82,6 @@ texture = ExtResource("5_axrfd")
 position = Vector2(203, 180)
 scale = Vector2(2, 2)
 texture = ExtResource("3_76dfe")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Column2"]
-position = Vector2(268, 386)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_kr7fj")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Column2"]
 position = Vector2(151, 494)
