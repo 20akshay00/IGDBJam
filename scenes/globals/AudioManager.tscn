@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bld2x7n3jok5h"]
+[gd_scene load_steps=4 format=3 uid="uid://bld2x7n3jok5h"]
 
 [ext_resource type="Script" path="res://scenes/globals/AudioManager.gd" id="1_qn1gh"]
+[ext_resource type="AudioStream" uid="uid://1x3w48c4euk7" path="res://assets/audio/music/del.maintheme2mp3.mp3" id="2_wup75"]
+[ext_resource type="AudioStream" uid="uid://bvwuwqtlimp2n" path="res://assets/audio/music/del.secondthemev2.mp3" id="3_7fxof"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 script = ExtResource("1_qn1gh")
+
+[node name="Theme2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7fxof")
+volume_db = -80.0
+
+[node name="Theme1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wup75")
+volume_db = -80.0

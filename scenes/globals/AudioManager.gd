@@ -12,26 +12,30 @@ var stealth_sfx := preload("res://assets/audio/sfx/stealthdecrease.mp3")
 var virus_sfx := preload("res://assets/audio/sfx/virusfillv7.mp3")
 var virus_fail_sfx := preload("res://assets/audio/sfx/virusfillFAIL.mp3")
 
-var bg_music := preload("res://assets/audio/music/del.maintheme2mp3.mp3")
-var bg_music_adv := preload("res://assets/audio/music/del.secondthemev2.mp3")
-
 var mouse_click_sfx := preload("res://assets/audio/sfx/mouseclickv2.mp3")
 
-func _play_music(music: AudioStream, volume = -7):
-	if stream == music:
-		return
+var _stream_tween: Tween = null
+var _current_stream_id: int = -1
 
-	stream = music
-	volume_db = volume
-	play()
-
+func _play_music(id: int) -> void:
+	if _current_stream_id == id: return
+	_current_stream_id = id
+	if _stream_tween: _stream_tween.kill()
+	
+	get_child(id).playing = true
+	_stream_tween = create_tween()
+	_stream_tween.set_parallel()
+	_stream_tween.tween_property(get_child(1 - id), "volume_db", -40., 3.)
+	_stream_tween.tween_property(get_child(id), "volume_db", -15., 3.)
+	_stream_tween.tween_callback(func(): get_child(1 - id).playing = false)
+	
 func play_music_level(lvl: int):
 	if lvl == 0:
-		_play_music(bg_music_adv, -20)
+		_play_music(0)
 	elif lvl < 6:
-		_play_music(bg_music, -20)
+		_play_music(1)
 	else:
-		_play_music(bg_music_adv, -20)
+		_play_music(0)
 		
 func play_effect(aud_stream: AudioStream, volume = 0.0, loops = false):
 	var fx_player = AudioStreamPlayer2D.new()
