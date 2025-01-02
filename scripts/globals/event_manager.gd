@@ -14,6 +14,8 @@ signal level_lose()
 
 var time: int = 0
 var ticks: int = 0
+var stars: int = 0
+
 var is_detected := false
 
 func _on_level_start():
@@ -22,10 +24,13 @@ func _on_level_start():
 
 func _on_level_complete():
 	time = Time.get_ticks_msec() - time
+	stars = LevelManager.calculate_stars(ticks)
+
 	level_complete.emit()
 	
 	var prev_ticks = LevelManager.ticks[LevelManager.current_level]
 	var prev_time = LevelManager.times[LevelManager.current_level]
+	var prev_stars = LevelManager.stars[LevelManager.current_level]
 
 	if prev_ticks != -1:
 		LevelManager.ticks[LevelManager.current_level] = min(ticks, prev_ticks)
@@ -36,6 +41,12 @@ func _on_level_complete():
 		LevelManager.times[LevelManager.current_level] = min(time, prev_time)
 	else:
 		LevelManager.times[LevelManager.current_level] = time
+
+	if prev_stars != -1:
+		LevelManager.stars[LevelManager.current_level] = max(stars, prev_stars)
+	else:
+		LevelManager.stars[LevelManager.current_level] = stars
+
 
 func _on_level_lose():
 	level_lose.emit()

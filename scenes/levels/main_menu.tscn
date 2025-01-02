@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://sebkj3ei6w28"]
+[gd_scene load_steps=10 format=4 uid="uid://sebkj3ei6w28"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_menu.gd" id="1_7lyrq"]
 [ext_resource type="PackedScene" uid="uid://054ttw8cqh5y" path="res://scenes/levels/grid.tscn" id="3_vjjfw"]
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="4_7elwf"]
 [ext_resource type="PackedScene" uid="uid://c1oef4fngrtru" path="res://scenes/entities/level_select.tscn" id="5_jgvk7"]
 [ext_resource type="PackedScene" uid="uid://dhcsq3kfesbte" path="res://scenes/entities/carrier_bug_level_select.tscn" id="5_ymc17"]
+[ext_resource type="Texture2D" uid="uid://xkpc8o32hsfv" path="res://assets/art/ui/level_screen_background.png" id="6_lswla"]
+[ext_resource type="Script" path="res://scenes/levels/level_stats_board.gd" id="7_f0clm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jeolj"]
 texture = ExtResource("4_7elwf")
@@ -97,7 +99,7 @@ level_idx = 2
 
 [node name="LevelSelect3" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(800, 417.778)
-level_idx = 3
+level_idx = 5
 
 [node name="LevelSelect12" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(736.667, 418.889)
@@ -105,7 +107,7 @@ level_idx = 4
 
 [node name="LevelSelect13" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(673.333, 421.111)
-level_idx = 5
+level_idx = 3
 
 [node name="LevelSelect4" parent="Grid" instance=ExtResource("5_jgvk7")]
 position = Vector2(417.778, 161.111)
@@ -237,3 +239,42 @@ offset_right = 195.0
 offset_bottom = 50.0
 theme_override_font_sizes/font_size = 36
 text = "[Q] - interact"
+
+[node name="LevelStatsBoard" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+offset_left = 19.0
+offset_top = 536.0
+offset_right = 199.0
+offset_bottom = 633.0
+texture = ExtResource("6_lswla")
+expand_mode = 1
+script = ExtResource("7_f0clm")
+
+[node name="Level" type="Label" parent="LevelStatsBoard"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 8.0
+offset_right = 166.0
+offset_bottom = 25.0
+text = "Level 1"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelStatsBoard"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 31.0
+offset_right = 108.0
+offset_bottom = 90.0
+metadata/_edit_group_ = true
+
+[node name="Stars" type="Label" parent="LevelStatsBoard/VBoxContainer"]
+layout_mode = 2
+text = "Stars: ??"
+
+[node name="ClockCycles" type="Label" parent="LevelStatsBoard/VBoxContainer"]
+layout_mode = 2
+text = "Clock cycles: ??"
+
+[node name="RealTime" type="Label" parent="LevelStatsBoard/VBoxContainer"]
+layout_mode = 2
+text = "Real-time: ???"

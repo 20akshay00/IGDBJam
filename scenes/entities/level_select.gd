@@ -22,12 +22,18 @@ func _on_body_entered(body: Node2D) -> void:
 		_key_tween = get_tree().create_tween()
 		_key_tween.tween_property($Overlay, "modulate:a", 1.0, 0.3)
 		AudioManager.play_effect(AudioManager.hash_press_sfx)
+		
+		_set_stats()
 
 func _on_body_exited(body: Node2D) -> void:
 	if _key_tween: _key_tween.kill()
 	_key_tween = get_tree().create_tween()
 	_key_tween.tween_property($Overlay, "modulate:a", 0., 0.3)
-
+	%LevelStatsBoard._hide()
+	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("infect") and get_overlapping_bodies():
 		LevelManager.load_level(level_idx)
+
+func _set_stats():
+	%LevelStatsBoard.set_stats(LevelManager.times[level_idx], LevelManager.ticks[level_idx], LevelManager.stars[level_idx], level_idx)
