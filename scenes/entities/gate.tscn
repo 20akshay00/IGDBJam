@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://041iv8uy6m00" path="res://assets/art/tilesheet_v4.png" id="3_vjx0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gylah"]
-size = Vector2(64, 50)
+size = Vector2(37, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc8ev"]
 atlas = ExtResource("3_vjx0r")
@@ -89,10 +89,11 @@ animations = [{
 }]
 
 [node name="Gate" type="Area2D"]
+scale = Vector2(1.01, 1.01)
 script = ExtResource("1_xkgoe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_gylah")
 
 [node name="Lower" type="AnimatedSprite2D" parent="."]

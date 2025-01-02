@@ -10,7 +10,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		LevelManager.reload_level()
-	
+	elif event.is_action_pressed("back"):
+		LevelManager.load_level(0)
+
 	for idx in len(keys):
 		if Input.is_action_pressed(keys[idx]):
 			LevelManager.load_level(idx)

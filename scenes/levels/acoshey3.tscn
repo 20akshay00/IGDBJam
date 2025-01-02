@@ -407,7 +407,7 @@ tile_map_data = PackedByteArray("AAABAAQAAAADAAIAAAABAAMAAAADAAIAAAABAAIAAAADAAI
 tile_set = SubResource("TileSet_d4eyp")
 
 [node name="Gate" parent="Grid" node_paths=PackedStringArray("locks") instance=ExtResource("4_yougw")]
-position = Vector2(735, 93)
+position = Vector2(734, 97)
 locks = [NodePath("../Lock"), NodePath("../Lock2"), NodePath("../Lock3"), NodePath("../Lock4")]
 
 [node name="LevelPortal" parent="Grid" node_paths=PackedStringArray("UI") instance=ExtResource("5_scl47")]

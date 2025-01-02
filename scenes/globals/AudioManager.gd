@@ -24,7 +24,7 @@ func _play_music(music: AudioStream, volume = -7):
 	play()
 
 func play_music_level():
-	_play_music(bg_music, -25)
+	_play_music(bg_music, -20)
 
 func play_effect(aud_stream: AudioStream, volume = 0.0, loops = false):
 	var fx_player = AudioStreamPlayer2D.new()
