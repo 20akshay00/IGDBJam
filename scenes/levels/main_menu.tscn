@@ -113,12 +113,12 @@ level_idx = 11
 difficulty = 2
 
 [node name="LevelSelect5" parent="Grid" instance=ExtResource("5_jgvk7")]
-position = Vector2(551.111, 161.111)
+position = Vector2(545.556, 155.556)
 level_idx = 12
 difficulty = 2
 
 [node name="LevelSelect6" parent="Grid" instance=ExtResource("5_jgvk7")]
-position = Vector2(682.222, 163.333)
+position = Vector2(671.111, 161.111)
 level_idx = 13
 difficulty = 2
 
@@ -128,7 +128,7 @@ level_idx = 14
 difficulty = 2
 
 [node name="LevelSelect15" parent="Grid" instance=ExtResource("5_jgvk7")]
-position = Vector2(933.333, 165.556)
+position = Vector2(928.889, 157.778)
 level_idx = 15
 difficulty = 2
 
@@ -162,7 +162,7 @@ level_idx = 9
 difficulty = 1
 
 [node name="LevelSelect10" parent="Grid" instance=ExtResource("5_jgvk7")]
-position = Vector2(403.333, 607.778)
+position = Vector2(417.778, 607.778)
 level_idx = 10
 difficulty = 1
 
@@ -183,9 +183,9 @@ theme_override_font_sizes/font_size = 48
 text = "VIRUS.exe"
 
 [node name="Title2" type="Label" parent="."]
-offset_left = 313.0
+offset_left = 340.0
 offset_top = 597.0
-offset_right = 848.0
+offset_right = 875.0
 offset_bottom = 647.0
 theme_override_font_sizes/font_size = 36
 text = "Deliver the virus to every file on disk!"
@@ -200,10 +200,27 @@ metadata/_edit_group_ = true
 
 [node name="Title3" type="Label" parent="TutorialLabel"]
 layout_mode = 0
-offset_right = 195.0
+offset_left = 2.0
+offset_right = 197.0
 offset_bottom = 50.0
 theme_override_font_sizes/font_size = 24
 text = "Tutorial files"
+
+[node name="RootLabel" type="ColorRect" parent="."]
+offset_left = 39.0
+offset_top = 302.0
+offset_right = 135.0
+offset_bottom = 329.0
+color = Color(0.207843, 0.760784, 0.0392157, 0.513726)
+metadata/_edit_group_ = true
+
+[node name="Title3" type="Label" parent="RootLabel"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 197.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "SysAdmin"
 
 [node name="QLabel" type="ColorRect" parent="."]
 offset_left = 936.0
