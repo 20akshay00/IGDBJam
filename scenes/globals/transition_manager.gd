@@ -4,6 +4,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	$ColorRect.modulate.a = 0.
+	$ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func change_scene(target: String) -> void:
 	$ColorRect.mouse_filter = Control.MOUSE_FILTER_STOP

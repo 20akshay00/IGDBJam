@@ -36,3 +36,18 @@ func _input(event: InputEvent) -> void:
 	for idx in len(keys):
 		if Input.is_action_pressed(keys[idx]):
 			LevelManager.load_level(idx)
+
+
+func _on_reset_data_button_pressed() -> void:
+	$ConfirmationDialog.show()
+
+
+func _on_confirmation_dialog_confirmed() -> void:
+	if FileAccess.file_exists("user://save_data_v1.json"):
+		DirAccess.remove_absolute("user://save_data_v1.json")
+	
+	LevelManager.reset_data()
+	LevelManager.reload_level()
+
+func _on_confirmation_dialog_canceled() -> void:
+	pass

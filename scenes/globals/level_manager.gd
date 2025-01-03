@@ -98,7 +98,7 @@ func load_level(lvl: int):
 		if ticks[idx + 1] == -1:
 			flag = false
 			break
-	
+		
 	if flag: all_complete = true
 		
 	TransitionManager.change_scene(levels[lvl])
@@ -133,3 +133,14 @@ func _save_data() -> void:
 	var save_data := {"ticks": ticks, "times": times, "stars": stars}
 	var save_file := FileAccess.open("user://save_data_v1.json", FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
+
+func reset_data() -> void:
+	var n := len(levels)
+	times.resize(n)
+	times.fill(-1)
+	
+	ticks.resize(n)
+	ticks.fill(-1)
+	
+	stars.resize(n)
+	stars.fill(-1)
