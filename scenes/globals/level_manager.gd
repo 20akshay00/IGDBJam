@@ -94,7 +94,7 @@ func load_level(lvl: int):
 		tutorial_complete = true
 	
 	var flag = true
-	for idx in range(17):
+	for idx in range(15):
 		if ticks[idx + 1] == -1:
 			flag = false
 			break
