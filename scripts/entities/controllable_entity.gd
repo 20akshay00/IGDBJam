@@ -103,8 +103,8 @@ func _move(dir: Vector2) -> void:
 	# move tween
 	else:
 		if _tile_map.is_empty(target_position):
-			EventManager.tick_started(self)
 			_tile_map.update_grid(position, target_position)
+			EventManager.tick_started(self)
 			_move_tween = create_tween()
 			_move_tween.tween_property(self, "position",
 				position + dir * _tile_size, _move_animation_sec).set_trans(Tween.TRANS_SINE)

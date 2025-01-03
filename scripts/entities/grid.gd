@@ -63,10 +63,10 @@ func get_next_dir_to(from: Vector2, to: Vector2):
 	
 	var path := astargrid.get_id_path(pos1, pos2, false)
 	
-	if path: 
+	if len(path) > 1:
 		return Vector2(path[1] - pos1)
 	else: 
 		if (pos1.x == pos2.x) or (pos1.y == pos2.y):
-			return pos2 - pos1
+			return (pos2 - pos1) / (pos2 - pos1).length()
 		else:
 			return Vector2(1, 0)
