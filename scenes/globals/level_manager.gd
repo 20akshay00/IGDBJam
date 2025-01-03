@@ -106,7 +106,10 @@ func load_level(lvl: int):
 	AudioManager.play_music_level(lvl)
 	
 func load_next_level():
-	load_level(current_level + 1)
+	if current_level == 15: 
+		load_level(0)
+	else:
+		load_level(current_level + 1)
 
 func reload_level():
 	TransitionManager.reload_scene()
