@@ -45,20 +45,49 @@ var star1: Array[int] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 
 func _ready() -> void:
 	var n = len(levels)
-	times.resize(n)
-	times.fill(-1)
-	
-	ticks.resize(n)
-	ticks.fill(-1)
-	
-	stars.resize(n)
-	stars.fill(-1)
+		
+	if FileAccess.file_exists("user://save_data_v1.json"):
+		FileAccess.open("user://save_data_v1.json", FileAccess.READ)
+		var json := JSON.new()
+		var error := json.parse(FileAccess.get_file_as_string("user://save_data_v1.json"))
+		if error == OK:
+			var data = json.data
+			
+			times.assign(data["times"])
+			ticks.assign(data["ticks"])
+			stars.assign(data["stars"])
+		else:
+			print("Unable to read save data!")
+			
+			times.resize(n)
+			times.fill(-1)
+			
+			ticks.resize(n)
+			ticks.fill(-1)
+			
+			stars.resize(n)
+			stars.fill(-1)
+	else:
+		times.resize(n)
+		times.fill(-1)
+		
+		ticks.resize(n)
+		ticks.fill(-1)
+		
+		stars.resize(n)
+		stars.fill(-1)
 	
 	assert(len(star5) == n, "Star list must have same entries as number of levels (including start)")
 	assert(len(star4) == n, "Star list must have same entries as number of levels (including start)")
 	assert(len(star3) == n, "Star list must have same entries as number of levels (including start)")
 	assert(len(star2) == n, "Star list must have same entries as number of levels (including start)")
 	assert(len(star1) == n, "Star list must have same entries as number of levels (including start)")
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		var save_data := {"ticks": ticks, "times": times, "stars": stars}
+		var save_file := FileAccess.open("user://save_data_v1.json", FileAccess.WRITE)
+		save_file.store_line(JSON.stringify(save_data))
 	
 func load_level(lvl: int):
 	current_level = lvl
