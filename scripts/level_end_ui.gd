@@ -48,7 +48,7 @@ func _set_stars(stars: int) -> void:
 	for i in min(5, stars):
 		tween.tween_property($Stars.get_child(i), "modulate:a", 1., 0.4)
 		
-	await tween.finished
+	if stars != 0: await tween.finished
 	_activate_buttons()
 
 func _activate_buttons() -> void:
