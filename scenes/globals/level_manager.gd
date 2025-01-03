@@ -85,11 +85,10 @@ func _ready() -> void:
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		var save_data := {"ticks": ticks, "times": times, "stars": stars}
-		var save_file := FileAccess.open("user://save_data_v1.json", FileAccess.WRITE)
-		save_file.store_line(JSON.stringify(save_data))
-	
+		_save_data()
+
 func load_level(lvl: int):
+	_save_data()
 	current_level = lvl
 	if (ticks[1] != -1) and (ticks[2] != -1) and (ticks[3] != -1) and (ticks[4] != -1) and (ticks[5] != -1):
 		tutorial_complete = true
@@ -129,3 +128,8 @@ func calculate_stars(lvl_tick: int) -> int:
 		return 1
 	else:
 		return 0
+
+func _save_data() -> void:
+	var save_data := {"ticks": ticks, "times": times, "stars": stars}
+	var save_file := FileAccess.open("user://save_data_v1.json", FileAccess.WRITE)
+	save_file.store_line(JSON.stringify(save_data))
