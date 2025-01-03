@@ -170,7 +170,7 @@ level_idx = 6
 difficulty = 1
 
 [node name="CarrierBugLite" parent="Grid" instance=ExtResource("5_ymc17")]
-position = Vector2(96.6667, 358.889)
+position = Vector2(544.444, 346.667)
 
 [node name="Title" type="Label" parent="."]
 offset_left = 511.0
