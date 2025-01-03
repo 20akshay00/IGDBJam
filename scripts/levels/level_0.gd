@@ -1,7 +1,5 @@
 extends Node2D
 
-var keys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
 func _ready() -> void:
 	EventManager._on_level_start()
 	EventManager.level_complete.connect(_on_level_complete)
@@ -12,10 +10,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		LevelManager.reload_level()
 	elif event.is_action_pressed("back"):
 		LevelManager.load_level(0)
-
-	for idx in len(keys):
-		if Input.is_action_pressed(keys[idx]):
-			LevelManager.load_level(idx)
 	
 func _on_level_complete() -> void:
 	for child in $Grid.get_children():

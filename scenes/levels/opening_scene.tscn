@@ -11,7 +11,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_me6jq"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 314, 484, 14.2791, 125.572, -14.2791, -125.572, 468, 316, 0, 0, 0, 0, 315, 142)
+"points": PackedVector2Array(0, 0, 0, 0, 314, 484, 14.2791, 125.572, -14.2791, -125.572, 476, 319, 0, 0, 0, 0, 298, 134)
 }
 point_count = 3
 
@@ -23,7 +23,7 @@ point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_yqm24"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 579, 327, 0, 0, 0, 0, 316, 147)
+"points": PackedVector2Array(0, 0, 0, 0, 579, 327, 0, 0, 0, 0, 321, 174)
 }
 point_count = 2
 
@@ -120,7 +120,7 @@ curve = SubResource("Curve2D_me6jq")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
 position = Vector2(314, 484)
-rotation = -0.828849
+rotation = -0.794572
 script = ExtResource("5_8l03f")
 
 [node name="Bug" type="Sprite2D" parent="Path2D/PathFollow2D"]

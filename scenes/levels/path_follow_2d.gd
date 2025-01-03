@@ -18,7 +18,8 @@ func _process(delta: float) -> void:
 		
 func _shrink():
 	var tween = get_tree().create_tween()
-	tween.tween_property($Bug, "scale", Vector2(0, 0), 2.)
+	tween.tween_property($Bug, "scale", Vector2(0.01, 0.01), 1.)
 	tween.tween_callback(func(): return)
 	await tween.finished
+	$Bug.hide()
 	%PathFollowCamera.process_mode = Node.PROCESS_MODE_ALWAYS

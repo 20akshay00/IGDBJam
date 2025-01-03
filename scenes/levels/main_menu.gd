@@ -6,8 +6,6 @@ var _filled_tile_atlas_coord = Vector2i(4, 0)
 var _empty_tile_atlas_coord = Vector2i(3, 2)
 var _rect: Rect2
 
-var keys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
 func _ready() -> void:
 	if not LevelManager.tutorial_complete:
 		_tile_map.set_cell(Vector2(10, 7), 0, _empty_tile_atlas_coord, 0)
@@ -31,11 +29,6 @@ func _ready() -> void:
 	tween.set_loops()
 	tween.tween_property($QLabel, "modulate:a", 0.3, 1.)
 	tween.tween_property($QLabel, "modulate:a", 1., 1.)
-
-func _input(event: InputEvent) -> void:
-	for idx in len(keys):
-		if Input.is_action_pressed(keys[idx]):
-			LevelManager.load_level(idx)
 
 
 func _on_reset_data_button_pressed() -> void:

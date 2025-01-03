@@ -15,9 +15,9 @@ func _ready() -> void:
 
 func launch():
 	show()
-	_launch(LevelManager.current_level, EventManager.ticks, EventManager.time / 1000)
+	_launch(LevelManager.current_level, EventManager.ticks, EventManager.time / 1000, EventManager.stars)
 	
-func _launch(lvl: int, clock: int, time: int) -> void:
+func _launch(lvl: int, clock: int, time: int, stars: int) -> void:
 	_set_level_text(lvl)
 	_set_clock_cycle(clock)
 	_set_time(time)
@@ -30,7 +30,7 @@ func _launch(lvl: int, clock: int, time: int) -> void:
 	tween.tween_property($VBoxContainer/TimeLabel, "modulate:a", 1., 1.5)
 	tween.tween_property($StarSlots, "modulate:a", 1., 1.)
 	await tween.finished
-	_set_stars(5)
+	_set_stars(stars)
 
 func _set_level_text(lvl: int) -> void:
 	$LevelLabel.text = "Level " + str(lvl)
